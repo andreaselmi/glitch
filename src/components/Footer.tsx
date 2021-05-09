@@ -1,9 +1,10 @@
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 
 const Footer = () => {
   return (
     <div style={{ marginTop: "auto" }}>
-      <h1>Ciao sono il footer</h1>
+      <Typography color="textPrimary">Ciao sono il footer</Typography>
     </div>
   );
 };
