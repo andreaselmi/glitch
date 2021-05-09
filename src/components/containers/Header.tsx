@@ -21,7 +21,7 @@ interface Links {
 const Header = () => {
   const theme = useTheme();
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     button: {
       maxWidth: 150,
     },
@@ -31,21 +31,12 @@ const Header = () => {
       flexDirection: "column",
     },
     expandContainer: {
-      marginTop: 30,
-      marginBottom: 30,
+      marginTop: 20,
+      marginBottom: 20,
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       textAlign: "center",
-    },
-    expandIcon: {
-      fontSize: "2rem",
-      color: "#fff",
-      "&:hover": {
-        position: "absolute",
-        marginTop: 10,
-        transition: "all .5s ease",
-      },
     },
     headerContainer: {
       alignItems: "center",
@@ -62,15 +53,32 @@ const Header = () => {
       height: "30vh",
     },
     overlay: {
-      zIndex: -1,
-      position: "absolute",
-      width: "100%",
-      height: "100%",
       backgroundImage:
         "linear-gradient(30deg, rgba(0,0,0,0.9) 85%, rgba(255,255,255,0) 93%);",
+      height: "100%",
+      position: "absolute",
       opacity: 0.5,
+      width: "100%",
+      zIndex: -1,
     },
-  });
+    //animated bottom icon
+    bounce: {
+      alignItems: "center",
+      animation: `$myEffect 2000ms `,
+      animationIterationCount: "infinite",
+      color: "#fff",
+      cursor: "pointer",
+      display: "flex",
+      height: 50,
+      justifyContent: "center",
+      width: 50,
+    },
+    "@keyframes myEffect": {
+      "0%": { transform: "translateY(0)" },
+      "50%": { transform: "translateY(-10px)" },
+      "100% ": { transform: "translateY(0)" },
+    },
+  }));
 
   const classes = useStyles();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -107,8 +115,8 @@ const Header = () => {
         <Typography variant={mobile ? "h5" : "h4"} color="textPrimary">
           All your favorite streams in one place
         </Typography>
-        <Icon>
-          <ExpandMore className={classes.expandIcon} />
+        <Icon className={classes.bounce}>
+          <ExpandMore />
         </Icon>
       </Container>
     </div>
