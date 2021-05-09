@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import "@fontsource/roboto";
+import "./assets/css/globalStyle.css";
 
 ReactDOM.render(
   <React.StrictMode>
