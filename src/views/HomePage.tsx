@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <HomeSection />
+      <HomeSection name="entry-section" />
       <HomeSection />
       <HomeSection />
       <Footer />

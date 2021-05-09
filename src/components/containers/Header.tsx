@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as Scroller } from "react-scroll";
 //material ui
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -116,7 +117,15 @@ const Header = () => {
           All your favorite streams in one place
         </Typography>
         <Icon className={classes.bounce}>
-          <ExpandMore />
+          <Scroller
+            activeClass="active"
+            to="entry-section"
+            spy={true}
+            smooth={true}
+            duration={500}
+          >
+            <ExpandMore />
+          </Scroller>
         </Icon>
       </Container>
     </div>
