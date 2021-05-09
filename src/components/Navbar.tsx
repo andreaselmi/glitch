@@ -1,31 +1,41 @@
 import React from "react";
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  makeStyles,
-} from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Button from "@material-ui/core/Button";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+
+//components
 import logo from "../assets/images/logoWhite.png";
+import MyDrawer from "./MyDrawer";
+
+//interface
+import { NavbarProps } from "../types/interfaces";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: theme.palette.background.default,
   },
+  button: {
+    height: 35,
+    marginLeft: 15,
+  },
   imgContainer: {
-    display: "flex",
     alignItems: "center",
+    display: "flex",
   },
   linkText: {
+    color: `white`,
+    marginLeft: 10,
     textDecoration: `none`,
     textTransform: `uppercase`,
-    color: `white`,
   },
   navList: {
+    alignItems: "center",
     display: `flex`,
     justifyContent: `space-between`,
   },
@@ -34,25 +44,25 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: `space-between`,
   },
   title: {
-    flexGrow: 1,
     alignSelf: "center",
+    flexGrow: 1,
   },
 }));
 
-interface NavbarProps {
-  links: { name: string; path: string }[];
-}
-
 const Navbar = ({ links }: NavbarProps) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const mobileView = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <AppBar position="static" className={classes.appBar}>
-      <Toolbar>
-        <Container className={classes.navbarDisplay}>
-          <div className={classes.imgContainer}>
-            <img src={logo} width="75" />
-          </div>
+      <Toolbar className={classes.navbarDisplay}>
+        <div className={classes.imgContainer}>
+          <img src={logo} width="75" />
+        </div>
+        {mobileView ? (
+          <MyDrawer links={links} />
+        ) : (
           <List
             className={classes.navList}
             component="nav"
@@ -65,8 +75,15 @@ const Navbar = ({ links }: NavbarProps) => {
                 </ListItem>
               </a>
             ))}
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+            >
+              Sign in
+            </Button>
           </List>
-        </Container>
+        )}
       </Toolbar>
     </AppBar>
   );

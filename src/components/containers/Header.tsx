@@ -8,9 +8,8 @@ interface Links {
 
 const Header = () => {
   const links: Links[] = [
-    { name: "home", path: "/" },
-    { name: "about", path: "/" },
-    { name: "contact", path: "/" },
+    { name: "HOME", path: "/" },
+    { name: "SEARCH", path: "/" },
   ];
 
   return <Navbar links={links} />;
