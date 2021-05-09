@@ -98,18 +98,19 @@ const Header = () => {
           className={classes.headerTextContainer}
           container
           direction="column"
-          xs={6}
         >
-          <Typography variant={mobile ? "h4" : "h3"} color="textPrimary">
-            Discover around your favorite videogames.
-          </Typography>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-          >
-            EXPLORE
-          </Button>
+          <Grid item xs={6}>
+            <Typography variant={mobile ? "h4" : "h3"} color="textPrimary">
+              Discover around your favorite videogames.
+            </Typography>
+            <Button
+              className={classes.button}
+              color="primary"
+              variant="contained"
+            >
+              EXPLORE
+            </Button>
+          </Grid>
         </Grid>
       </div>
       <Container className={classes.expandContainer}>
