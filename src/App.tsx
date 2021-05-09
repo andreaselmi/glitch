@@ -10,6 +10,9 @@ function App() {
       <Button color="primary" variant="contained">
         Hello
       </Button>
+      <Button color="secondary" variant="contained">
+        Hello
+      </Button>
     </ThemeProvider>
   );
 }
