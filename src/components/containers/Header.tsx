@@ -8,7 +8,7 @@ import Container from "@material-ui/core/Container";
 import Icon from "@material-ui/core/Icon";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //My components
 import Navbar from "../Navbar";
