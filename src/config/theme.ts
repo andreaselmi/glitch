@@ -4,6 +4,9 @@ import { deepPurple, teal } from "@material-ui/core/colors";
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
+    background: {
+      default: "#212121",
+    },
     primary: {
       main: deepPurple["A200"],
     },

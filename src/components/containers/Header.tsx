@@ -1,5 +1,6 @@
 import React from "react";
-import { Link as Scroller } from "react-scroll";
+import { Element } from "react-scroll";
+
 //material ui
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -13,6 +14,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 //My components
 import Navbar from "../Navbar";
 import bgImage from "../../assets/images/headerBg.jpg";
+import Scroller from "../Scroller";
 
 interface Links {
   name: string;
@@ -25,6 +27,7 @@ const Header = () => {
   const useStyles = makeStyles((theme) => ({
     button: {
       maxWidth: 150,
+      marginTop: 20,
     },
     container: {
       minHeight: "100%",
@@ -91,6 +94,7 @@ const Header = () => {
 
   return (
     <div className={classes.container}>
+      <Element name="top" />
       <Navbar links={links} />
       <div className={classes.headerContainer}>
         <div className={classes.overlay}></div>
@@ -100,7 +104,7 @@ const Header = () => {
           direction="column"
         >
           <Grid item xs={6}>
-            <Typography variant={mobile ? "h4" : "h3"} color="textPrimary">
+            <Typography variant={mobile ? "h5" : "h3"} color="textPrimary">
               Discover around your favorite videogames.
             </Typography>
             <Button
@@ -114,13 +118,12 @@ const Header = () => {
         </Grid>
       </div>
       <Container className={classes.expandContainer}>
-        <Typography variant={mobile ? "h5" : "h4"} color="textPrimary">
+        <Typography variant={mobile ? "h6" : "h4"} color="textPrimary">
           All your favorite streams in one place
         </Typography>
         <Icon className={classes.bounce}>
           <Scroller
-            activeClass="active"
-            to="entry-section"
+            path="entry-section"
             spy={true}
             smooth={true}
             duration={500}
