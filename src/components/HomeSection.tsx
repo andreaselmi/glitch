@@ -20,7 +20,6 @@ const HomeSection: React.FC<HomeSectionProps> = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "60vh",
       padding: "0 50px",
       "& > div": {
         textAlign: "center",
@@ -39,16 +38,18 @@ const HomeSection: React.FC<HomeSectionProps> = ({
   }));
 
   const classes = useStyles();
-
-  //TODO ridurre spazio tra le sezioni
-
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up("xl"));
+  const mobile = useMediaQuery(theme.breakpoints.down("xs"));
+
   return (
-    <Container className={classes.container} maxWidth="md">
+    <Container
+      style={mobile ? { minHeight: "70vh" } : { minHeight: "60vh" }}
+      className={classes.container}
+      maxWidth="md"
+    >
       <Grid
         container
-        data-aos={desktop ? "fade-left" : "zoom-in"}
+        data-aos="zoom-in"
         data-aos-delay="100"
         data-aos-duration="1000"
       >
