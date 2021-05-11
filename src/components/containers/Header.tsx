@@ -1,5 +1,4 @@
 import React from "react";
-import { Element } from "react-scroll";
 
 //material ui
 import Typography from "@material-ui/core/Typography";
@@ -55,9 +54,7 @@ const Header = () => {
 
   return (
     <div className={classes.container}>
-      <Element name="top" />
       <Jumbotron />
-
       <Container className={classes.expandContainer}>
         <Typography variant={mobile ? "h6" : "h4"} color="textPrimary">
           All your favorite streams in one place

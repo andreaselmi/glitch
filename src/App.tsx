@@ -2,6 +2,8 @@ import React from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import darkTheme from "./config/theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { Element } from "react-scroll";
+
 import HomePage from "./views/HomePage";
 import Navbar from "./components/Navbar";
 
@@ -18,6 +20,7 @@ function App() {
   return (
     <CssBaseline>
       <ThemeProvider theme={darkTheme}>
+        <Element name="top" />
         <Navbar links={links} />
         <HomePage />
       </ThemeProvider>

@@ -15,7 +15,7 @@ const Footer = () => {
   const useStyles = makeStyles((theme) => ({
     backToTopIcon: {
       alignItems: "center",
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.palette.background.paper,
       borderRadius: 50,
       color: theme.palette.text.primary,
       cursor: "pointer",
