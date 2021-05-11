@@ -20,7 +20,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "85%",
+      minHeight: "60vh",
       padding: "0 50px",
       "& > div": {
         textAlign: "center",

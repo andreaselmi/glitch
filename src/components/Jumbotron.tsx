@@ -4,14 +4,15 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
 
 import bgImage from "../assets/images/headerBg.jpg";
 const Jumbotron = () => {
   const theme = useTheme();
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     button: {
-      maxWidth: 150,
+      minWidth: 200,
       marginTop: 20,
     },
     headerContainer: {
@@ -37,7 +38,7 @@ const Jumbotron = () => {
       width: "100%",
       zIndex: -1,
     },
-  });
+  }));
 
   const classes = useStyles();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -54,13 +55,15 @@ const Jumbotron = () => {
           <Typography variant={mobile ? "h5" : "h3"} color="textPrimary">
             Discover around your favorite videogames.
           </Typography>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-          >
-            EXPLORE
-          </Button>
+          <Link style={{ textDecoration: "none" }} to="/explore">
+            <Button
+              className={classes.button}
+              color="primary"
+              variant="contained"
+            >
+              EXPLORE
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </div>

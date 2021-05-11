@@ -1,5 +1,4 @@
 import React from "react";
-import { Element } from "react-scroll";
 
 //Mycomponents
 import Header from "../components/containers/Header";
@@ -33,7 +32,6 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <Element name="entry-section" />
       <HomeSection
         title="Join us to search and follow your favorite games"
         subtitle="You will have access from any device and can add or remove favorite games to your list"
