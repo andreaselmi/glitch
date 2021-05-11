@@ -30,11 +30,10 @@ const Jumbotron = () => {
       height: "30vh",
     },
     overlay: {
-      backgroundImage:
-        "linear-gradient(30deg, rgba(0,0,0,0.9) 85%, rgba(255,255,255,0) 93%);",
+      backgroundColor: "rgba(0,0,0,1)",
       height: "100%",
       position: "absolute",
-      opacity: 0.5,
+      opacity: 0.6,
       width: "100%",
       zIndex: -1,
     },
