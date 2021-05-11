@@ -50,9 +50,17 @@ const Jumbotron = () => {
         container
         direction="column"
       >
-        <Grid item xs={6}>
+        <Grid item xs={6} lg={5}>
           <Typography variant={mobile ? "h5" : "h3"} color="textPrimary">
             Discover around your favorite videogames.
+          </Typography>
+          <Typography
+            variant={mobile ? "subtitle2" : "subtitle1"}
+            color="textPrimary"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+            sed maxime cum nesciunt aperiam, rerum exercitationem eius fuga
+            inventore!
           </Typography>
           <Link style={{ textDecoration: "none" }} to="/explore">
             <Button
