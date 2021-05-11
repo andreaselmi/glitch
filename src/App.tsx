@@ -3,11 +3,22 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import darkTheme from "./config/theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomePage from "./views/HomePage";
+import Navbar from "./components/Navbar";
+
+interface Links {
+  name: string;
+  path: string;
+}
 
 function App() {
+  const links: Links[] = [
+    { name: "HOME", path: "/" },
+    { name: "SEARCH", path: "/" },
+  ];
   return (
     <CssBaseline>
       <ThemeProvider theme={darkTheme}>
+        <Navbar links={links} />
         <HomePage />
       </ThemeProvider>
     </CssBaseline>

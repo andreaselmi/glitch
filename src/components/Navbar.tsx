@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
@@ -12,13 +12,15 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 //components
 import logo from "../assets/images/logoWhite.png";
 import MyDrawer from "./MyDrawer";
+import MyModal from "./MyModal";
+import UserAuthTabs from "./containers/UserAuthTabs";
 
 //interface
 import { NavbarProps } from "../types/interfaces";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.paper,
   },
   button: {
     height: 35,
@@ -50,18 +52,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = ({ links }: NavbarProps) => {
+  const [open, setOpen] = useState<boolean>(false);
   const classes = useStyles();
   const theme = useTheme();
   const mobileView = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const toggleModal = () => {
+    setOpen(!open);
+  };
+
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.navbarDisplay}>
+        <MyModal
+          open={open}
+          onClose={toggleModal}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          <UserAuthTabs />
+        </MyModal>
         <div className={classes.imgContainer}>
           <img src={logo} width="75" />
         </div>
         {mobileView ? (
-          <MyDrawer links={links} />
+          <MyDrawer openModal={toggleModal} links={links} />
         ) : (
           <List
             className={classes.navList}
@@ -79,6 +94,7 @@ const Navbar = ({ links }: NavbarProps) => {
               className={classes.button}
               variant="contained"
               color="primary"
+              onClick={toggleModal}
             >
               Sign in
             </Button>

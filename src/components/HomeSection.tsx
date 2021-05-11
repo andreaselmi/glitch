@@ -40,6 +40,8 @@ const HomeSection: React.FC<HomeSectionProps> = ({
 
   const classes = useStyles();
 
+  //TODO ridurre spazio tra le sezioni
+
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("xl"));
   return (

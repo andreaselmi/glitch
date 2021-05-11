@@ -29,7 +29,7 @@ const Footer = () => {
     },
     container: {
       alignItems: "center",
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.palette.background.paper,
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",

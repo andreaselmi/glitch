@@ -5,7 +5,8 @@ const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
     background: {
-      default: "#212121",
+      default: "#121212",
+      paper: "#212121",
     },
     primary: {
       main: deepPurple["A200"],
