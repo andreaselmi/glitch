@@ -13,6 +13,7 @@ interface MyModalProps {
 const MyModal = ({ open, onClose, children }: MyModalProps) => {
   const useStyles = makeStyles((theme) => ({
     container: {
+      outline: "none",
       backgroundColor: theme.palette.background.paper,
       display: "flex",
       justifyContent: "center",
