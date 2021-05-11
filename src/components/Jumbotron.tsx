@@ -19,7 +19,7 @@ const Jumbotron = () => {
       background: `url(${bgImage})no-repeat fixed center`,
       backgroundSize: "cover",
       display: "flex",
-      height: "80vh",
+      height: "77vh",
       position: "relative",
       zIndex: 1,
     },

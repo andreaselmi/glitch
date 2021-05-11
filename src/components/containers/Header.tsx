@@ -2,9 +2,7 @@ import React from "react";
 import { Element } from "react-scroll";
 
 //material ui
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Icon from "@material-ui/core/Icon";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -12,8 +10,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //My components
-
-import bgImage from "../../assets/images/headerBg.jpg";
 import Scroller from "../Scroller";
 import Jumbotron from "../Jumbotron";
 
