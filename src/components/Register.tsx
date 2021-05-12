@@ -5,6 +5,8 @@ import { Button, LinearProgress, Typography } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
 import { UserFormValues } from "../types/interfaces";
+import { useHistory } from "react-router";
+import { auth } from "../config/firebase";
 
 let validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -12,6 +14,8 @@ let validationSchema = yup.object().shape({
 });
 
 const Register = () => {
+  const history = useHistory();
+
   const initialValues: UserFormValues = {
     email: "",
     password: "",
@@ -32,6 +36,20 @@ const Register = () => {
 
   const classes = useStyle();
 
+  const register = async (values: UserFormValues) => {
+    try {
+      const res = await auth.createUserWithEmailAndPassword(
+        values.email,
+        values.password
+      );
+      console.log(res);
+      history.push("/explore");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Typography
@@ -45,7 +63,7 @@ const Register = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+          register(values);
           setSubmitting(false);
         }}
       >

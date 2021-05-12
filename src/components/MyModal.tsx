@@ -1,8 +1,7 @@
 import React from "react";
 import Modal from "@material-ui/core/Modal";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 interface MyModalProps {
   open: boolean;
