@@ -10,8 +10,11 @@ import Navbar from "./components/Navbar";
 import links from "./config/routes";
 import SearchPage from "./views/SearchPage";
 import ExplorePage from "./views/ExplorePage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const user = false;
+
   return (
     <Router>
       <CssBaseline>
@@ -19,12 +22,12 @@ function App() {
           <Element name="top" />
           <Navbar links={links} />
           <Switch>
-            <Route path="/search">
+            <ProtectedRoute isAuthenticated={user} path="/search">
               <SearchPage />
-            </Route>
-            <Route path="/explore">
+            </ProtectedRoute>
+            <ProtectedRoute isAuthenticated={user} path="/explore">
               <ExplorePage />
-            </Route>
+            </ProtectedRoute>
             <Route path="/">
               <HomePage />
             </Route>
