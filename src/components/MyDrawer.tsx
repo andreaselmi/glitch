@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 //interfaces
 import { NavbarProps } from "../types/interfaces";
-import LogoutButton from "./LogoutButton";
+import MyButton from "./common/MyButton";
 
 const useStyles = makeStyles({
   drawerContainer: {
@@ -67,7 +67,7 @@ const MyDrawer = ({ links, openModal, onClickLogout }: MyModalProps) => {
               </ListItem>
             ))}
             <ListItem>
-              <LogoutButton onClick={onClickLogout} />
+              <MyButton name="LOGOUT" onClick={onClickLogout} />
             </ListItem>
           </List>
         </div>

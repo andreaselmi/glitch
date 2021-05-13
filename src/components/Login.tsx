@@ -11,6 +11,7 @@ import { UserFormValues } from "../types/interfaces";
 
 //config
 import { login } from "../config/auth";
+import MyButton from "./common/MyButton";
 
 let validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -51,8 +52,9 @@ const Login = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          login(values);
+        onSubmit={async (values, { setSubmitting }) => {
+          await login(values);
+          setSubmitting(false);
         }}
       >
         {({ submitForm, isSubmitting }) => (
@@ -71,15 +73,11 @@ const Login = () => {
               name="password"
             />
             {isSubmitting && <LinearProgress />}
-
-            <Button
-              variant="contained"
-              color="primary"
+            <MyButton
+              name="SUBMIT"
               disabled={isSubmitting}
               onClick={submitForm}
-            >
-              Submit
-            </Button>
+            />
           </Form>
         )}
       </Formik>

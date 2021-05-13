@@ -22,8 +22,6 @@ let validationSchema = yup.object().shape({
 });
 
 const Register = () => {
-  const history = useHistory();
-
   const initialValues: UserFormValues = {
     email: "",
     password: "",
@@ -57,8 +55,9 @@ const Register = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          register(values);
+        onSubmit={async (values, { setSubmitting }) => {
+          await register(values);
+          setSubmitting(false);
         }}
       >
         {({ submitForm, isSubmitting }) => (

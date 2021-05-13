@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 //material ui imports
 import {
   AppBar,
-  Button,
   Toolbar,
   List,
   ListItem,
@@ -19,22 +18,22 @@ import logo from "../assets/images/logoWhite.png";
 import MyDrawer from "./MyDrawer";
 import MyModal from "./MyModal";
 import UserAuthTabs from "./containers/UserAuthTabs";
-import LogoutButton from "./LogoutButton";
+import MyButton from "./common/MyButton";
 
 //interface
 import { NavbarProps } from "../types/interfaces";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { auth } from "../config/firebase";
 import { setNoUser } from "../store/user";
+
+import { auth } from "../config/firebase";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: theme.palette.background.paper,
   },
   button: {
-    height: 35,
     marginLeft: 15,
   },
   imgContainer: {
@@ -127,16 +126,17 @@ const Navbar = ({ links }: NavbarProps) => {
               );
             })}
             {user.uid ? (
-              <LogoutButton className={classes.button} onClick={logout} />
-            ) : (
-              <Button
+              <MyButton
                 className={classes.button}
-                variant="contained"
-                color="primary"
+                name="LOGOUT"
+                onClick={logout}
+              />
+            ) : (
+              <MyButton
+                className={classes.button}
+                name="SIGN IN"
                 onClick={toggleModal}
-              >
-                Sign in
-              </Button>
+              />
             )}
           </List>
         )}
