@@ -25,7 +25,7 @@ const Jumbotron = () => {
     },
     headerContainer: {
       alignItems: "center",
-      background: `url(${bgImage})no-repeat fixed center`,
+      background: `url(${bgImage})no-repeat center`,
       backgroundSize: "cover",
       display: "flex",
       height: "77vh",

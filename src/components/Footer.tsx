@@ -42,6 +42,15 @@ const Footer = () => {
     },
     socialIconContainer: {
       color: theme.palette.text.primary,
+      "& a:link": {
+        color: theme.palette.text.primary,
+      },
+      "& a:active": {
+        color: theme.palette.text.primary,
+      },
+      "& a:visited": {
+        color: theme.palette.text.primary,
+      },
       "& > span": {
         margin: "0 10px",
         cursor: "pointer",
@@ -61,16 +70,27 @@ const Footer = () => {
     <div className={classes.container}>
       <div className={classes.socialIconContainer}>
         <Icon>
-          <GitHub />
+          <a target="_blank" href="https://github.com/andreaselmi">
+            <GitHub />
+          </a>
         </Icon>
         <Icon>
-          <Facebook />
+          <a target="_blank" href="https://www.facebook.com/andryyy90">
+            <Facebook />
+          </a>
         </Icon>
         <Icon>
-          <LinkedIn />
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/andrea-selmi-915605161/"
+          >
+            <LinkedIn />
+          </a>
         </Icon>
         <Icon>
-          <Instagram />
+          <a target="_blank" href="https://www.instagram.com/andreaselmi_/">
+            <Instagram />
+          </a>
         </Icon>
       </div>
       <Grid container className={classes.textContainer}>
