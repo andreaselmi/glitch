@@ -2,9 +2,7 @@ import React from "react";
 import { Element } from "react-scroll";
 
 //material ui
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Icon from "@material-ui/core/Icon";
+import { Typography, Container, Icon } from "@material-ui/core";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";

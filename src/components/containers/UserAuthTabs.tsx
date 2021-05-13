@@ -1,9 +1,10 @@
 import React from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 
+//material ui
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { AppBar, Tabs, Tab } from "@material-ui/core";
+
+//my components
 import TabPanel from "../TabPanel";
 import Register from "../Register";
 import Login from "../Login";

@@ -1,12 +1,20 @@
 import React from "react";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
+
+import { useHistory } from "react-router";
+import { ToastContainer } from "react-toastify";
+
+//material ui
 import { Button, LinearProgress, Typography } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
+
+//types
 import { UserFormValues } from "../types/interfaces";
-import { useHistory } from "react-router";
-import { auth } from "../config/firebase";
+
+//config
+import { register } from "../config/auth";
 
 let validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -36,20 +44,9 @@ const Register = () => {
 
   const classes = useStyle();
 
-  const register = async (values: UserFormValues) => {
-    try {
-      const res = await auth.createUserWithEmailAndPassword(
-        values.email,
-        values.password
-      );
-    } catch (error) {
-      //TODO error handling
-      console.log(error);
-    }
-  };
-
   return (
     <>
+      <ToastContainer />
       <Typography
         className={classes.headerText}
         variant="h5"

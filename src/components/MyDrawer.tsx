@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 //material-ui imports
-import IconButton from "@material-ui/core/IconButton";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Button from "@material-ui/core/Button";
+import {
+  IconButton,
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 

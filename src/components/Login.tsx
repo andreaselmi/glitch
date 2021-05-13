@@ -1,14 +1,16 @@
 import React from "react";
-import { useHistory } from "react-router";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress, Typography } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
+import { ToastContainer } from "react-toastify";
 
 //types
 import { UserFormValues } from "../types/interfaces";
-import { auth } from "../config/firebase";
+
+//config
+import { login } from "../config/auth";
 
 let validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -16,8 +18,6 @@ let validationSchema = yup.object().shape({
 });
 
 const Login = () => {
-  const history = useHistory();
-
   const initialValues: UserFormValues = {
     email: "",
     password: "",
@@ -36,22 +36,11 @@ const Login = () => {
     },
   });
 
-  const login = async (values: UserFormValues) => {
-    try {
-      const res = await auth.signInWithEmailAndPassword(
-        values.email,
-        values.password
-      );
-    } catch (error) {
-      //TODO error handling
-      console.log(error);
-    }
-  };
-
   const classes = useStyle();
 
   return (
     <>
+      <ToastContainer />
       <Typography
         className={classes.headerText}
         variant="h5"

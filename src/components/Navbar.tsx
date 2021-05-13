@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Link } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+
+//material ui imports
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  List,
+  ListItem,
+  ListItemText,
+  makeStyles,
+  useTheme,
+} from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //components
 import logo from "../assets/images/logoWhite.png";

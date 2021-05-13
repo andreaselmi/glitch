@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "@fontsource/roboto";
 import "./assets/css/globalStyle.css";
+import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 

@@ -1,12 +1,15 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+
+//material ui
 import { makeStyles } from "@material-ui/core/styles";
-import GitHub from "@material-ui/icons/GitHub";
-import Facebook from "@material-ui/icons/Facebook";
-import LinkedIn from "@material-ui/icons/LinkedIn";
-import Instagram from "@material-ui/icons/Instagram";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import { Grid, Icon } from "@material-ui/core";
+import {
+  GitHub,
+  Facebook,
+  LinkedIn,
+  Instagram,
+  ArrowUpward,
+} from "@material-ui/icons";
+import { Grid, Icon, Typography } from "@material-ui/core";
 
 //my components
 import Scroller from "./common/Scroller";

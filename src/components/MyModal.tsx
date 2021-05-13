@@ -1,6 +1,7 @@
 import React from "react";
-import Modal from "@material-ui/core/Modal";
 
+//material ui
+import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 
 interface MyModalProps {
