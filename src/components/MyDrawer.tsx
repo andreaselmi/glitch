@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 //material-ui imports
 import {
@@ -18,6 +19,11 @@ import MyButton from "./common/MyButton";
 const useStyles = makeStyles({
   drawerContainer: {
     width: "10rem",
+  },
+  linkText: {
+    color: `white`,
+    textDecoration: `none`,
+    textTransform: `uppercase`,
   },
 });
 
@@ -62,9 +68,11 @@ const MyDrawer = ({ links, openModal, onClickLogout }: MyModalProps) => {
         >
           <List>
             {links.map((link, index) => (
-              <ListItem key={index} button divider>
-                <ListItemText>{link.name}</ListItemText>
-              </ListItem>
+              <Link className={classes.linkText} to={link.path} key={link.name}>
+                <ListItem key={index} button divider>
+                  <ListItemText>{link.name}</ListItemText>
+                </ListItem>
+              </Link>
             ))}
             <ListItem>
               <MyButton name="LOGOUT" onClick={onClickLogout} />
