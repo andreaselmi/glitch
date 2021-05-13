@@ -9,7 +9,7 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import { Grid, Icon } from "@material-ui/core";
 
 //my components
-import Scroller from "../components/Scroller";
+import Scroller from "./common/Scroller";
 
 const Footer = () => {
   const useStyles = makeStyles((theme) => ({

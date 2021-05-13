@@ -43,6 +43,7 @@ const Login = () => {
         values.password
       );
       console.log(res);
+      //TODO verificare un redirect se user è true
       history.push("/explore");
       window.location.reload();
     } catch (error) {

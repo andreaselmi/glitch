@@ -10,7 +10,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //My components
-import Scroller from "../Scroller";
+import Scroller from "../common/Scroller";
 import Jumbotron from "../Jumbotron";
 
 const Header = () => {
