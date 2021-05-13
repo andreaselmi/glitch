@@ -42,10 +42,8 @@ const Register = () => {
         values.email,
         values.password
       );
-      console.log(res);
-      history.push("/explore");
-      window.location.reload();
     } catch (error) {
+      //TODO error handling
       console.log(error);
     }
   };

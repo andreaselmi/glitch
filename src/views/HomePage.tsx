@@ -2,7 +2,7 @@ import React from "react";
 
 //Mycomponents
 import Header from "../components/containers/Header";
-import Footer from "../components/Footer";
+
 import HomeSection from "../components/HomeSection";
 
 //material ui Icons
@@ -55,7 +55,6 @@ const HomePage = () => {
       >
         <ExploreIcon className={desktop ? classes.icon : classes.mobileIcon} />
       </HomeSection>
-      <Footer />
     </>
   );
 };

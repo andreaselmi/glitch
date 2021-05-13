@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+//material ui
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "react-router-dom";
 
 import bgImage from "../assets/images/headerBg.jpg";
 const Jumbotron = () => {

@@ -28,13 +28,11 @@ const userSlice = createSlice({
       state.provider = action.payload.provider;
     },
     setNoUser: (state) => {
-      state = {
-        fullName: "",
-        email: "",
-        userImg: "",
-        uid: "",
-        provider: "",
-      };
+      state.fullName = "";
+      state.email = "";
+      state.userImg = "";
+      state.uid = "";
+      state.provider = "";
     },
     setUserImg: (state, action: PayloadAction<any>) => {
       state.userImg = action.payload.userImg;

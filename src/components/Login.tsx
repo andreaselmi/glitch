@@ -42,11 +42,8 @@ const Login = () => {
         values.email,
         values.password
       );
-      console.log(res);
-      //TODO verificare un redirect se user è true
-      history.push("/explore");
-      window.location.reload();
     } catch (error) {
+      //TODO error handling
       console.log(error);
     }
   };

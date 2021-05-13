@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
@@ -6,7 +6,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
+import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 //components
@@ -17,6 +17,11 @@ import UserAuthTabs from "./containers/UserAuthTabs";
 
 //interface
 import { NavbarProps } from "../types/interfaces";
+
+//store
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { auth } from "../config/firebase";
+import { setNoUser } from "../store/user";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -57,9 +62,21 @@ const Navbar = ({ links }: NavbarProps) => {
   const theme = useTheme();
   const mobileView = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const user = useAppSelector((state) => state.currentUser);
+  const dispatch = useAppDispatch();
+
   const toggleModal = () => {
     setOpen(!open);
   };
+
+  const logout = () => {
+    auth.signOut();
+    dispatch(setNoUser());
+  };
+
+  useEffect(() => {
+    if (user.uid) setOpen(false);
+  });
 
   return (
     <AppBar position="static" className={classes.appBar}>
@@ -83,21 +100,39 @@ const Navbar = ({ links }: NavbarProps) => {
             component="nav"
             aria-labelledby="main navigation"
           >
-            {links.map(({ name, path }) => (
-              <a className={classes.linkText} href={path} key={name}>
-                <ListItem button>
-                  <ListItemText primary={name} />
-                </ListItem>
-              </a>
-            ))}
-            <Button
-              className={classes.button}
-              variant="contained"
-              color="primary"
-              onClick={toggleModal}
-            >
-              Sign in
-            </Button>
+            {links.map((link) => {
+              if (link.private && !user.uid) return null;
+              return (
+                <Link
+                  className={classes.linkText}
+                  to={link.path}
+                  key={link.name}
+                >
+                  <ListItem button>
+                    <ListItemText primary={link.name} />
+                  </ListItem>
+                </Link>
+              );
+            })}
+            {user && user.uid ? (
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                onClick={toggleModal}
+              >
+                Sign in
+              </Button>
+            )}
           </List>
         )}
       </Toolbar>

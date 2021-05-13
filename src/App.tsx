@@ -15,8 +15,10 @@ import { auth } from "./config/firebase";
 import { useAppDispatch } from "./store/hooks";
 import { setCurrentUser } from "./store/user";
 
+import Footer from "./components/Footer";
+
 function App() {
-  const [user, setUser] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,8 +33,10 @@ function App() {
             provider: user.providerData[0]?.providerId,
           })
         );
+        setIsAuthenticated(true);
       } else {
         console.log("user out");
+        setIsAuthenticated(false);
       }
     });
   }, []);
@@ -46,14 +50,14 @@ function App() {
           <Switch>
             <ProtectedRoute
               redirectPath="/"
-              isAuthenticated={user}
+              isAuthenticated={isAuthenticated}
               path="/search"
             >
               <SearchPage />
             </ProtectedRoute>
             <ProtectedRoute
               redirectPath="/"
-              isAuthenticated={user}
+              isAuthenticated={isAuthenticated}
               path="/explore"
             >
               <ExplorePage />
@@ -62,6 +66,7 @@ function App() {
               <HomePage />
             </Route>
           </Switch>
+          <Footer />
         </ThemeProvider>
       </CssBaseline>
     </Router>
