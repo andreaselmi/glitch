@@ -1,10 +1,10 @@
 import React from "react";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
-import { Button, LinearProgress, Typography } from "@material-ui/core";
-import { TextField } from "formik-material-ui";
-import { makeStyles } from "@material-ui/core/styles";
 import { ToastContainer } from "react-toastify";
+//material ui
+import { LinearProgress, Typography, makeStyles } from "@material-ui/core";
+import { TextField } from "formik-material-ui";
 
 //types
 import { UserFormValues } from "../types/interfaces";
