@@ -19,6 +19,7 @@ import logo from "../assets/images/logoWhite.png";
 import MyDrawer from "./MyDrawer";
 import MyModal from "./MyModal";
 import UserAuthTabs from "./containers/UserAuthTabs";
+import LogoutButton from "./LogoutButton";
 
 //interface
 import { NavbarProps } from "../types/interfaces";
@@ -83,19 +84,6 @@ const Navbar = ({ links }: NavbarProps) => {
     if (user.uid) setOpen(false);
   });
 
-  const LogoutButton = () => {
-    return (
-      <Button
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        onClick={logout}
-      >
-        Logout
-      </Button>
-    );
-  };
-
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.navbarDisplay}>
@@ -113,7 +101,11 @@ const Navbar = ({ links }: NavbarProps) => {
           </div>
         </Link>
         {mobileView && user.uid ? (
-          <MyDrawer openModal={toggleModal} links={links} />
+          <MyDrawer
+            onClickLogout={logout}
+            openModal={toggleModal}
+            links={links}
+          />
         ) : (
           <List
             className={classes.navList}
@@ -135,7 +127,7 @@ const Navbar = ({ links }: NavbarProps) => {
               );
             })}
             {user.uid ? (
-              <LogoutButton />
+              <LogoutButton className={classes.button} onClick={logout} />
             ) : (
               <Button
                 className={classes.button}

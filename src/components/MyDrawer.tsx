@@ -7,13 +7,13 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 
 //interfaces
 import { NavbarProps } from "../types/interfaces";
+import LogoutButton from "./LogoutButton";
 
 const useStyles = makeStyles({
   drawerContainer: {
@@ -23,9 +23,10 @@ const useStyles = makeStyles({
 
 interface MyModalProps extends NavbarProps {
   openModal: () => void;
+  onClickLogout: () => void;
 }
 
-const MyDrawer = ({ links, openModal }: MyModalProps) => {
+const MyDrawer = ({ links, openModal, onClickLogout }: MyModalProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const classes = useStyles();
   return (
@@ -65,9 +66,9 @@ const MyDrawer = ({ links, openModal }: MyModalProps) => {
                 <ListItemText>{link.name}</ListItemText>
               </ListItem>
             ))}
-            <Button variant="contained" color="primary" onClick={openModal}>
-              Sign in
-            </Button>
+            <ListItem>
+              <LogoutButton onClick={onClickLogout} />
+            </ListItem>
           </List>
         </div>
       </SwipeableDrawer>

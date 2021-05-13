@@ -51,7 +51,7 @@ const Login = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           login(values);
         }}
       >

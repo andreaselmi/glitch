@@ -57,7 +57,7 @@ const Register = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           register(values);
         }}
       >
