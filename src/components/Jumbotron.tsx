@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //material ui
@@ -7,8 +7,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Button, Grid, Typography } from "@material-ui/core";
 //background home header image
 import bgImage from "../assets/images/headerBg.jpg";
+import MyModal from "./MyModal";
+import UserAuthTabs from "./containers/UserAuthTabs";
+import { useAppSelector } from "../store/hooks";
 
 const Jumbotron = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const user = useAppSelector((state) => state.currentUser);
   const theme = useTheme();
 
   const useStyles = makeStyles((theme) => ({
@@ -43,8 +48,24 @@ const Jumbotron = () => {
   const classes = useStyles();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  useEffect(() => {
+    if (user.uid) setOpen(false);
+  });
+
+  const toggleModal = () => {
+    setOpen(!open);
+  };
+
   return (
     <div className={classes.headerContainer}>
+      <MyModal
+        open={open}
+        onClose={toggleModal}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <UserAuthTabs />
+      </MyModal>
       <div className={classes.overlay}></div>
       <Grid
         className={classes.headerTextContainer}
@@ -63,15 +84,26 @@ const Jumbotron = () => {
             sed maxime cum nesciunt aperiam, rerum exercitationem eius fuga
             inventore!
           </Typography>
-          <Link style={{ textDecoration: "none" }} to="/explore">
+          {user.uid ? (
+            <Link style={{ textDecoration: "none" }} to="/explore">
+              <Button
+                className={classes.button}
+                color="primary"
+                variant="contained"
+              >
+                EXPLORE
+              </Button>
+            </Link>
+          ) : (
             <Button
               className={classes.button}
               color="primary"
               variant="contained"
+              onClick={toggleModal}
             >
               EXPLORE
             </Button>
-          </Link>
+          )}
         </Grid>
       </Grid>
     </div>

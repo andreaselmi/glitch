@@ -35,7 +35,6 @@ function App() {
         );
         setIsAuthenticated(true);
       } else {
-        console.log("user out");
         setIsAuthenticated(false);
       }
     });

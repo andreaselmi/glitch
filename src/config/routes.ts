@@ -1,7 +1,7 @@
 import { Route } from "../types/interfaces";
 
 const links: Route[] = [
-  { name: "HOME", path: "/", private: false },
+  { name: "EXPLORE", path: "/explore", private: true },
   { name: "SEARCH", path: "/search", private: true },
 ];
 

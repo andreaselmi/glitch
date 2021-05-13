@@ -83,6 +83,19 @@ const Navbar = ({ links }: NavbarProps) => {
     if (user.uid) setOpen(false);
   });
 
+  const LogoutButton = () => {
+    return (
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={logout}
+      >
+        Logout
+      </Button>
+    );
+  };
+
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.navbarDisplay}>
@@ -94,10 +107,12 @@ const Navbar = ({ links }: NavbarProps) => {
         >
           <UserAuthTabs />
         </MyModal>
-        <div className={classes.imgContainer}>
-          <img src={logo} width="75" />
-        </div>
-        {mobileView ? (
+        <Link to="/">
+          <div className={classes.imgContainer}>
+            <img src={logo} width="75"></img>
+          </div>
+        </Link>
+        {mobileView && user.uid ? (
           <MyDrawer openModal={toggleModal} links={links} />
         ) : (
           <List
@@ -119,15 +134,8 @@ const Navbar = ({ links }: NavbarProps) => {
                 </Link>
               );
             })}
-            {user && user.uid ? (
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                onClick={logout}
-              >
-                Logout
-              </Button>
+            {user.uid ? (
+              <LogoutButton />
             ) : (
               <Button
                 className={classes.button}
