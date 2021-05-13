@@ -53,7 +53,6 @@ const Login = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           login(values);
-          setSubmitting(false);
         }}
       >
         {({ submitForm, isSubmitting }) => (

@@ -59,7 +59,6 @@ const Register = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           register(values);
-          setSubmitting(false);
         }}
       >
         {({ submitForm, isSubmitting }) => (
