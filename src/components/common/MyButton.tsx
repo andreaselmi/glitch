@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button, ButtonProps } from "@material-ui/core";
 
-interface MyButtonProps extends ButtonProps {
+export interface MyButtonProps extends ButtonProps {
   name: string;
 }
 

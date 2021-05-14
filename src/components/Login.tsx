@@ -10,8 +10,12 @@ import { TextField } from "formik-material-ui";
 import { UserFormValues } from "../types/interfaces";
 
 //config
-import { login } from "../config/auth";
+import { facebookSignIn, googleSignIn, login } from "../config/auth";
+
+//my components
 import MyButton from "./common/MyButton";
+import SocialButtons from "./containers/SocialButtons";
+import logo from "../assets/images/logoWhite.png";
 
 let validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -47,7 +51,14 @@ const Login = () => {
         variant="h5"
         color="textPrimary"
       >
-        Login to GLITCH
+        Login to{" "}
+        {
+          <img
+            src={logo}
+            width="75"
+            style={{ marginLeft: 5, marginBottom: -1 }}
+          />
+        }
       </Typography>
       <Formik
         initialValues={initialValues}
@@ -81,6 +92,17 @@ const Login = () => {
           </Form>
         )}
       </Formik>
+      <Typography
+        style={{ textAlign: "center", margin: "15px 0" }}
+        variant="subtitle2"
+        color="textPrimary"
+      >
+        or
+      </Typography>
+      <SocialButtons
+        handleFacebook={() => facebookSignIn()}
+        handleGoogle={() => googleSignIn()}
+      />
     </>
   );
 };

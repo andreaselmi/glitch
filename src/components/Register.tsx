@@ -4,19 +4,18 @@ import { Formik, Form, Field } from "formik";
 import { ToastContainer } from "react-toastify";
 
 //material ui
-import {
-  Button,
-  LinearProgress,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { LinearProgress, Typography, makeStyles } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 
+//my components
+import MyButton from "./common/MyButton";
+import logo from "../assets/images/logoWhite.png";
 //types
 import { UserFormValues } from "../types/interfaces";
 
 //config
-import { register } from "../config/auth";
+import { facebookSignIn, googleSignIn, register } from "../config/auth";
+import SocialButtons from "./containers/SocialButtons";
 
 let validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -52,7 +51,14 @@ const Register = () => {
         variant="h5"
         color="textPrimary"
       >
-        Register to GLITCH
+        Register to{" "}
+        {
+          <img
+            src={logo}
+            width="75"
+            style={{ marginLeft: 5, marginBottom: -1 }}
+          />
+        }
       </Typography>
       <Formik
         initialValues={initialValues}
@@ -79,17 +85,25 @@ const Register = () => {
             />
             {isSubmitting && <LinearProgress />}
 
-            <Button
-              variant="contained"
-              color="primary"
+            <MyButton
+              name="Submit"
               disabled={isSubmitting}
               onClick={submitForm}
-            >
-              Submit
-            </Button>
+            />
           </Form>
         )}
       </Formik>
+      <Typography
+        style={{ textAlign: "center", margin: "15px 0" }}
+        variant="subtitle2"
+        color="textPrimary"
+      >
+        or
+      </Typography>
+      <SocialButtons
+        handleFacebook={() => facebookSignIn()}
+        handleGoogle={() => googleSignIn()}
+      />
     </>
   );
 };

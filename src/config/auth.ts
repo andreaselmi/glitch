@@ -1,4 +1,4 @@
-import { auth } from "./firebase";
+import { auth, Providers } from "./firebase";
 import { toast } from "react-toastify";
 
 interface AuthValues {
@@ -32,5 +32,20 @@ export const register = async (values: AuthValues) => {
       );
     } else toast.error("Unable to register. Please try again later.");
     console.log(error);
+  }
+};
+
+export const googleSignIn = () => {
+  try {
+    auth.signInWithPopup(Providers.google);
+  } catch (error) {
+    toast.error("Unable to access. Try again later.");
+  }
+};
+export const facebookSignIn = () => {
+  try {
+    auth.signInWithPopup(Providers.facebook);
+  } catch (error) {
+    toast.error("Unable to access. Try again later.");
   }
 };
