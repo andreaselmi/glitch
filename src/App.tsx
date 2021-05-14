@@ -16,6 +16,7 @@ import { useAppDispatch } from "./store/hooks";
 import { setCurrentUser } from "./store/user";
 
 import Footer from "./components/Footer";
+import AccountPage from "./views/AccountPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -54,6 +55,7 @@ function App() {
           userImg: "",
         });
       } else {
+        //TODO migliorare
         await firestore
           .collection("users")
           .doc(user.uid)
@@ -79,12 +81,15 @@ function App() {
     setInitializing(false);
   };
 
+  //TODO valutare un loader all'avvio dell'app
+
   useEffect(() => {
     auth.onAuthStateChanged(authStateChanged);
   }, []);
 
   if (initializing) return null;
 
+  //TODO valutare array di routes da mappare
   return (
     <Router>
       <CssBaseline>
@@ -95,9 +100,9 @@ function App() {
             <ProtectedRoute
               redirectPath="/"
               isAuthenticated={isAuthenticated}
-              path="/search"
+              path="/account"
             >
-              <SearchPage />
+              <AccountPage />
             </ProtectedRoute>
             <ProtectedRoute
               redirectPath="/"
@@ -105,6 +110,13 @@ function App() {
               path="/explore"
             >
               <ExplorePage />
+            </ProtectedRoute>
+            <ProtectedRoute
+              redirectPath="/"
+              isAuthenticated={isAuthenticated}
+              path="/search"
+            >
+              <SearchPage />
             </ProtectedRoute>
             <Route path="/">
               <HomePage />

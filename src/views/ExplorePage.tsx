@@ -74,24 +74,24 @@ const ExplorePage = () => {
 
   return (
     <div>
-      <Container className={classes.sectionTitleContainer}>
+      <Container maxWidth="xl" className={classes.sectionTitleContainer}>
         <Typography variant="h4" color="textSecondary">
           Top Games ({games.length})
         </Typography>
       </Container>
-      <HorizontalList sectionTitle="Top Games" items={games} />
-      <Container className={classes.sectionTitleContainer}>
+      <HorizontalList items={games} />
+      <Container maxWidth="xl" className={classes.sectionTitleContainer}>
         <Typography variant="h4" color="textSecondary">
           Favorite games ({games.length})
         </Typography>
       </Container>
-      <HorizontalList sectionTitle="Top Games" items={games} />
-      <Container className={classes.sectionTitleContainer}>
+      <HorizontalList items={games} />
+      <Container maxWidth="xl" className={classes.sectionTitleContainer}>
         <Typography variant="h4" color="textSecondary">
           Top Streams ({games.length})
         </Typography>
       </Container>
-      <HorizontalList sectionTitle="Top Games" items={games} />
+      <HorizontalList items={games} />
     </div>
   );
 };

@@ -14,10 +14,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface HorizontalListProps {
   items: Games[];
-  sectionTitle: string;
 }
 
-const HorizontalList = ({ items, sectionTitle }: HorizontalListProps) => {
+const HorizontalList = ({ items }: HorizontalListProps) => {
   const classes = useStyles();
 
   return (
