@@ -11,7 +11,7 @@ import links from "./config/routes";
 import SearchPage from "./views/SearchPage";
 import ExplorePage from "./views/ExplorePage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
-import { auth } from "./config/firebase";
+import { auth, firestore } from "./config/firebase";
 import { useAppDispatch } from "./store/hooks";
 import { setCurrentUser } from "./store/user";
 
@@ -19,43 +19,71 @@ import Footer from "./components/Footer";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [initializing, setInitializing] = useState<boolean>(true);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        let provider = user.providerData[0]?.providerId;
+  const authStateChanged = async (user: any) => {
+    if (user) {
+      let provider = user.providerData[0]?.providerId;
 
-        if (provider === "google.com") {
-          dispatch(
-            setCurrentUser({
-              email: user.email,
-              uid: user.uid,
-              fullName: user.displayName,
-              userImg: user.photoURL,
-              provider,
-            })
-          );
-        } else {
-          dispatch(
-            setCurrentUser({
-              fullName: user.displayName,
-              email: user.email,
-              userImg: "",
-              uid: user.uid,
-              provider: user.providerData[0]?.providerId,
-            })
-          );
-        }
-
-        console.log(user);
-
-        setIsAuthenticated(true);
+      if (provider === "google.com") {
+        dispatch(
+          setCurrentUser({
+            email: user.email,
+            uid: user.uid,
+            fullName: user.displayName,
+            userImg: user.photoURL,
+            provider,
+          })
+        );
+      } else if (provider === "facebook.com") {
+        dispatch(
+          setCurrentUser({
+            fullName: user.displayName,
+            email: user.email,
+            userImg: "",
+            uid: user.uid,
+            provider,
+          })
+        );
+        await firestore.collection("users").doc(user.uid).set({
+          provider,
+          email: user.email,
+          fullName: user.displayName,
+          uid: user.uid,
+          userImg: "",
+        });
       } else {
-        setIsAuthenticated(false);
+        await firestore
+          .collection("users")
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            if (doc.exists)
+              dispatch(
+                setCurrentUser({
+                  fullName: doc.data()?.fullName,
+                  email: doc.data()?.email,
+                  userImg: doc.data()?.userImg,
+                  uid: doc.data()?.uid,
+                  provider: doc.data()?.provider,
+                })
+              );
+          });
       }
-    });
+
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+    setInitializing(false);
+  };
+
+  useEffect(() => {
+    auth.onAuthStateChanged(authStateChanged);
   }, []);
+
+  if (initializing) return null;
 
   return (
     <Router>
