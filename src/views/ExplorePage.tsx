@@ -4,8 +4,7 @@ import cardImg from "../assets/images/ff.jpg";
 
 //material ui
 import HorizontalList from "../components/containers/HorizontalList";
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Container, Typography, makeStyles } from "@material-ui/core";
 
 //types
 import { Games } from "../types/interfaces";
