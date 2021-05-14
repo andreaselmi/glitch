@@ -1,3 +1,8 @@
+export interface Games {
+  title: string;
+  urlImg: string;
+  id: number | string;
+}
 export interface Route {
   name: string;
   path: string;
