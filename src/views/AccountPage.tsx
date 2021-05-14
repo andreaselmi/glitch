@@ -2,10 +2,13 @@ import React from "react";
 import {
   Typography,
   makeStyles,
+  useMediaQuery,
   Grid,
   Divider,
   Container,
+  useTheme,
 } from "@material-ui/core";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 //mycomponents
 import HorizontalList from "../components/containers/HorizontalList";
@@ -54,7 +57,7 @@ const favoriteGames: Games[] = [
   },
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: "30px 0",
   },
@@ -69,24 +72,48 @@ const useStyles = makeStyles({
     overflow: "hidden",
     margin: "20px 30px",
     "& img": {
-      width: "100%",
-      height: "100%",
+      width: 200,
+      height: 200,
     },
   },
   sectionTitleContainer: {
     padding: "20px",
   },
-});
+  uploadCameraIcon: {
+    color: theme.palette.background.paper,
+    backgroundColor: theme.palette.text.disabled,
+    width: 50,
+    height: 50,
+    padding: 10,
+    borderRadius: "50%",
+    position: "absolute",
+    bottom: 20,
+    right: 35,
+  },
+}));
 
 const AccountPage = () => {
   const user = useAppSelector((state) => state.currentUser);
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   return (
     <Container maxWidth="xl">
-      <Grid container className={classes.headerContainer}>
-        <Grid md={6} item className={classes.imageContainer}>
-          <img src={user.userImg || placeholder} />
-        </Grid>
+      <Grid
+        style={
+          mobile
+            ? { justifyContent: "center" }
+            : { justifyContent: "flex-start" }
+        }
+        container
+        className={classes.headerContainer}
+      >
+        <div style={{ position: "relative" }}>
+          <Grid md={6} item className={classes.imageContainer}>
+            <img src={user.userImg || placeholder} />
+          </Grid>
+          <PhotoCameraIcon className={classes.uploadCameraIcon} />
+        </div>
 
         <Grid md={6} item>
           <Typography variant="h3" color="textPrimary">
