@@ -1,7 +1,8 @@
-import { auth, Providers } from "./firebase";
+import { auth, Providers, firestore } from "./firebase";
 import { toast } from "react-toastify";
 
 interface AuthValues {
+  fullName?: string;
   email: string;
   password: string;
 }
@@ -23,6 +24,15 @@ export const login = async (values: AuthValues) => {
 export const register = async (values: AuthValues) => {
   try {
     await auth.createUserWithEmailAndPassword(values.email, values.password);
+    if (auth.currentUser) {
+      await firestore.collection("users").doc(auth.currentUser.uid).set({
+        provider: "Firebase",
+        email: values.email,
+        fullName: values.fullName,
+        uid: auth.currentUser.uid,
+        userImg: "",
+      });
+    }
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
       return toast.error("Email already in use. Please use another one.");

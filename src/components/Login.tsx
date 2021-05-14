@@ -54,6 +54,7 @@ const Login = () => {
         Login to{" "}
         {
           <img
+            alt="Logo Glitch"
             src={logo}
             width="75"
             style={{ marginLeft: 5, marginBottom: -1 }}

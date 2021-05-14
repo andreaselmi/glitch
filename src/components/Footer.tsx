@@ -70,17 +70,26 @@ const Footer = () => {
     <div className={classes.container}>
       <div className={classes.socialIconContainer}>
         <Icon>
-          <a target="_blank" href="https://github.com/andreaselmi">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://github.com/andreaselmi"
+          >
             <GitHub />
           </a>
         </Icon>
         <Icon>
-          <a target="_blank" href="https://www.facebook.com/andryyy90">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://www.facebook.com/andryyy90"
+          >
             <Facebook />
           </a>
         </Icon>
         <Icon>
           <a
+            rel="noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/andrea-selmi-915605161/"
           >
@@ -88,7 +97,11 @@ const Footer = () => {
           </a>
         </Icon>
         <Icon>
-          <a target="_blank" href="https://www.instagram.com/andreaselmi_/">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://www.instagram.com/andreaselmi_/"
+          >
             <Instagram />
           </a>
         </Icon>

@@ -81,7 +81,7 @@ const Navbar = ({ links }: NavbarProps) => {
 
   useEffect(() => {
     if (user.uid) setOpen(false);
-  });
+  }, [user.uid]);
 
   return (
     <AppBar position="static" className={classes.appBar}>
@@ -96,7 +96,7 @@ const Navbar = ({ links }: NavbarProps) => {
         </MyModal>
         <Link to="/">
           <div className={classes.imgContainer}>
-            <img src={logo} width="75"></img>
+            <img alt="Logo Glitch" src={logo} width="75"></img>
           </div>
         </Link>
         {mobileView && user.uid ? (

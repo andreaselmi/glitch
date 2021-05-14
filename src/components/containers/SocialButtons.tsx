@@ -1,5 +1,5 @@
 import React from "react";
-import MyButton, { MyButtonProps } from "../common/MyButton";
+import MyButton from "../common/MyButton";
 import { makeStyles } from "@material-ui/core";
 
 interface SocialButtonsProps {

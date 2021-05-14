@@ -8,6 +8,7 @@ export interface NavbarProps {
 }
 
 export interface UserFormValues {
+  fullName?: string;
   email: string;
   password: string;
 }

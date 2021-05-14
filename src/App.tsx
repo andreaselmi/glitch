@@ -24,15 +24,32 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        dispatch(
-          setCurrentUser({
-            fullName: "Andrea",
-            email: user.email,
-            userImg: "",
-            uid: user.uid,
-            provider: user.providerData[0]?.providerId,
-          })
-        );
+        let provider = user.providerData[0]?.providerId;
+
+        if (provider === "google.com") {
+          dispatch(
+            setCurrentUser({
+              email: user.email,
+              uid: user.uid,
+              fullName: user.displayName,
+              userImg: user.photoURL,
+              provider,
+            })
+          );
+        } else {
+          dispatch(
+            setCurrentUser({
+              fullName: user.displayName,
+              email: user.email,
+              userImg: "",
+              uid: user.uid,
+              provider: user.providerData[0]?.providerId,
+            })
+          );
+        }
+
+        console.log(user);
+
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);

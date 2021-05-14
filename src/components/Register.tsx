@@ -14,16 +14,17 @@ import logo from "../assets/images/logoWhite.png";
 import { UserFormValues } from "../types/interfaces";
 
 //config
-import { facebookSignIn, googleSignIn, register } from "../config/auth";
-import SocialButtons from "./containers/SocialButtons";
+import { register } from "../config/auth";
 
 let validationSchema = yup.object().shape({
+  fullName: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().required(),
+  password: yup.string().required().min(6),
 });
 
 const Register = () => {
   const initialValues: UserFormValues = {
+    fullName: "",
     email: "",
     password: "",
   };
@@ -32,7 +33,7 @@ const Register = () => {
     form: {
       display: "flex",
       flexDirection: "column",
-      minHeight: 200,
+      minHeight: 300,
       minWidth: 250,
       justifyContent: "space-between",
     },
@@ -55,6 +56,7 @@ const Register = () => {
         {
           <img
             src={logo}
+            alt="Logo Glitch"
             width="75"
             style={{ marginLeft: 5, marginBottom: -1 }}
           />
@@ -72,11 +74,16 @@ const Register = () => {
           <Form className={classes.form}>
             <Field
               component={TextField}
+              name="fullName"
+              type="fullName"
+              label="Full Name"
+            />
+            <Field
+              component={TextField}
               name="email"
               type="email"
               label="Email"
             />
-
             <Field
               component={TextField}
               type="password"
@@ -93,17 +100,6 @@ const Register = () => {
           </Form>
         )}
       </Formik>
-      <Typography
-        style={{ textAlign: "center", margin: "15px 0" }}
-        variant="subtitle2"
-        color="textPrimary"
-      >
-        or
-      </Typography>
-      <SocialButtons
-        handleFacebook={() => facebookSignIn()}
-        handleGoogle={() => googleSignIn()}
-      />
     </>
   );
 };

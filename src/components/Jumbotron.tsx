@@ -52,7 +52,7 @@ const Jumbotron = () => {
 
   useEffect(() => {
     if (user.uid) setOpen(false);
-  });
+  }, [user.uid]);
 
   const toggleModal = () => {
     setOpen(!open);
