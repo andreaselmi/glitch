@@ -18,7 +18,6 @@ interface HorizontalListProps {
 
 const HorizontalList = ({ items }: HorizontalListProps) => {
   const classes = useStyles();
-
   const [games, setGames] = useState<Games[]>();
 
   const replaceImgDimentions = () => {
