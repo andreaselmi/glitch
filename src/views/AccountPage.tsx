@@ -28,38 +28,38 @@ import { firestore, storage } from "../config/firebase";
 
 const favoriteGames: Games[] = [
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 1,
   },
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 2,
   },
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 3,
   },
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 4,
   },
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 5,
   },
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 6,
   },
   {
-    title: "FinalFantasy",
-    urlImg: cardImg,
+    name: "FinalFantasy",
+    box_art_url: cardImg,
     id: 7,
   },
 ];
@@ -112,6 +112,8 @@ const AccountPage = () => {
   const classes = useStyles();
   const [image, setImage] = useState<string>("");
   const [file, setFile] = useState<File | undefined>();
+
+  //TODO impostare setLoading
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;

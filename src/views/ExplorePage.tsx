@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 //my components
 import cardImg from "../assets/images/ff.jpg";
 
@@ -8,59 +8,7 @@ import { Container, Typography, makeStyles } from "@material-ui/core";
 
 //types
 import { Games } from "../types/interfaces";
-
-const games: Games[] = [
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 1,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 2,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 3,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 4,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 5,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 6,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 7,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 8,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 9,
-  },
-  {
-    title: "FinalFantasy",
-    urlImg: cardImg,
-    id: 10,
-  },
-];
+import { helix } from "../config/api";
 
 const useStyles = makeStyles({
   sectionTitleContainer: {
@@ -71,26 +19,37 @@ const useStyles = makeStyles({
 const ExplorePage = () => {
   const classes = useStyles();
 
+  const [topGames, setTopGames] = useState<Games[]>();
+
+  const fetchTopGames = async () => {
+    const { data } = await helix.get("/games/top");
+    setTopGames(data.data);
+  };
+
+  useEffect(() => {
+    fetchTopGames();
+  });
+
   return (
     <div>
       <Container maxWidth="xl" className={classes.sectionTitleContainer}>
         <Typography variant="h4" color="textSecondary">
-          Top Games ({games.length})
+          Top Games ({topGames && topGames.length})
         </Typography>
       </Container>
-      <HorizontalList items={games} />
+      {topGames && topGames.length > 0 && <HorizontalList items={topGames} />}
       <Container maxWidth="xl" className={classes.sectionTitleContainer}>
         <Typography variant="h4" color="textSecondary">
-          Favorite games ({games.length})
+          Favorite topGames ({topGames && topGames.length})
         </Typography>
       </Container>
-      <HorizontalList items={games} />
+      {topGames && topGames.length > 0 && <HorizontalList items={topGames} />}
       <Container maxWidth="xl" className={classes.sectionTitleContainer}>
         <Typography variant="h4" color="textSecondary">
-          Top Streams ({games.length})
+          Top Streams ({topGames && topGames.length})
         </Typography>
       </Container>
-      <HorizontalList items={games} />
+      {topGames && topGames.length > 0 && <HorizontalList items={topGames} />}
     </div>
   );
 };

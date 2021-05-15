@@ -25,6 +25,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 //config
 import links from "./config/routes";
 import darkTheme from "./config/theme";
+import { setAccessToken } from "./config/api";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -105,6 +106,7 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged(authStateChanged);
+    setAccessToken();
   }, []);
 
   if (initializing) return null;

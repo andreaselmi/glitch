@@ -1,6 +1,6 @@
 export interface Games {
-  title: string;
-  urlImg: string;
+  name: string;
+  box_art_url: string;
   id: number | string;
 }
 export interface Route {

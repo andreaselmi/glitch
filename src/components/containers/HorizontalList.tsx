@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Card from "../Card";
 import { Games } from "../../types/interfaces";
@@ -19,17 +19,31 @@ interface HorizontalListProps {
 const HorizontalList = ({ items }: HorizontalListProps) => {
   const classes = useStyles();
 
+  const [games, setGames] = useState<Games[]>();
+
+  const replaceImgDimentions = () => {
+    if (items && items.length > 0) {
+      const newItems = items.map((item) => ({
+        ...item,
+        box_art_url: item.box_art_url.replace(/{width}|{height}/g, "300"),
+      }));
+      setGames(newItems);
+    }
+  };
+
+  useEffect(() => replaceImgDimentions(), []);
   return (
     <div className={classes.gamesListContainer}>
-      {items.map((item) => (
-        <Card
-          key={item.id}
-          urlImg={item.urlImg}
-          title={item.title}
-          onClick={() => console.log(item.id)}
-          saved={false}
-        />
-      ))}
+      {games &&
+        games.map((item) => (
+          <Card
+            key={item.id}
+            urlImg={item.box_art_url}
+            title={item.name}
+            onClick={() => console.log(item.id)}
+            saved={false}
+          />
+        ))}
     </div>
   );
 };
