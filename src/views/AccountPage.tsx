@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   imageContainer: {
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
     maxWidth: 200,
     maxHeight: 200,
     borderRadius: "50%",
