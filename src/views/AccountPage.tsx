@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactEventHandler, useState } from "react";
 import {
   Typography,
   makeStyles,
@@ -7,8 +7,10 @@ import {
   Divider,
   Container,
   useTheme,
+  Button,
 } from "@material-ui/core";
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import IconButton from "@material-ui/core/IconButton";
 
 //mycomponents
 import HorizontalList from "../components/containers/HorizontalList";
@@ -18,6 +20,7 @@ import placeholder from "../assets/images/account.png";
 //types
 import { Games } from "../types/interfaces";
 import { useAppSelector } from "../store/hooks";
+import { firestore } from "../config/firebase";
 
 const favoriteGames: Games[] = [
   {
@@ -76,17 +79,19 @@ const useStyles = makeStyles((theme) => ({
       height: 200,
     },
   },
+  input: {
+    display: "none",
+  },
   sectionTitleContainer: {
     padding: "20px",
   },
   uploadCameraIcon: {
     color: theme.palette.background.paper,
     backgroundColor: theme.palette.text.disabled,
-    width: 50,
     height: 50,
-    padding: 10,
-    borderRadius: "50%",
+    width: 50,
     position: "absolute",
+    borderRadius: 50,
     bottom: 20,
     right: 35,
   },
@@ -97,6 +102,16 @@ const AccountPage = () => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
+  const [image, setImage] = useState<string | undefined>();
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+
+    if (!fileList) return;
+
+    setImage(URL.createObjectURL(fileList[0]));
+  };
+
   return (
     <Container maxWidth="xl">
       <Grid
@@ -110,9 +125,25 @@ const AccountPage = () => {
       >
         <div style={{ position: "relative" }}>
           <Grid md={6} item className={classes.imageContainer}>
-            <img src={user.userImg || placeholder} />
+            <img src={user.userImg || image || placeholder} />
           </Grid>
-          <PhotoCameraIcon className={classes.uploadCameraIcon} />
+
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="icon-button-file"
+            type="file"
+            onChange={(e) => handleImageChange(e)}
+          />
+          <label htmlFor="icon-button-file">
+            <IconButton
+              className={classes.uploadCameraIcon}
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
         </div>
 
         <Grid md={6} item>
