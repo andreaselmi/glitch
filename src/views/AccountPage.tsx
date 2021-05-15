@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   makeStyles,
@@ -7,7 +7,6 @@ import {
   Divider,
   Container,
   useTheme,
-  Button,
 } from "@material-ui/core";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import IconButton from "@material-ui/core/IconButton";
@@ -119,17 +118,17 @@ const AccountPage = () => {
 
     if (!fileList) return;
 
-    const file = setFile(fileList[0]);
+    setFile(fileList[0]);
     setImage(URL.createObjectURL(fileList[0]));
   };
+
   const uploadImage = async () => {
     if (file == null) {
       return null;
     }
 
-    const uploadUri = file;
     const storageRef = storage().ref(`photos/${user.uid}`);
-    const task = storageRef.put(uploadUri);
+    const task = storageRef.put(file);
 
     try {
       await task;
