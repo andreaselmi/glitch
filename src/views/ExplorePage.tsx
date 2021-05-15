@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 //my components
-import cardImg from "../assets/images/ff.jpg";
 
 //material ui
 import HorizontalList from "../components/containers/HorizontalList";
@@ -26,9 +25,12 @@ const ExplorePage = () => {
     setTopGames(data.data);
   };
 
+  //TODO SALVARE NELLO STORE REDUX PER EVITARE REFETCH
   useEffect(() => {
     fetchTopGames();
   });
+
+  //TODO hide scrollbar
 
   return (
     <div>
