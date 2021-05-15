@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useState } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
 import {
   Typography,
   makeStyles,
@@ -19,8 +19,13 @@ import placeholder from "../assets/images/account.png";
 
 //types
 import { Games } from "../types/interfaces";
-import { useAppSelector } from "../store/hooks";
-import { firestore } from "../config/firebase";
+
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setUserImg } from "../store/user";
+
+import { firestore, storage } from "../config/firebase";
+
+//TODO absolutely da sistemare
 
 const favoriteGames: Games[] = [
   {
@@ -101,19 +106,59 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AccountPage = () => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.currentUser);
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
-  const [image, setImage] = useState<string | undefined>();
+  const [image, setImage] = useState<string>("");
+  const [file, setFile] = useState<File | undefined>();
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
 
     if (!fileList) return;
 
+    const file = setFile(fileList[0]);
     setImage(URL.createObjectURL(fileList[0]));
   };
+  const uploadImage = async () => {
+    if (file == null) {
+      return null;
+    }
+
+    const uploadUri = file;
+    const storageRef = storage().ref(`photos/${user.uid}`);
+    const task = storageRef.put(uploadUri);
+
+    try {
+      await task;
+
+      const url = await storageRef.getDownloadURL();
+
+      return url;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
+
+  const storedImg = async () => {
+    let url = await uploadImage();
+    dispatch(
+      setUserImg({
+        userImg: url,
+      })
+    );
+    await firestore.collection("users").doc(user.uid).update({
+      userImg: url,
+    });
+    // setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (image) storedImg();
+  }, [image]);
 
   return (
     <Container maxWidth="xl">
@@ -131,22 +176,26 @@ const AccountPage = () => {
             <img src={user.userImg || image || placeholder} />
           </Grid>
 
-          <input
-            accept="image/*"
-            className={classes.input}
-            id="icon-button-file"
-            type="file"
-            onChange={(e) => handleImageChange(e)}
-          />
-          <label htmlFor="icon-button-file">
-            <IconButton
-              className={classes.uploadCameraIcon}
-              aria-label="upload picture"
-              component="span"
-            >
-              <PhotoCamera />
-            </IconButton>
-          </label>
+          {user.provider === "google.com" ? null : (
+            <>
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+                onChange={(e) => handleImageChange(e)}
+              />
+              <label htmlFor="icon-button-file">
+                <IconButton
+                  className={classes.uploadCameraIcon}
+                  aria-label="upload picture"
+                  component="span"
+                >
+                  <PhotoCamera />
+                </IconButton>
+              </label>
+            </>
+          )}
         </div>
 
         <Grid md={6} item>

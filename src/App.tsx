@@ -47,12 +47,12 @@ function App() {
             provider,
           })
         );
+        //TODO supportare img facebook
         await firestore.collection("users").doc(user.uid).set({
           provider,
           email: user.email,
           fullName: user.displayName,
           uid: user.uid,
-          userImg: "",
         });
       } else {
         //TODO migliorare
