@@ -16,6 +16,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import MyButton from "./common/MyButton";
 
 interface MyCardProps {
+  buttonTitle: string;
   onClick: () => void;
   title: string;
   urlImg: string;
@@ -25,8 +26,11 @@ interface MyCardProps {
 const useStyles = makeStyles((theme: Theme) => ({
   cardActionsContainer: {
     justifyContent: "space-between",
+    marginTop: "auto",
   },
   card: {
+    display: "flex",
+    flexDirection: "column",
     minWidth: 300,
     margin: "0 20px",
   },
@@ -36,15 +40,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   media: {
     minHeight: 400,
   },
+  title: {
+    overflow: "scroll",
+  },
 }));
 
-const MyCard = ({ urlImg, title, onClick, saved }: MyCardProps) => {
+const MyCard = ({
+  buttonTitle,
+  urlImg,
+  title,
+  onClick,
+  saved,
+}: MyCardProps) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={urlImg} title={title} />
       <CardContent>
-        <Typography variant="h5" color="textSecondary" component="p">
+        <Typography
+          className={classes.title}
+          variant="h5"
+          color="textSecondary"
+          component="p"
+        >
           {title}
         </Typography>
       </CardContent>
@@ -55,7 +73,7 @@ const MyCard = ({ urlImg, title, onClick, saved }: MyCardProps) => {
         <MyButton
           onClick={onClick}
           className={classes.livesButton}
-          name="View Lives"
+          name={buttonTitle}
         />
       </CardActions>
     </Card>
