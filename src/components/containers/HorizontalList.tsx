@@ -21,6 +21,7 @@ const HorizontalList = ({ items }: HorizontalListProps) => {
   const [data, setData] = useState<Games[] | Streams[]>();
   const classes = useStyles();
 
+  //function that replaces width and height with dimensions
   const replaceImgDimensions = () => {
     if (items && items.length > 0) {
       if ("box_art_url" in items[0]) {
@@ -42,8 +43,7 @@ const HorizontalList = ({ items }: HorizontalListProps) => {
     }
   };
 
-  useEffect(() => replaceImgDimensions(), []);
-
+  //render item depending on whether it is games or stream
   const renderItems = (data: Games[] | Streams[]) => {
     if ("box_art_url" in data[0]) {
       return (
@@ -80,9 +80,11 @@ const HorizontalList = ({ items }: HorizontalListProps) => {
     } else return null;
   };
 
+  useEffect(() => replaceImgDimensions(), []);
+
   return (
     <div>
-      {(data && renderItems(data)) || (
+      {(data && data.length > 0 && renderItems(data)) || (
         <Typography variant="h5" color="textPrimary">
           Non ci sono elementi da mostrare
         </Typography>
