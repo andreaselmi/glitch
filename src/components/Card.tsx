@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     overflow: "scroll",
+    maxHeight: 100,
   },
 }));
 
