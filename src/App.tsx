@@ -8,28 +8,21 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 //my components
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import RoutesRender from "./views/RoutesRender";
+import Loader from "./components/Loader";
 
 //config
 import darkTheme from "./config/theme";
 import { navLinks } from "./config/routes";
-
-import RoutesRender from "./views/RoutesRender";
+import { auth } from "./config/firebase";
+import { authStateChanged } from "./config/auth";
+import { setAccessToken } from "./config/api";
 
 //store
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { loadGamesFromFirestore } from "./store/games";
 
-//auth
-import { auth } from "./config/firebase";
-import { authStateChanged } from "./config/auth";
-
-//my components
-import Loader from "./components/Loader";
-
-//config
-import { setAccessToken } from "./config/api";
-
-function App() {
+const App = () => {
   const { user, initializing } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
@@ -57,6 +50,6 @@ function App() {
       </CssBaseline>
     </Router>
   );
-}
+};
 
 export default App;
