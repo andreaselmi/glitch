@@ -10,7 +10,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     marginBottom: 50,
     overflowY: "scroll",
-    width: "100%",
+    width: "100%" /* IE and Edge */,
+    scrollbarWidth: "none",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
 }));
 

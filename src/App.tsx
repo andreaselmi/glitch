@@ -36,7 +36,7 @@ const App = () => {
     if (user.uid) dispatch(loadGamesFromFirestore(user));
   }, [user]);
 
-  if (initializing) return <Loader />;
+  if (initializing) return <Loader height={400} width={400} />;
 
   return (
     <Router>

@@ -124,6 +124,7 @@ export const apiMiddleware =
         throw new Error(response.data.message);
       }
     } catch (error) {
+      console.log(error);
       dispatch({ type: onError, payload: error });
     }
   };

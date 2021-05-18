@@ -24,9 +24,7 @@ export const setAccessToken = async () => {
           expiresAt: dateInSeconds + data.expires_in,
         })
       );
-    } else {
-      return null;
-    }
+    } else return null;
   } else {
     const { data } = await requestAccessToken();
     localStorage.setItem(
@@ -50,8 +48,18 @@ export const getAccessToken = () => {
 
 export const helix = axios.create({
   baseURL: "https://api.twitch.tv/helix",
-  headers: {
-    "client-id": client_id,
-    Authorization: "Bearer " + getAccessToken(),
-  },
 });
+
+helix.interceptors.request.use(
+  function (config: any) {
+    const token = getAccessToken();
+    if (token) {
+      config.headers["client-id"] = client_id;
+      config.headers["Authorization"] = "Bearer " + token;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);

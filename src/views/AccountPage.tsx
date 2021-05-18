@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
-  Typography,
-  makeStyles,
-  useMediaQuery,
-  Grid,
-  Divider,
   Container,
+  Divider,
+  Grid,
+  IconButton,
+  makeStyles,
+  Typography,
+  useMediaQuery,
   useTheme,
 } from "@material-ui/core";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import IconButton from "@material-ui/core/IconButton";
 
 //mycomponents
 import HorizontalList from "../components/containers/HorizontalList";
@@ -19,9 +19,9 @@ import placeholder from "../assets/images/account.png";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setUserImg } from "../store/auth";
 
+//config
 import { firestore, storage } from "../config/firebase";
-
-//TODO absolutely da sistemare
+import Loader from "../components/Loader";
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   sectionTitleContainer: {
     padding: "20px",
   },
-  uploadCameraIcon: {
+  userImgButton: {
     color: theme.palette.background.paper,
     backgroundColor: theme.palette.text.disabled,
     height: 50,
@@ -64,16 +64,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AccountPage = () => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const favoriteGames = useAppSelector((state) => state.games.favoriteGames);
+  const [image, setImage] = useState<string>("");
+  const [file, setFile] = useState<File | undefined>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
-  const [image, setImage] = useState<string>("");
-  const [file, setFile] = useState<File | undefined>();
-
-  //TODO impostare setLoading
+  const dispatch = useAppDispatch();
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
@@ -89,14 +89,14 @@ const AccountPage = () => {
       return null;
     }
 
+    setIsLoading(true);
+
     const storageRef = storage().ref(`photos/${user.uid}`);
     const task = storageRef.put(file);
 
     try {
       await task;
-
       const url = await storageRef.getDownloadURL();
-
       return url;
     } catch (e) {
       console.log(e);
@@ -114,7 +114,7 @@ const AccountPage = () => {
     await firestore.collection("users").doc(user.uid).update({
       userImg: url,
     });
-    // setIsLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -147,13 +147,28 @@ const AccountPage = () => {
                 onChange={(e) => handleImageChange(e)}
               />
               <label htmlFor="icon-button-file">
-                <IconButton
-                  className={classes.uploadCameraIcon}
-                  aria-label="upload picture"
-                  component="span"
-                >
-                  <PhotoCamera />
-                </IconButton>
+                {isLoading ? (
+                  <Loader
+                    height={70}
+                    width={70}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    className={classes.userImgButton}
+                  />
+                ) : (
+                  <IconButton
+                    className={classes.userImgButton}
+                    aria-label="upload picture"
+                    component="span"
+                  >
+                    <PhotoCamera />
+                  </IconButton>
+                )}
               </label>
             </>
           )}

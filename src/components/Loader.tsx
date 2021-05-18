@@ -1,8 +1,13 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Lottie from "react-lottie";
 import animationData from "../assets/loaders/robotLoader.json";
 
-const Loader = () => {
+interface LoaderProps extends React.HTMLProps<HTMLDivElement> {
+  height: number;
+  width: number;
+}
+
+const Loader = ({ height, width, ...restProps }: LoaderProps) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -15,14 +20,15 @@ const Loader = () => {
   return (
     <div
       style={{
+        width: "100vw",
         height: "100vh",
-        width: "100wh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
+      {...restProps}
     >
-      <Lottie options={defaultOptions} height={400} width={400} />
+      <Lottie options={defaultOptions} height={height} width={width} />
     </div>
   );
 };
