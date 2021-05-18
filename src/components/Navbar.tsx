@@ -25,7 +25,7 @@ import { NavbarProps } from "../types/interfaces";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setNoUser } from "../store/user";
+import { setNoUser } from "../store/auth";
 import { clearFavoriteGames } from "../store/games";
 
 import { auth } from "../config/firebase";
@@ -68,7 +68,7 @@ const Navbar = ({ links }: NavbarProps) => {
   const theme = useTheme();
   const mobileView = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const user = useAppSelector((state) => state.currentUser);
+  const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
   const toggleModal = () => {

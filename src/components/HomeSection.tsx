@@ -10,33 +10,33 @@ interface HomeSectionProps {
   subtitle: string;
 }
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0 50px",
+    "& > div": {
+      textAlign: "center",
+    },
+  },
+  childrenContainer: {},
+  textContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    "& > h6": {
+      paddingTop: 10,
+      color: theme.palette.text.secondary,
+    },
+  },
+}));
+
 const HomeSection: React.FC<HomeSectionProps> = ({
   title,
   subtitle,
   children,
 }) => {
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "0 50px",
-      "& > div": {
-        textAlign: "center",
-      },
-    },
-    childrenContainer: {},
-    textContainer: {
-      display: "flex",
-      justifyContent: "center",
-      flexDirection: "column",
-      "& > h6": {
-        paddingTop: 10,
-        color: theme.palette.text.secondary,
-      },
-    },
-  }));
-
   const classes = useStyles();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("xs"));

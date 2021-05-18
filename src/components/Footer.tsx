@@ -14,56 +14,56 @@ import { Grid, Icon, Typography } from "@material-ui/core";
 //my components
 import Scroller from "./common/Scroller";
 
-const Footer = () => {
-  const useStyles = makeStyles((theme) => ({
-    backToTopIcon: {
-      alignItems: "center",
-      backgroundColor: theme.palette.background.paper,
-      borderRadius: 50,
+const useStyles = makeStyles((theme) => ({
+  backToTopIcon: {
+    alignItems: "center",
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 50,
+    color: theme.palette.text.primary,
+    cursor: "pointer",
+    display: "flex",
+    fontSize: "3rem",
+    justifyContent: "center",
+    padding: 5,
+    position: "absolute",
+    right: 20,
+    top: -60,
+  },
+  container: {
+    alignItems: "center",
+    backgroundColor: theme.palette.background.paper,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginTop: "auto",
+    minHeight: "6rem",
+    position: "relative",
+  },
+  socialIconContainer: {
+    color: theme.palette.text.primary,
+    "& a:link": {
       color: theme.palette.text.primary,
+    },
+    "& a:active": {
+      color: theme.palette.text.primary,
+    },
+    "& a:visited": {
+      color: theme.palette.text.primary,
+    },
+    "& > span": {
+      margin: "0 10px",
       cursor: "pointer",
-      display: "flex",
-      fontSize: "3rem",
-      justifyContent: "center",
-      padding: 5,
-      position: "absolute",
-      right: 20,
-      top: -60,
-    },
-    container: {
-      alignItems: "center",
-      backgroundColor: theme.palette.background.paper,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      marginTop: "auto",
-      minHeight: "6rem",
-      position: "relative",
-    },
-    socialIconContainer: {
-      color: theme.palette.text.primary,
-      "& a:link": {
-        color: theme.palette.text.primary,
-      },
-      "& a:active": {
-        color: theme.palette.text.primary,
-      },
-      "& a:visited": {
-        color: theme.palette.text.primary,
-      },
-      "& > span": {
-        margin: "0 10px",
-        cursor: "pointer",
-        "& :hover": {
-          color: theme.palette.primary.main,
-        },
+      "& :hover": {
+        color: theme.palette.primary.main,
       },
     },
-    textContainer: {
-      textAlign: "center",
-    },
-  }));
+  },
+  textContainer: {
+    textAlign: "center",
+  },
+}));
 
+const Footer = () => {
   const classes = useStyles();
 
   return (

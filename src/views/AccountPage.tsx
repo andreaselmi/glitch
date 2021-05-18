@@ -17,7 +17,7 @@ import placeholder from "../assets/images/account.png";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setUserImg } from "../store/user";
+import { setUserImg } from "../store/auth";
 
 import { firestore, storage } from "../config/firebase";
 
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AccountPage = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.currentUser);
+  const user = useAppSelector((state) => state.auth.user);
   const favoriteGames = useAppSelector((state) => state.games.favoriteGames);
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));

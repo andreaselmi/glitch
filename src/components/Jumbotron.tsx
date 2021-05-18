@@ -13,39 +13,39 @@ import UserAuthTabs from "./containers/UserAuthTabs";
 //store
 import { useAppSelector } from "../store/hooks";
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    minWidth: 200,
+    marginTop: 20,
+  },
+  headerContainer: {
+    alignItems: "center",
+    background: `url(${bgImage})no-repeat center`,
+    backgroundSize: "cover",
+    display: "flex",
+    height: "77vh",
+    position: "relative",
+    zIndex: 1,
+  },
+  headerTextContainer: {
+    justifyContent: "space-around",
+    paddingLeft: "5vw",
+    height: "30vh",
+  },
+  overlay: {
+    backgroundColor: "rgba(0,0,0,1)",
+    height: "100%",
+    position: "absolute",
+    opacity: 0.6,
+    width: "100%",
+    zIndex: -1,
+  },
+}));
+
 const Jumbotron = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const user = useAppSelector((state) => state.currentUser);
+  const user = useAppSelector((state) => state.auth.user);
   const theme = useTheme();
-
-  const useStyles = makeStyles((theme) => ({
-    button: {
-      minWidth: 200,
-      marginTop: 20,
-    },
-    headerContainer: {
-      alignItems: "center",
-      background: `url(${bgImage})no-repeat center`,
-      backgroundSize: "cover",
-      display: "flex",
-      height: "77vh",
-      position: "relative",
-      zIndex: 1,
-    },
-    headerTextContainer: {
-      justifyContent: "space-around",
-      paddingLeft: "5vw",
-      height: "30vh",
-    },
-    overlay: {
-      backgroundColor: "rgba(0,0,0,1)",
-      height: "100%",
-      position: "absolute",
-      opacity: 0.6,
-      width: "100%",
-      zIndex: -1,
-    },
-  }));
 
   const classes = useStyles();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));

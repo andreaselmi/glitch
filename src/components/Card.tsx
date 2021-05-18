@@ -63,7 +63,7 @@ const MyCard = ({
   item,
 }: MyCardProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const user = useAppSelector((state) => state.currentUser);
+  const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
   const classes = useStyles();
 

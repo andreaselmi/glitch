@@ -22,25 +22,25 @@ let validationSchema = yup.object().shape({
   password: yup.string().required().min(6),
 });
 
+const useStyle = makeStyles({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: 300,
+    minWidth: 250,
+    justifyContent: "space-between",
+  },
+  headerText: {
+    marginBottom: 20,
+  },
+});
+
 const Register = () => {
   const initialValues: UserFormValues = {
     fullName: "",
     email: "",
     password: "",
   };
-
-  const useStyle = makeStyles({
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      minHeight: 300,
-      minWidth: 250,
-      justifyContent: "space-between",
-    },
-    headerText: {
-      marginBottom: 20,
-    },
-  });
 
   const classes = useStyle();
 

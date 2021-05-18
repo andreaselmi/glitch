@@ -22,24 +22,24 @@ let validationSchema = yup.object().shape({
   password: yup.string().required(),
 });
 
+const useStyle = makeStyles({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: 200,
+    minWidth: 250,
+    justifyContent: "space-between",
+  },
+  headerText: {
+    marginBottom: 20,
+  },
+});
+
 const Login = () => {
   const initialValues: UserFormValues = {
     email: "",
     password: "",
   };
-
-  const useStyle = makeStyles({
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      minHeight: 200,
-      minWidth: 250,
-      justifyContent: "space-between",
-    },
-    headerText: {
-      marginBottom: 20,
-    },
-  });
 
   const classes = useStyle();
 

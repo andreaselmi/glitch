@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setCurrentUser } from "../store/user";
+import { setCurrentUser } from "../store/auth";
 
 //auth
 import { auth, firestore } from "../config/firebase";
@@ -20,7 +20,7 @@ import { setAccessToken } from "../config/api";
 import { loadGamesFromFirestore } from "../store/games";
 
 const Routes = () => {
-  const user = useAppSelector((state) => state.currentUser);
+  const user = useAppSelector((state) => state.auth.user);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [initializing, setInitializing] = useState<boolean>(true);
   const dispatch = useAppDispatch();

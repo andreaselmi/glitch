@@ -1,10 +1,10 @@
 import { configureStore, MiddlewareArray } from "@reduxjs/toolkit";
-import userReducer from "./user";
+import authReducer from "./auth";
 import gamesReducer, { apiMiddleware, firestoreMiddleware } from "./games";
 
 export const store = configureStore({
   reducer: {
-    currentUser: userReducer,
+    auth: authReducer,
     games: gamesReducer,
   },
   middleware: [apiMiddleware, firestoreMiddleware],

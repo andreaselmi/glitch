@@ -1,0 +1,56 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface User {
+  fullName: string;
+  email: string;
+  userImg: string;
+  uid: string;
+  provider: string;
+}
+
+interface AuthProps {
+  user: User;
+  isAuthenticated: boolean;
+  initializing: boolean;
+}
+
+const initialState: AuthProps = {
+  user: {
+    fullName: "",
+    email: "",
+    userImg: "",
+    uid: "",
+    provider: "",
+  },
+  isAuthenticated: false,
+  initializing: false,
+};
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    setCurrentUser: (state, action: PayloadAction<any>) => {
+      const { user } = state;
+      user.fullName = action.payload.fullName;
+      user.email = action.payload.email;
+      user.userImg = action.payload.userImg;
+      user.uid = action.payload.uid;
+      user.provider = action.payload.provider;
+    },
+    setNoUser: (state) => {
+      const { user } = state;
+      user.fullName = "";
+      user.email = "";
+      user.userImg = "";
+      user.uid = "";
+      user.provider = "";
+    },
+    setUserImg: (state, action: PayloadAction<any>) => {
+      state.user.userImg = action.payload.userImg;
+    },
+  },
+});
+
+export const { setCurrentUser, setNoUser, setUserImg } = authSlice.actions;
+export default authSlice.reducer;

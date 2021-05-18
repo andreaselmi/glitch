@@ -10,23 +10,23 @@ interface MyModalProps {
   children: React.ReactNode;
 }
 
-const MyModal = ({ open, onClose, children }: MyModalProps) => {
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      outline: "none",
-      backgroundColor: theme.palette.background.paper,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 30,
-    },
-    modal: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-  }));
+const useStyles = makeStyles((theme) => ({
+  container: {
+    outline: "none",
+    backgroundColor: theme.palette.background.paper,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30,
+  },
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
 
+const MyModal = ({ open, onClose, children }: MyModalProps) => {
   const classes = useStyles();
 
   return (
