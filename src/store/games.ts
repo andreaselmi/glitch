@@ -33,6 +33,9 @@ const userSlice = createSlice({
     gamesRequested: (state) => {
       state.isLoading = true;
     },
+    gamesEndRequest: (state) => {
+      state.isLoading = false;
+    },
     loadTopGamesFailed: (state, action) => {
       state.loadTopGamesError = action.payload;
       state.isLoading = false;
@@ -44,7 +47,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { gamesRequested } = userSlice.actions;
+export const { gamesRequested, gamesEndRequest } = userSlice.actions;
 export default userSlice.reducer;
 
 //action for starting api calls
@@ -77,6 +80,7 @@ export const apiMiddleware =
       const response = await helix.get(endpoint);
       if (response.status === 200) {
         dispatch({ type: onSuccess, payload: response.data });
+        dispatch(gamesEndRequest());
       } else {
         throw new Error(response.data.message);
       }

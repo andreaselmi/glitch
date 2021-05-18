@@ -14,17 +14,18 @@ import { auth, firestore } from "./config/firebase";
 import firebase from "firebase/app";
 
 //my components
-import Footer from "./components/Footer";
 import AccountPage from "./views/AccountPage";
+import ExplorePage from "./views/ExplorePage";
+import Footer from "./components/Footer";
 import HomePage from "./views/HomePage";
+import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import SearchPage from "./views/SearchPage";
-import ExplorePage from "./views/ExplorePage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
 //config
-import links from "./config/routes";
 import darkTheme from "./config/theme";
+import links from "./config/routes";
 import { setAccessToken } from "./config/api";
 
 function App() {
@@ -109,7 +110,7 @@ function App() {
     setAccessToken();
   }, []);
 
-  if (initializing) return null;
+  if (initializing) return <Loader />;
 
   //TODO valutare array di routes da mappare
   return (

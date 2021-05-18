@@ -24,7 +24,9 @@ export const setAccessToken = async () => {
           expiresAt: dateInSeconds + data.expires_in,
         })
       );
-    } else return null;
+    } else {
+      console.log("Valid Token");
+    }
   } else {
     const { data } = await requestAccessToken();
     localStorage.setItem(
@@ -37,7 +39,7 @@ export const setAccessToken = async () => {
   }
 };
 
-const getAccessToken = () => {
+export const getAccessToken = () => {
   const token = localStorage.getItem("accessToken");
   if (token) {
     const parsedToken = JSON.parse(token);

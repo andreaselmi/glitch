@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-//my components
+//mycomponents
+import Loader from "../components/Loader";
 
 //material ui
 import HorizontalList from "../components/containers/HorizontalList";
-import { Container, Typography, makeStyles } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 
 //types
 import { loadTopGames, loadTopStreams } from "../store/games";
@@ -20,8 +21,13 @@ const ExplorePage = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
-  const { topGames, topStreams, loadTopGamesError, loadTopStreamsError } =
-    useAppSelector((state) => state.games);
+  const {
+    topGames,
+    topStreams,
+    loadTopGamesError,
+    loadTopStreamsError,
+    isLoading,
+  } = useAppSelector((state) => state.games);
 
   //TODO SALVARE NELLO STORE REDUX PER EVITARE REFETCH
   useEffect(() => {
@@ -33,25 +39,33 @@ const ExplorePage = () => {
 
   return (
     <div>
-      <Container maxWidth="xl" className={classes.sectionTitleContainer}>
-        <HorizontalListHeader
-          error={loadTopGamesError}
-          title="Top Games"
-          numberOfItems={topGames.length}
-          retryAction={() => dispatch(loadTopGames())}
-        />
-      </Container>
-      {topGames && topGames.length > 0 && <HorizontalList items={topGames} />}
-      <Container maxWidth="xl" className={classes.sectionTitleContainer}>
-        <HorizontalListHeader
-          error={loadTopStreamsError}
-          title="Top Streams"
-          numberOfItems={topStreams.length}
-          retryAction={() => dispatch(loadTopStreams())}
-        />
-      </Container>
-      {topStreams && topStreams.length > 0 && (
-        <HorizontalList items={topStreams} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Container maxWidth="xl" className={classes.sectionTitleContainer}>
+            <HorizontalListHeader
+              error={loadTopGamesError}
+              title="Top Games"
+              numberOfItems={topGames.length}
+              retryAction={() => dispatch(loadTopGames())}
+            />
+          </Container>
+          {topGames && topGames.length > 0 && (
+            <HorizontalList items={topGames} />
+          )}
+          <Container maxWidth="xl" className={classes.sectionTitleContainer}>
+            <HorizontalListHeader
+              error={loadTopStreamsError}
+              title="Top Streams"
+              numberOfItems={topStreams.length}
+              retryAction={() => dispatch(loadTopStreams())}
+            />
+          </Container>
+          {topStreams && topStreams.length > 0 && (
+            <HorizontalList items={topStreams} />
+          )}
+        </>
       )}
     </div>
   );

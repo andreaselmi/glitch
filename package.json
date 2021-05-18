@@ -58,6 +58,7 @@
     ]
   },
   "devDependencies": {
-    "@types/aos": "^3.0.3"
+    "@types/aos": "^3.0.3",
+    "@types/react-lottie": "^1.2.5"
   }
 }
