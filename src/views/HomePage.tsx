@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 //Mycomponents
 import Header from "../components/containers/Header";
@@ -12,19 +12,20 @@ import ExploreIcon from "@material-ui/icons/Explore";
 //material ui hooks
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useAppDispatch } from "../store/hooks";
+
+const useStyle = makeStyles((theme) => ({
+  icon: {
+    color: theme.palette.text.primary,
+    fontSize: "20rem",
+  },
+  mobileIcon: {
+    color: theme.palette.text.primary,
+    fontSize: "10rem",
+  },
+}));
 
 const HomePage = () => {
-  const useStyle = makeStyles((theme) => ({
-    icon: {
-      color: theme.palette.text.primary,
-      fontSize: "20rem",
-    },
-    mobileIcon: {
-      color: theme.palette.text.primary,
-      fontSize: "10rem",
-    },
-  }));
-
   const classes = useStyle();
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("lg"));

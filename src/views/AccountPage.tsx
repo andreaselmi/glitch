@@ -13,56 +13,15 @@ import IconButton from "@material-ui/core/IconButton";
 
 //mycomponents
 import HorizontalList from "../components/containers/HorizontalList";
-import cardImg from "../assets/images/ff.jpg";
 import placeholder from "../assets/images/account.png";
 
-//types
-import { Games } from "../types/interfaces";
-
+//store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setUserImg } from "../store/user";
 
 import { firestore, storage } from "../config/firebase";
 
 //TODO absolutely da sistemare
-
-const favoriteGames: Games[] = [
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 1,
-  },
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 2,
-  },
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 3,
-  },
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 4,
-  },
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 5,
-  },
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 6,
-  },
-  {
-    name: "FinalFantasy",
-    box_art_url: cardImg,
-    id: 7,
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -107,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 const AccountPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.currentUser);
+  const favoriteGames = useAppSelector((state) => state.games.favoriteGames);
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
@@ -174,7 +134,7 @@ const AccountPage = () => {
       >
         <div style={{ position: "relative" }}>
           <Grid md={6} item className={classes.imageContainer}>
-            <img src={user.userImg || image || placeholder} />
+            <img alt="User" src={user.userImg || image || placeholder} />
           </Grid>
 
           {user.provider === "google.com" ? null : (
@@ -209,12 +169,20 @@ const AccountPage = () => {
         </Grid>
       </Grid>
       <Divider className={classes.divider} light />
-      <Container maxWidth="xl" className={classes.sectionTitleContainer}>
+      {favoriteGames.length === 0 ? (
         <Typography variant="h4" color="textSecondary">
-          Your favorite Games ({favoriteGames.length})
+          Your favorite games list is empty, add some!
         </Typography>
-      </Container>
-      <HorizontalList items={favoriteGames} />
+      ) : (
+        <>
+          <Container maxWidth="xl" className={classes.sectionTitleContainer}>
+            <Typography variant="h4" color="textSecondary">
+              Your favorite Games ({favoriteGames.length})
+            </Typography>
+          </Container>
+          <HorizontalList items={favoriteGames} />
+        </>
+      )}
     </Container>
   );
 };

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Games {
   name: string;
   box_art_url: string;
@@ -15,9 +17,10 @@ export interface Route {
   name: string;
   path: string;
   private: boolean;
+  component: any;
 }
 export interface NavbarProps {
-  links: Route[];
+  links: NavLinksProps[];
 }
 
 export interface UserFormValues {
@@ -25,3 +28,5 @@ export interface UserFormValues {
   email: string;
   password: string;
 }
+
+export type NavLinksProps = Omit<Route, "component">;

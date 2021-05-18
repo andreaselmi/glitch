@@ -3,6 +3,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import Card from "../Card";
 import { Games, Streams } from "../../types/interfaces";
 import { Typography } from "@material-ui/core";
+import { useAppSelector } from "../../store/hooks";
 
 const useStyles = makeStyles((theme: Theme) => ({
   gamesListContainer: {
@@ -19,6 +20,7 @@ interface HorizontalListProps {
 
 const HorizontalList = ({ items }: HorizontalListProps) => {
   const [data, setData] = useState<Games[] | Streams[]>();
+  const favoriteGames = useAppSelector((state) => state.games.favoriteGames);
   const classes = useStyles();
 
   //function that replaces width and height with dimensions
@@ -51,12 +53,14 @@ const HorizontalList = ({ items }: HorizontalListProps) => {
           {data &&
             data.map((item: any) => (
               <Card
+                item={item}
+                likeButton={true}
                 buttonTitle="View Lives"
                 key={item.id}
                 urlImg={item.box_art_url}
                 title={item.name}
                 onClick={() => console.log(item.id)}
-                saved={false}
+                savedItems={favoriteGames}
               />
             ))}
         </div>
@@ -67,12 +71,12 @@ const HorizontalList = ({ items }: HorizontalListProps) => {
           {data &&
             data.map((item: any) => (
               <Card
+                likeButton={false}
                 buttonTitle="View Channel"
                 key={item.id}
                 urlImg={item.thumbnail_url}
                 title={item.title}
                 onClick={() => console.log(item.id)}
-                saved={false}
               />
             ))}
         </div>
@@ -82,13 +86,18 @@ const HorizontalList = ({ items }: HorizontalListProps) => {
 
   useEffect(() => replaceImgDimensions(), []);
 
+  useEffect(() => {
+    replaceImgDimensions();
+  }, [favoriteGames]);
+
   return (
     <div>
-      {(data && data.length > 0 && renderItems(data)) || (
+      {!data && (
         <Typography variant="h5" color="textPrimary">
           Non ci sono elementi da mostrare
         </Typography>
       )}
+      {data && data.length > 0 && renderItems(data)}
     </div>
   );
 };

@@ -26,6 +26,7 @@ import { NavbarProps } from "../types/interfaces";
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setNoUser } from "../store/user";
+import { clearFavoriteGames } from "../store/games";
 
 import { auth } from "../config/firebase";
 
@@ -77,6 +78,7 @@ const Navbar = ({ links }: NavbarProps) => {
   const logout = () => {
     auth.signOut();
     dispatch(setNoUser());
+    dispatch(clearFavoriteGames());
   };
 
   useEffect(() => {

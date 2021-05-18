@@ -25,7 +25,7 @@ export const setAccessToken = async () => {
         })
       );
     } else {
-      console.log("Valid Token");
+      return null;
     }
   } else {
     const { data } = await requestAccessToken();
