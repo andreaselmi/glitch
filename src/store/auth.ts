@@ -23,13 +23,23 @@ const initialState: AuthProps = {
     provider: "",
   },
   isAuthenticated: false,
-  initializing: false,
+  initializing: true,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    startInitializing: (state) => {
+      state.initializing = true;
+    },
+    endInitializing: (state) => {
+      state.initializing = false;
+    },
+
+    userIsAuthenticated: (state) => {
+      state.isAuthenticated = true;
+    },
     setCurrentUser: (state, action: PayloadAction<any>) => {
       const { user } = state;
       user.fullName = action.payload.fullName;
@@ -45,6 +55,7 @@ const authSlice = createSlice({
       user.userImg = "";
       user.uid = "";
       user.provider = "";
+      state.isAuthenticated = false;
     },
     setUserImg: (state, action: PayloadAction<any>) => {
       state.user.userImg = action.payload.userImg;
@@ -52,5 +63,12 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, setNoUser, setUserImg } = authSlice.actions;
+export const {
+  startInitializing,
+  endInitializing,
+  userIsAuthenticated,
+  setCurrentUser,
+  setNoUser,
+  setUserImg,
+} = authSlice.actions;
 export default authSlice.reducer;

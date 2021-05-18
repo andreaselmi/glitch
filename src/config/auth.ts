@@ -1,5 +1,14 @@
 import { auth, Providers, firestore } from "./firebase";
+import firebase from "firebase/app";
 import { toast } from "react-toastify";
+import { store } from "../store/store";
+import {
+  setCurrentUser,
+  userIsAuthenticated,
+  setNoUser,
+  startInitializing,
+  endInitializing,
+} from "../store/auth";
 
 interface AuthValues {
   fullName?: string;
@@ -43,6 +52,76 @@ export const register = async (values: AuthValues) => {
     } else toast.error("Unable to register. Please try again later.");
     console.log(error);
   }
+};
+
+export const authStateChanged = async (user: firebase.User | null) => {
+  if (user) {
+    let provider = user.providerData[0]?.providerId;
+
+    if (provider === "google.com") {
+      store.dispatch(
+        setCurrentUser({
+          email: user.email,
+          uid: user.uid,
+          fullName: user.displayName,
+          userImg: user.photoURL,
+          provider,
+        })
+      );
+    } else if (provider === "facebook.com") {
+      const userRef = await firestore.collection("users").doc(user.uid);
+      userRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            store.dispatch(
+              setCurrentUser({
+                fullName: doc.data()?.fullName,
+                email: doc.data()?.email,
+                userImg: doc.data()?.userImg,
+                uid: doc.data()?.uid,
+                provider: doc.data()?.provider,
+              })
+            );
+          } else {
+            userRef.set({
+              provider,
+              email: user.email,
+              fullName: user.displayName,
+              uid: user.uid,
+              userImg: "",
+            });
+          }
+        })
+        .catch((error) => {
+          //TODO toast per gestire l'errore
+          console.log("Error getting document:", error);
+        });
+    } else {
+      //TODO migliorare
+      await firestore
+        .collection("users")
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists)
+            store.dispatch(
+              setCurrentUser({
+                fullName: doc.data()?.fullName,
+                email: doc.data()?.email,
+                userImg: doc.data()?.userImg,
+                uid: doc.data()?.uid,
+                provider: doc.data()?.provider,
+              })
+            );
+        });
+    }
+
+    store.dispatch(userIsAuthenticated());
+  } else {
+    setNoUser();
+  }
+  store.dispatch(endInitializing());
 };
 
 export const googleSignIn = () => {
