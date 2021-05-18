@@ -81,6 +81,7 @@ const MyCard = ({
   //save data on firebase firestore
   const storeData = () => {
     if (item) {
+      setIsSaved(true);
       firestore
         .collection("games")
         .doc(`${item.id} user id: ${user.uid}`)
@@ -91,7 +92,9 @@ const MyCard = ({
           userId: user.uid,
         })
         .catch((error) => {
+          //TODO toast per l'errore
           alert("Non è stato possibile salvare l'articolo");
+          setIsSaved(false);
         });
     }
   };
@@ -99,26 +102,27 @@ const MyCard = ({
   //delete data from firebase firestore
   const deleteData = () => {
     if (item) {
-      firestore
-        .collection("games")
-        .doc(`${item.id} user id: ${user.uid}`)
-        .delete();
+      try {
+        setIsSaved(false);
+        firestore
+          .collection("games")
+          .doc(`${item.id} user id: ${user.uid}`)
+          .delete();
+      } catch (error) {
+        //TODO toast per l'errore
+        setIsSaved(true);
+      }
     }
   };
 
   const toggleArticle = async () => {
     dispatch(toggleFavoriteGame(item));
 
-    //TODO spostare il setIsSave all'interno dei metodi store e delete data
-    //inserirlo all'inizio, e solo in caso di errore tornare allo stato precedente
-
     if (!isSaved) {
       storeData();
-      setIsSaved(true);
     }
     if (isSaved) {
       deleteData();
-      setIsSaved(false);
     }
   };
 

@@ -54,6 +54,7 @@ export const register = async (values: AuthValues) => {
   }
 };
 
+//sets the user according to the provider used to log in
 export const authStateChanged = async (user: firebase.User | null) => {
   if (user) {
     let provider = user.providerData[0]?.providerId;
@@ -84,6 +85,15 @@ export const authStateChanged = async (user: firebase.User | null) => {
               })
             );
           } else {
+            store.dispatch(
+              setCurrentUser({
+                fullName: user.displayName,
+                email: user.email,
+                userImg: "",
+                uid: user.uid,
+                provider,
+              })
+            );
             userRef.set({
               provider,
               email: user.email,
@@ -93,9 +103,8 @@ export const authStateChanged = async (user: firebase.User | null) => {
             });
           }
         })
-        .catch((error) => {
-          //TODO toast per gestire l'errore
-          console.log("Error getting document:", error);
+        .catch((e) => {
+          toast.error("Unable to access. Try again later.");
         });
     } else {
       //TODO migliorare
