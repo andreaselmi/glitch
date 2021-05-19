@@ -1,4 +1,4 @@
-import { configureStore, MiddlewareArray } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth";
 import gamesReducer, { apiMiddleware, firestoreMiddleware } from "./games";
 
@@ -7,7 +7,8 @@ export const store = configureStore({
     auth: authReducer,
     games: gamesReducer,
   },
-  middleware: [apiMiddleware, firestoreMiddleware],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiMiddleware, firestoreMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -6,7 +6,6 @@ import {
   setCurrentUser,
   userIsAuthenticated,
   setNoUser,
-  startInitializing,
   endInitializing,
 } from "../store/auth";
 
@@ -50,80 +49,75 @@ export const register = async (values: AuthValues) => {
         "This password is too weak. Please use a strong password"
       );
     } else toast.error("Unable to register. Please try again later.");
-    console.log(error);
   }
 };
 
 //sets the user according to the provider used to log in
 export const authStateChanged = async (user: firebase.User | null) => {
   if (user) {
+    //data from firebaseUser
     let provider = user.providerData[0]?.providerId;
+    const { email, uid, displayName, photoURL } = user;
+
+    //data from firestore
+    const userRef = await firestore.collection("users").doc(user.uid);
+    const userDoc = await userRef.get().then((doc) => {
+      if (doc.exists) {
+        return doc.data();
+      } else return null;
+    });
 
     if (provider === "google.com") {
       store.dispatch(
         setCurrentUser({
-          email: user.email,
-          uid: user.uid,
-          fullName: user.displayName,
-          userImg: user.photoURL,
+          email,
+          uid,
+          fullName: displayName,
+          userImg: photoURL,
           provider,
         })
       );
     } else if (provider === "facebook.com") {
-      const userRef = await firestore.collection("users").doc(user.uid);
-      userRef
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            store.dispatch(
-              setCurrentUser({
-                fullName: doc.data()?.fullName,
-                email: doc.data()?.email,
-                userImg: doc.data()?.userImg,
-                uid: doc.data()?.uid,
-                provider: doc.data()?.provider,
-              })
-            );
-          } else {
-            store.dispatch(
-              setCurrentUser({
-                fullName: user.displayName,
-                email: user.email,
-                userImg: "",
-                uid: user.uid,
-                provider,
-              })
-            );
-            userRef.set({
-              provider,
-              email: user.email,
-              fullName: user.displayName,
-              uid: user.uid,
-              userImg: "",
-            });
-          }
-        })
-        .catch((e) => {
-          toast.error("Unable to access. Try again later.");
+      if (userDoc) {
+        store.dispatch(
+          setCurrentUser({
+            fullName: userDoc.fullName,
+            email: userDoc.email,
+            userImg: userDoc.userImg,
+            uid: userDoc.uid,
+            provider: userDoc.provider,
+          })
+        );
+      } else {
+        store.dispatch(
+          setCurrentUser({
+            fullName: displayName,
+            email,
+            userImg: "",
+            uid,
+            provider,
+          })
+        );
+        userRef.set({
+          provider,
+          email,
+          fullName: displayName,
+          uid,
+          userImg: "",
         });
+      }
     } else {
-      //TODO migliorare
-      await firestore
-        .collection("users")
-        .doc(user.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists)
-            store.dispatch(
-              setCurrentUser({
-                fullName: doc.data()?.fullName,
-                email: doc.data()?.email,
-                userImg: doc.data()?.userImg,
-                uid: doc.data()?.uid,
-                provider: doc.data()?.provider,
-              })
-            );
-        });
+      if (userDoc) {
+        store.dispatch(
+          setCurrentUser({
+            fullName: userDoc.fullName,
+            email: userDoc.email,
+            userImg: userDoc.userImg,
+            uid: userDoc.uid,
+            provider: userDoc.provider,
+          })
+        );
+      }
     }
 
     store.dispatch(userIsAuthenticated());
