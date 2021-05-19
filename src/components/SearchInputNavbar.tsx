@@ -3,8 +3,9 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 //material ui imports
-import { makeStyles, InputBase, fade } from "@material-ui/core";
+import { makeStyles, InputBase, fade, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -23,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1),
     height: "100%",
     position: "absolute",
-    pointerEvents: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -61,6 +61,7 @@ const validationSchema = yup.object({
 
 const SearchInputNavbar = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -69,13 +70,17 @@ const SearchInputNavbar = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
+      history.push("/search");
     },
   });
   return (
     <div className={classes.search}>
-      <div className={classes.searchIcon}>
+      <IconButton
+        onClick={() => formik.handleSubmit()}
+        className={classes.searchIcon}
+      >
         <SearchIcon />
-      </div>
+      </IconButton>
       <form onSubmit={formik.handleSubmit}>
         <InputBase
           style={{}}
