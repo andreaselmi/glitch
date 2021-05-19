@@ -16,11 +16,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "0 50px",
+    minHeight: "60vh",
     "& > div": {
       textAlign: "center",
     },
+    [theme.breakpoints.down("xs")]: {
+      minHeight: "70vh",
+    },
   },
-  childrenContainer: {},
   textContainer: {
     display: "flex",
     justifyContent: "center",
@@ -39,14 +42,9 @@ const HomeSection: React.FC<HomeSectionProps> = ({
 }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const mobile = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
-    <Container
-      style={mobile ? { minHeight: "70vh" } : { minHeight: "60vh" }}
-      className={classes.container}
-      maxWidth="md"
-    >
+    <Container className={classes.container} maxWidth="md">
       <Grid
         container
         data-aos="zoom-in"
@@ -54,7 +52,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
         data-aos-duration="1000"
       >
         {children ? (
-          <Grid item xs={12} lg={5} className={classes.childrenContainer}>
+          <Grid item xs={12} lg={5}>
             {children}
           </Grid>
         ) : null}

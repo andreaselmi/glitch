@@ -29,6 +29,7 @@ import { setNoUser } from "../store/auth";
 import { clearFavoriteGames } from "../store/games";
 
 import { auth } from "../config/firebase";
+import SearchInputNavbar from "./SearchInputNavbar";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -101,6 +102,7 @@ const Navbar = ({ links }: NavbarProps) => {
             <img alt="Logo Glitch" src={logo} width="100" height="30"></img>
           </div>
         </Link>
+
         {mobileView && user.uid ? (
           <MyDrawer
             onClickLogout={logout}
@@ -113,6 +115,7 @@ const Navbar = ({ links }: NavbarProps) => {
             component="nav"
             aria-labelledby="main navigation"
           >
+            {user.uid && <SearchInputNavbar />}
             {links.map((link) => {
               if (link.private && !user.uid) return null;
               return (

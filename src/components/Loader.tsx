@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import Lottie from "react-lottie";
 import animationData from "../assets/loaders/robotLoader.json";
 
