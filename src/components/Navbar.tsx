@@ -98,7 +98,7 @@ const Navbar = ({ links }: NavbarProps) => {
         </MyModal>
         <Link to="/">
           <div className={classes.imgContainer}>
-            <img alt="Logo Glitch" src={logo} width="75"></img>
+            <img alt="Logo Glitch" src={logo} width="100" height="30"></img>
           </div>
         </Link>
         {mobileView && user.uid ? (

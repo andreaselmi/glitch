@@ -10,7 +10,6 @@ import { Container, makeStyles } from "@material-ui/core";
 import { loadTopGames, loadTopStreams } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import HorizontalListHeader from "../components/HorizontalListHeader";
-import { getAccessToken } from "../config/api";
 
 const useStyles = makeStyles({
   sectionTitleContainer: {
@@ -21,7 +20,6 @@ const useStyles = makeStyles({
 const ExplorePage = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
-  const token = getAccessToken();
 
   const {
     topGames,
@@ -31,13 +29,9 @@ const ExplorePage = () => {
     isLoading,
   } = useAppSelector((state) => state.games);
 
-  //TODO SALVARE NELLO STORE REDUX PER EVITARE REFETCH
   useEffect(() => {
-    console.log(token);
-    if (token) {
-      if (topGames.length === 0) dispatch(loadTopGames());
-      if (topStreams.length === 0) dispatch(loadTopStreams());
-    }
+    if (topGames.length === 0) dispatch(loadTopGames());
+    if (topStreams.length === 0) dispatch(loadTopStreams());
   }, []);
 
   //TODO hide scrollbar
