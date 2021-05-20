@@ -7,6 +7,7 @@ import Card from "../Card";
 const useStyles = makeStyles((theme) => ({
   grid: {
     margin: "10px 20px 20px 10px",
+    maxWidth: 300,
     "& .MuiCard-root": {
       miHeight: 350,
     },
@@ -74,10 +75,12 @@ const GridList = ({
   };
 
   return (
-    <Grid container style={{ margin: "30px 0" }}>
+    <Grid justify="center" container style={{ margin: "30px 0" }}>
       {items && items.length > 0 ? renderItems(items) : null}
     </Grid>
   );
 };
 
 export default GridList;
+
+//TODO da implementare title

@@ -2,22 +2,37 @@ import React from "react";
 import { useAppSelector } from "../store/hooks";
 import ContainerList from "../components/containers/ContainerList";
 import Loader from "../components/Loader";
+import { Redirect } from "react-router";
+import { Typography } from "@material-ui/core";
 
 const SearchPage = () => {
-  const { searchedGames, isLoading } = useAppSelector((state) => state.games);
+  const { searchedGames, isLoading, searchGameErrorMsg } = useAppSelector(
+    (state) => state.games
+  );
+
+  if (searchedGames.length === 0 && isLoading === false && !searchGameErrorMsg)
+    return <Redirect to="/" />;
 
   return (
     <div>
       {isLoading ? (
         <Loader height={400} width={400} />
       ) : (
-        //TODO aggiungere come titolo la stringa cercata
-        <ContainerList
-          title="Results"
-          itemTypeError={null}
-          type="grid"
-          items={searchedGames}
-        />
+        <>
+          {searchGameErrorMsg ? (
+            <Typography variant="h2" color="textPrimary">
+              {searchGameErrorMsg}
+            </Typography>
+          ) : (
+            <ContainerList
+              title="Results"
+              itemTypeError={null}
+              type="grid"
+              items={searchedGames}
+            />
+          )}
+          //TODO aggiungere come titolo la stringa cercata
+        </>
       )}
     </div>
   );

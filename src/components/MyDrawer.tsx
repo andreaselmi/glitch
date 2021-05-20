@@ -32,6 +32,8 @@ interface MyModalProps extends NavbarProps {
   onClickLogout: () => void;
 }
 
+//TODO implementare search su mobile
+
 const MyDrawer = ({ links, openModal, onClickLogout }: MyModalProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const classes = useStyles();

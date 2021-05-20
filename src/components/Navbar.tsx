@@ -10,8 +10,10 @@ import {
   ListItemText,
   makeStyles,
   useTheme,
+  IconButton,
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import SearchIcon from "@material-ui/icons/Search";
 
 //components
 import logo from "../assets/images/logoWhite.png";
@@ -29,7 +31,7 @@ import { setNoUser } from "../store/auth";
 import { clearFavoriteGames } from "../store/games";
 
 import { auth } from "../config/firebase";
-import SearchInputNavbar from "./SearchInputNavbar";
+import SearchInputNavbar from "./SearchGameHandler";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -47,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     textDecoration: `none`,
     textTransform: `uppercase`,
+  },
+  mobileView: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   navList: {
     alignItems: "center",
@@ -68,6 +75,7 @@ const Navbar = ({ links }: NavbarProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const mobileView = useMediaQuery(theme.breakpoints.down("sm"));
+  const [showSearch, setShowSearch] = useState<boolean>(false);
 
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();

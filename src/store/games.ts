@@ -9,9 +9,9 @@ interface GamesStoreProps {
   topStreams: Streams[];
   searchedGames: Games[];
   isLoading: boolean;
-  loadTopGamesError: string | null;
-  loadTopStreamsError: string | null;
-  loadSearchedGamesError: string | null;
+  topGamesErrorMsg: string | null;
+  topStreamsErrorMsg: string | null;
+  searchGameErrorMsg: string | null;
 }
 
 const initialState: GamesStoreProps = {
@@ -20,9 +20,9 @@ const initialState: GamesStoreProps = {
   topStreams: [],
   searchedGames: [],
   isLoading: false,
-  loadTopGamesError: null,
-  loadTopStreamsError: null,
-  loadSearchedGamesError: null,
+  topGamesErrorMsg: null,
+  topStreamsErrorMsg: null,
+  searchGameErrorMsg: null,
 };
 
 const userSlice = createSlice({
@@ -30,12 +30,15 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addSearchedGames: (state, action: PayloadAction<any>) => {
+      state.searchGameErrorMsg = null;
       state.searchedGames = action.payload.data;
     },
     addTopGames: (state, action: PayloadAction<any>) => {
+      state.topGamesErrorMsg = null;
       state.topGames = action.payload.data;
     },
     addTopStreams: (state, action: PayloadAction<any>) => {
+      state.topStreamsErrorMsg = null;
       state.topStreams = action.payload.data;
     },
     clearFavoriteGames: (state) => {
@@ -56,15 +59,15 @@ const userSlice = createSlice({
       } else return state;
     },
     loadSearchedGamesFailed: (state, action) => {
-      state.loadTopGamesError = action.payload;
+      state.searchGameErrorMsg = action.payload;
       state.isLoading = false;
     },
     loadTopGamesFailed: (state, action) => {
-      state.loadTopGamesError = action.payload;
+      state.topGamesErrorMsg = action.payload;
       state.isLoading = false;
     },
     loadTopStreamsFailed: (state, action) => {
-      state.loadTopStreamsError = action.payload;
+      state.topStreamsErrorMsg = action.payload;
       state.isLoading = false;
     },
     toggleFavoriteGame: (state, action) => {
@@ -135,16 +138,16 @@ export const apiMiddleware =
         response = await helix.get(endpoint);
       }
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.data) {
         dispatch({ type: onSuccess, payload: response.data });
         dispatch(gamesEndRequest());
       } else {
-        throw new Error(response.data.message);
+        throw new Error("No Results");
       }
     } catch (error) {
       //TODO da verificare
       console.log(error);
-      dispatch({ type: onError, payload: error });
+      dispatch({ type: onError, payload: error.message });
     }
   };
 
@@ -172,14 +175,14 @@ export const loadTopGames = () => {
   return apiCallBegan({
     endpoint: "/games/top",
     onSuccess: "games/addTopGames",
-    onError: "games/loadTopGamesError",
+    onError: "games/loadTopGamesFailed",
   });
 };
 export const loadTopStreams = () => {
   return apiCallBegan({
     endpoint: "/streams",
     onSuccess: "games/addTopStreams",
-    onError: "games/loadTopStreamsError",
+    onError: "games/loadTopStreamsFailed",
   });
 };
 export const loadSearchedGames = (query: string) => {
@@ -187,7 +190,7 @@ export const loadSearchedGames = (query: string) => {
     endpoint: "/search/categories",
     query,
     onSuccess: "games/addSearchedGames",
-    onError: "games/loadSearchedGamesError",
+    onError: "games/loadSearchedGamesFailed",
   });
 };
 

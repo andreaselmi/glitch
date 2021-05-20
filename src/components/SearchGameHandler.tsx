@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { makeStyles, InputBase, fade, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory, useLocation } from "react-router";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
 import { loadSearchedGames } from "../store/games";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: "auto",
     },
+    overflow: "hidden",
   },
   searchIcon: {
     padding: theme.spacing(0, 1),
@@ -43,13 +44,16 @@ const useStyles = makeStyles((theme) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    width: 300,
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
     "&:-webkit-autofill": {
-      WebkitBoxShadow: "0 0 0 1000px #424242 inset",
+      WebkitBoxShadow: "0 0 0 1000px #353535 inset",
       WebkitTextFillColor: "white",
+      "&:hover": {
+        WebkitBoxShadow: "0 0 0 1000px #4D4D4D inset",
+      },
     },
     "&:-webkit-autofill::first-line": {
       fontSize: "1rem",
@@ -61,7 +65,7 @@ const validationSchema = yup.object({
   search: yup.string().required(),
 });
 
-const SearchInputNavbar = () => {
+const SearchGameHandler = ({ ...restProps }) => {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
@@ -75,35 +79,38 @@ const SearchInputNavbar = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(loadSearchedGames(values.search));
+
       if (location.pathname !== "/search") history.push("/search");
     },
   });
 
   return (
-    <div className={classes.search}>
-      <IconButton
-        onClick={() => formik.handleSubmit()}
-        className={classes.searchIcon}
-      >
-        <SearchIcon />
-      </IconButton>
-      <form onSubmit={formik.handleSubmit}>
-        <InputBase
-          style={{}}
-          id="search"
-          name="search"
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-          value={formik.values.search}
-          onChange={formik.handleChange}
-        />
-      </form>
+    <div {...restProps}>
+      <div className={classes.search}>
+        <IconButton
+          onClick={() => formik.handleSubmit()}
+          className={classes.searchIcon}
+        >
+          <SearchIcon />
+        </IconButton>
+        <form onSubmit={formik.handleSubmit}>
+          <InputBase
+            style={{}}
+            id="search"
+            name="search"
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+            value={formik.values.search}
+            onChange={formik.handleChange}
+          />
+        </form>
+      </div>
     </div>
   );
 };
 
-export default SearchInputNavbar;
+export default SearchGameHandler;

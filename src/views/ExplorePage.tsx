@@ -1,22 +1,25 @@
 import React, { useEffect } from "react";
 //mycomponents
 import Loader from "../components/Loader";
-
 //material ui
-import HorizontalList from "../components/containers/HorizontalList";
 import { Container, makeStyles } from "@material-ui/core";
-
 //types
 import { loadTopGames, loadTopStreams } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import HorizontalListHeader from "../components/HorizontalListHeader";
 import ContainerList from "../components/containers/ContainerList";
+import SearchInputNavbar from "../components/SearchGameHandler";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  containerSearch: {
+    marginTop: 20,
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
   sectionTitleContainer: {
     padding: "20px",
   },
-});
+}));
 
 const ExplorePage = () => {
   const classes = useStyles();
@@ -25,8 +28,8 @@ const ExplorePage = () => {
   const {
     topGames,
     topStreams,
-    loadTopGamesError,
-    loadTopStreamsError,
+    topGamesErrorMsg,
+    topStreamsErrorMsg,
     isLoading,
   } = useAppSelector((state) => state.games);
 
@@ -35,10 +38,11 @@ const ExplorePage = () => {
     if (topStreams.length === 0) dispatch(loadTopStreams());
   }, []);
 
-  //TODO hide scrollbar
-
   return (
     <div>
+      <Container maxWidth="xs" className={classes.containerSearch}>
+        <SearchInputNavbar />
+      </Container>
       {isLoading ? (
         <Loader height={400} width={400} />
       ) : (
@@ -46,7 +50,7 @@ const ExplorePage = () => {
           {topGames && topGames.length > 0 && (
             <ContainerList
               title="Top Games"
-              itemTypeError={loadTopGamesError}
+              itemTypeError={topGamesErrorMsg}
               type="horizontal"
               items={topGames}
             />
@@ -55,7 +59,7 @@ const ExplorePage = () => {
           {topStreams && topStreams.length > 0 && (
             <ContainerList
               title="Top Streams"
-              itemTypeError={loadTopStreamsError}
+              itemTypeError={topStreamsErrorMsg}
               type="horizontal"
               items={topStreams}
             />
