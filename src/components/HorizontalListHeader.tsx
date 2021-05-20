@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import MyButton from "./common/MyButton";
 
 interface HorizontalListHeaderProps {
@@ -16,7 +16,7 @@ const HorizontalListHeader = ({
   numberOfItems = 0,
 }: HorizontalListHeaderProps) => {
   return (
-    <>
+    <div style={{ margin: "20px 0" }}>
       {error ? (
         <div>
           <Typography variant="h5" color="textPrimary">
@@ -25,11 +25,13 @@ const HorizontalListHeader = ({
           <MyButton onClick={retryAction} name="Retry" />
         </div>
       ) : (
-        <Typography variant="h5" color="textSecondary">
-          {title} ({numberOfItems})
-        </Typography>
+        <Container maxWidth="xl">
+          <Typography variant="h5" color="textSecondary">
+            {title} ({numberOfItems})
+          </Typography>
+        </Container>
       )}
-    </>
+    </div>
   );
 };
 

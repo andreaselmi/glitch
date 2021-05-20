@@ -11,7 +11,13 @@ const SearchPage = () => {
       {isLoading ? (
         <Loader height={400} width={400} />
       ) : (
-        <ContainerList type="grid" items={searchedGames} />
+        //TODO da sistemare
+        <ContainerList
+          title="Results"
+          itemTypeError={null}
+          type="grid"
+          items={searchedGames}
+        />
       )}
     </div>
   );

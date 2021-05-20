@@ -4,13 +4,23 @@ import { ListProps, Games, Streams } from "../../types/interfaces";
 import GridList from "./GridList";
 import HorizontalList from "./HorizontalList";
 
+import placeholder from "../../assets/images/placeholder.png";
+
 interface ContainerListProps extends ListProps {
   type: "horizontal" | "grid";
+  itemTypeError: string | null;
+  title: string;
 }
 
-const ContainerList = ({ items, type }: ContainerListProps) => {
+const ContainerList = ({
+  items,
+  itemTypeError,
+  type,
+  title,
+}: ContainerListProps) => {
   const [data, setData] = useState<Games[] | Streams[]>();
   const { favoriteGames } = useAppSelector((state) => state.games);
+  const notAvailable = "Data not available";
 
   //function that replaces width and height with dimensions
   //Currently the categories endpoint of TWITCH API returns a bug in the image string, instead of passing width and height like the other endpoints it returns 52x72 images
@@ -59,8 +69,23 @@ const ContainerList = ({ items, type }: ContainerListProps) => {
 
   return (
     <div>
-      {type === "horizontal" && data && <HorizontalList items={data} />}
-      {type === "grid" && data && <GridList items={data} />}
+      {type === "horizontal" && data && (
+        <HorizontalList
+          title={title}
+          itemTypeError={itemTypeError}
+          placeholder={placeholder}
+          notAvailable={notAvailable}
+          items={data}
+        />
+      )}
+      {type === "grid" && data && (
+        <GridList
+          title={title}
+          placeholder={placeholder}
+          notAvailable={notAvailable}
+          items={data}
+        />
+      )}
     </div>
   );
 };

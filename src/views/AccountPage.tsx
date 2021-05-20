@@ -187,12 +187,13 @@ const AccountPage = () => {
         </Typography>
       ) : (
         <>
-          <Container maxWidth="xl" className={classes.sectionTitleContainer}>
-            <Typography variant="h4" color="textSecondary">
-              Your favorite Games ({favoriteGames.length})
-            </Typography>
-          </Container>
-          <ContainerList type="horizontal" items={favoriteGames} />
+          <ContainerList
+            //TODO da sistemare
+            title="Your favorite Games"
+            itemTypeError={null}
+            type="horizontal"
+            items={favoriteGames}
+          />
         </>
       )}
     </Container>

@@ -3,7 +3,9 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import Card from "../Card";
 import { Games, ListProps, Streams } from "../../types/interfaces";
 import { Typography } from "@material-ui/core";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import HorizontalListHeader from "../HorizontalListHeader";
+import { loadTopStreams } from "../../store/games";
 
 const useStyles = makeStyles((theme: Theme) => ({
   gamesListContainer: {
@@ -18,8 +20,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HorizontalList = ({ items }: ListProps) => {
-  const favoriteGames = useAppSelector((state) => state.games.favoriteGames);
+interface HorizontalListProps extends ListProps {
+  placeholder: string;
+  notAvailable: string;
+  itemTypeError: string | null;
+  title: string;
+}
+
+const HorizontalList = ({
+  items,
+  itemTypeError,
+  placeholder,
+  notAvailable,
+  title,
+}: HorizontalListProps) => {
+  const { favoriteGames } = useAppSelector((state) => state.games);
+  const dispatch = useAppDispatch();
   const classes = useStyles();
 
   //render item depending on whether it is games or stream
@@ -34,8 +50,8 @@ const HorizontalList = ({ items }: ListProps) => {
                 likeButton={true}
                 buttonTitle="View Lives"
                 key={item.id}
-                urlImg={item.box_art_url}
-                title={item.name}
+                urlImg={item.box_art_url || placeholder}
+                title={item.name || notAvailable}
                 onClick={() => console.log(item.id)}
                 savedItemsList={favoriteGames}
               />
@@ -51,8 +67,8 @@ const HorizontalList = ({ items }: ListProps) => {
                 likeButton={false}
                 buttonTitle="View Channel"
                 key={item.id}
-                urlImg={item.thumbnail_url}
-                title={item.title}
+                urlImg={item.thumbnail_url || placeholder}
+                title={item.title || notAvailable}
                 onClick={() => console.log(item.id)}
               />
             ))}
@@ -63,6 +79,12 @@ const HorizontalList = ({ items }: ListProps) => {
 
   return (
     <div>
+      <HorizontalListHeader
+        error={itemTypeError}
+        title={title}
+        numberOfItems={items.length}
+        retryAction={() => dispatch(loadTopStreams())}
+      />
       {!items && (
         <Typography variant="h5" color="textPrimary">
           Non ci sono elementi da mostrare

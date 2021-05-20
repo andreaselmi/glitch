@@ -1,5 +1,5 @@
-import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
+import { Grid, makeStyles } from "@material-ui/core";
 import { useAppSelector } from "../../store/hooks";
 import { Games, ListProps, Streams } from "../../types/interfaces";
 import Card from "../Card";
@@ -16,7 +16,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GridList = ({ items }: ListProps) => {
+interface GridListProps extends ListProps {
+  placeholder: string;
+  notAvailable: string;
+  title: string;
+}
+
+const GridList = ({
+  items,
+  placeholder,
+  notAvailable,
+  title,
+}: GridListProps) => {
   const favoriteGames = useAppSelector((state) => state.games.favoriteGames);
   const classes = useStyles();
 
@@ -26,14 +37,14 @@ const GridList = ({ items }: ListProps) => {
         <>
           {items &&
             items.map((item: any) => (
-              <Grid className={classes.grid} item xs>
+              <Grid key={item.id} className={classes.grid} item xs>
                 <Card
                   savedItem={item}
                   likeButton={true}
                   buttonTitle="View Lives"
                   key={item.id}
-                  urlImg={item.box_art_url}
-                  title={item.name}
+                  urlImg={item.box_art_url || placeholder}
+                  title={item.name || notAvailable}
                   onClick={() => console.log(item.id)}
                   savedItemsList={favoriteGames}
                 />
@@ -46,13 +57,13 @@ const GridList = ({ items }: ListProps) => {
         <>
           {items &&
             items.map((item: any) => (
-              <Grid item xs>
+              <Grid key={item.id} item xs>
                 <Card
                   likeButton={false}
                   buttonTitle="View Channel"
                   key={item.id}
-                  urlImg={item.thumbnail_url}
-                  title={item.title}
+                  urlImg={item.thumbnail_url || placeholder}
+                  title={item.title || notAvailable}
                   onClick={() => console.log(item.id)}
                 />
               </Grid>
