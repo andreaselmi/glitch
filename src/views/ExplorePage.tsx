@@ -10,6 +10,7 @@ import { Container, makeStyles } from "@material-ui/core";
 import { loadTopGames, loadTopStreams } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import HorizontalListHeader from "../components/HorizontalListHeader";
+import ContainerList from "../components/containers/ContainerList";
 
 const useStyles = makeStyles({
   sectionTitleContainer: {
@@ -51,7 +52,7 @@ const ExplorePage = () => {
             />
           </Container>
           {topGames && topGames.length > 0 && (
-            <HorizontalList items={topGames} />
+            <ContainerList type="horizontal" items={topGames} />
           )}
           <Container maxWidth="xl" className={classes.sectionTitleContainer}>
             <HorizontalListHeader
@@ -62,7 +63,7 @@ const ExplorePage = () => {
             />
           </Container>
           {topStreams && topStreams.length > 0 && (
-            <HorizontalList items={topStreams} />
+            <ContainerList type="horizontal" items={topStreams} />
           )}
         </>
       )}

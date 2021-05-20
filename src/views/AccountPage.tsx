@@ -22,6 +22,7 @@ import { setUserImg } from "../store/auth";
 //config
 import { firestore, storage } from "../config/firebase";
 import Loader from "../components/Loader";
+import ContainerList from "../components/containers/ContainerList";
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -30,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
   headerContainer: {
     alignItems: "center",
     display: "flex",
+    justifyContent: "flex-start",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+    },
   },
   imageContainer: {
     backgroundSize: "cover",
@@ -123,15 +128,7 @@ const AccountPage = () => {
 
   return (
     <Container maxWidth="xl">
-      <Grid
-        style={
-          mobile
-            ? { justifyContent: "center" }
-            : { justifyContent: "flex-start" }
-        }
-        container
-        className={classes.headerContainer}
-      >
+      <Grid container className={classes.headerContainer}>
         <div style={{ position: "relative" }}>
           <Grid md={6} item className={classes.imageContainer}>
             <img alt="User" src={user.userImg || image || placeholder} />
@@ -195,7 +192,7 @@ const AccountPage = () => {
               Your favorite Games ({favoriteGames.length})
             </Typography>
           </Container>
-          <HorizontalList items={favoriteGames} />
+          <ContainerList type="horizontal" items={favoriteGames} />
         </>
       )}
     </Container>

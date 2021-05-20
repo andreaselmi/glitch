@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 //material ui imports
 import { makeStyles, InputBase, fade, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { loadSearchedGames } from "../store/games";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -62,6 +64,9 @@ const validationSchema = yup.object({
 const SearchInputNavbar = () => {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const searchedGames = useAppSelector((state) => state.games.searchedGames);
 
   const formik = useFormik({
     initialValues: {
@@ -69,10 +74,12 @@ const SearchInputNavbar = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      history.push("/search");
+      dispatch(loadSearchedGames(values.search));
+      if (searchedGames.length > 0 && location.pathname !== "/search")
+        history.push("/search");
     },
   });
+
   return (
     <div className={classes.search}>
       <IconButton

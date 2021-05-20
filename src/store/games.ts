@@ -7,24 +7,31 @@ interface GamesStoreProps {
   favoriteGames: Games[];
   topGames: Games[];
   topStreams: Streams[];
+  searchedGames: Games[];
   isLoading: boolean;
   loadTopGamesError: string | null;
   loadTopStreamsError: string | null;
+  loadSearchedGamesError: string | null;
 }
 
 const initialState: GamesStoreProps = {
   favoriteGames: [],
   topGames: [],
   topStreams: [],
+  searchedGames: [],
   isLoading: false,
   loadTopGamesError: null,
   loadTopStreamsError: null,
+  loadSearchedGamesError: null,
 };
 
 const userSlice = createSlice({
   name: "games",
   initialState,
   reducers: {
+    addSearchedGames: (state, action: PayloadAction<any>) => {
+      state.searchedGames = action.payload.data;
+    },
     addTopGames: (state, action: PayloadAction<any>) => {
       state.topGames = action.payload.data;
     },
@@ -47,6 +54,10 @@ const userSlice = createSlice({
       if (alreadySaved === -1) {
         state.favoriteGames.push(action.payload);
       } else return state;
+    },
+    loadSearchedGamesFailed: (state, action) => {
+      state.loadTopGamesError = action.payload;
+      state.isLoading = false;
     },
     loadTopGamesFailed: (state, action) => {
       state.loadTopGamesError = action.payload;
@@ -82,6 +93,7 @@ interface ApiCallBeganProps {
   endpoint: string;
   onSuccess: string;
   onError: string;
+  query?: string;
 }
 interface FirestoreCallBeganProps {
   user: any;
@@ -113,10 +125,16 @@ export const apiMiddleware =
     if (action.type !== "apiCallBegan") return next(action);
     dispatch(gamesRequested());
 
-    const { endpoint, onSuccess, onError } = action.payload;
+    const { endpoint, onSuccess, onError, query } = action.payload;
 
     try {
-      const response = await helix.get(endpoint);
+      let response;
+      if (query) {
+        response = await helix.get(endpoint + "?query=" + query);
+      } else {
+        response = await helix.get(endpoint);
+      }
+
       if (response.status === 200) {
         dispatch({ type: onSuccess, payload: response.data });
         dispatch(gamesEndRequest());
@@ -124,6 +142,7 @@ export const apiMiddleware =
         throw new Error(response.data.message);
       }
     } catch (error) {
+      //TODO da verificare
       console.log(error);
       dispatch({ type: onError, payload: error });
     }
@@ -153,7 +172,7 @@ export const loadTopGames = () => {
   return apiCallBegan({
     endpoint: "/games/top",
     onSuccess: "games/addTopGames",
-    onError: "games/loadTopGamesFailed",
+    onError: "games/loadTopGamesError",
   });
 };
 export const loadTopStreams = () => {
@@ -161,6 +180,14 @@ export const loadTopStreams = () => {
     endpoint: "/streams",
     onSuccess: "games/addTopStreams",
     onError: "games/loadTopStreamsError",
+  });
+};
+export const loadSearchedGames = (query: string) => {
+  return apiCallBegan({
+    endpoint: "/search/categories",
+    query,
+    onSuccess: "games/addSearchedGames",
+    onError: "games/loadSearchedGamesError",
   });
 };
 

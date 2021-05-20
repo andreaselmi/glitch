@@ -29,4 +29,8 @@ export interface UserFormValues {
   password: string;
 }
 
+export interface ListProps {
+  items: Games[] | Streams[];
+}
+
 export type NavLinksProps = Omit<Route, "component">;

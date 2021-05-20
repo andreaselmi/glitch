@@ -14,7 +14,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 //my components
 import MyButton from "./common/MyButton";
-import { Games } from "../types/interfaces";
+import { Games, Streams } from "../types/interfaces";
 
 import { toggleFavoriteGame } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -26,8 +26,8 @@ interface MyCardProps {
   onClick: () => void;
   title: string;
   urlImg: string;
-  savedItems?: Games[];
-  item?: Games;
+  savedItemsList?: Games[];
+  savedItem?: Games;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,14 +38,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     display: "flex",
     flexDirection: "column",
-    minWidth: 300,
+    minWidth: 250,
     margin: "0 20px",
   },
   livesButton: {
     marginRight: 20,
   },
   media: {
-    minHeight: 400,
+    height: 200,
+    paddingTop: "56.25%",
   },
   title: {
     overflow: "scroll",
@@ -59,8 +60,8 @@ const MyCard = ({
   urlImg,
   title,
   onClick,
-  savedItems = [],
-  item,
+  savedItemsList = [],
+  savedItem,
 }: MyCardProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const user = useAppSelector((state) => state.auth.user);
@@ -68,27 +69,27 @@ const MyCard = ({
   const classes = useStyles();
 
   useEffect(() => {
-    if (savedItems.length > 0 && item) {
-      const alreadySaved = savedItems.findIndex(
-        (game) => game["id"] === item.id
+    if (savedItemsList.length > 0 && savedItem) {
+      const alreadySaved = savedItemsList.findIndex(
+        (game) => game["id"] === savedItem.id
       );
       if (alreadySaved === -1) {
         setIsSaved(false);
       } else setIsSaved(true);
     }
-  }, [savedItems]);
+  }, [savedItemsList]);
 
   //save data on firebase firestore
   const storeData = () => {
-    if (item) {
+    if (savedItem) {
       setIsSaved(true);
       firestore
         .collection("games")
-        .doc(`${item.id} user id: ${user.uid}`)
+        .doc(`${savedItem.id} user id: ${user.uid}`)
         .set({
-          name: item.name,
-          box_art_url: item.box_art_url,
-          id: item.id,
+          name: savedItem.name,
+          box_art_url: savedItem.box_art_url,
+          id: savedItem.id,
           userId: user.uid,
         })
         .catch((error) => {
@@ -101,12 +102,12 @@ const MyCard = ({
 
   //delete data from firebase firestore
   const deleteData = () => {
-    if (item) {
+    if (savedItem) {
       try {
         setIsSaved(false);
         firestore
           .collection("games")
-          .doc(`${item.id} user id: ${user.uid}`)
+          .doc(`${savedItem.id} user id: ${user.uid}`)
           .delete();
       } catch (error) {
         //TODO toast per l'errore
@@ -116,7 +117,7 @@ const MyCard = ({
   };
 
   const toggleArticle = async () => {
-    dispatch(toggleFavoriteGame(item));
+    dispatch(toggleFavoriteGame(savedItem));
 
     if (!isSaved) {
       storeData();
