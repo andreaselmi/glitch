@@ -66,8 +66,8 @@ const SearchInputNavbar = () => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const searchedGames = useAppSelector((state) => state.games.searchedGames);
 
+  //TODO svuotare il form dopo la ricerca
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -75,8 +75,7 @@ const SearchInputNavbar = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(loadSearchedGames(values.search));
-      if (searchedGames.length > 0 && location.pathname !== "/search")
-        history.push("/search");
+      if (location.pathname !== "/search") history.push("/search");
     },
   });
 

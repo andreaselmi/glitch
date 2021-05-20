@@ -45,7 +45,7 @@ const GridList = ({
                   key={item.id}
                   urlImg={item.box_art_url || placeholder}
                   title={item.name || notAvailable}
-                  onClick={() => console.log(item.id)}
+                  buttonPath={`/game/${item.id}`}
                   savedItemsList={favoriteGames}
                 />
               </Grid>
@@ -64,7 +64,7 @@ const GridList = ({
                   key={item.id}
                   urlImg={item.thumbnail_url || placeholder}
                   title={item.title || notAvailable}
-                  onClick={() => console.log(item.id)}
+                  buttonPath={""}
                 />
               </Grid>
             ))}

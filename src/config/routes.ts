@@ -4,6 +4,7 @@ import ExplorePage from "../views/ExplorePage";
 import HomePage from "../views/HomePage";
 import { NavLinksProps } from "../types/interfaces";
 import SearchPage from "../views/SearchPage";
+import GamePage from "../views/GamePage";
 
 export const navLinks: NavLinksProps[] = [
   { name: "EXPLORE", path: "/explore", private: true },
@@ -34,6 +35,12 @@ const routes: Route[] = [
     path: "/search",
     private: true,
     component: SearchPage,
+  },
+  {
+    name: "GameDetails",
+    path: "/game/:game_id",
+    private: true,
+    component: GamePage,
   },
 ];
 

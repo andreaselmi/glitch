@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 //store
 import { useAppSelector } from "../store/hooks";
@@ -36,6 +36,7 @@ const Routes = () => {
           />
         );
       })}
+      <Redirect to="/" />
     </Switch>
   );
 };

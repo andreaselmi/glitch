@@ -19,11 +19,12 @@ import { Games, Streams } from "../types/interfaces";
 import { toggleFavoriteGame } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { firestore } from "../config/firebase";
+import { Link } from "react-router-dom";
 
 interface MyCardProps {
   buttonTitle: string;
   likeButton: boolean;
-  onClick: () => void;
+  buttonPath: string;
   title: string;
   urlImg: string;
   savedItemsList?: Games[];
@@ -56,10 +57,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MyCard = ({
   buttonTitle,
+  buttonPath,
   likeButton,
   urlImg,
   title,
-  onClick,
   savedItemsList = [],
   savedItem,
 }: MyCardProps) => {
@@ -148,11 +149,9 @@ const MyCard = ({
             </IconButton>
           )}
         </div>
-        <MyButton
-          onClick={onClick}
-          className={classes.livesButton}
-          name={buttonTitle}
-        />
+        <Link to={buttonPath}>
+          <MyButton className={classes.livesButton} name={buttonTitle} />
+        </Link>
       </CardActions>
     </Card>
   );

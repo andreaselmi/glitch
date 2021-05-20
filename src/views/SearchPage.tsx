@@ -11,7 +11,7 @@ const SearchPage = () => {
       {isLoading ? (
         <Loader height={400} width={400} />
       ) : (
-        //TODO da sistemare
+        //TODO aggiungere come titolo la stringa cercata
         <ContainerList
           title="Results"
           itemTypeError={null}

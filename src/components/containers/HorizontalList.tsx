@@ -46,13 +46,13 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <Card
+                buttonPath={`/game/${item.id}`}
                 savedItem={item}
                 likeButton={true}
                 buttonTitle="View Lives"
                 key={item.id}
                 urlImg={item.box_art_url || placeholder}
                 title={item.name || notAvailable}
-                onClick={() => console.log(item.id)}
                 savedItemsList={favoriteGames}
               />
             ))}
@@ -64,12 +64,12 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <Card
+                buttonPath={""}
                 likeButton={false}
                 buttonTitle="View Channel"
                 key={item.id}
                 urlImg={item.thumbnail_url || placeholder}
                 title={item.title || notAvailable}
-                onClick={() => console.log(item.id)}
               />
             ))}
         </div>
