@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
-import Favorite from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-
 //my components
-import MyButton from "./common/MyButton";
-import { Games, Streams } from "../types/interfaces";
+import { Games } from "../../types/interfaces";
 
-import { toggleFavoriteGame } from "../store/games";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { firestore } from "../config/firebase";
+import { toggleFavoriteGame } from "../../store/games";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { firestore } from "../../config/firebase";
 import { Link } from "react-router-dom";
+import MyCard from "../common/Card";
 
 interface MyCardProps {
   buttonTitle: string;
@@ -31,31 +19,7 @@ interface MyCardProps {
   savedItem?: Games;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  cardActionsContainer: {
-    justifyContent: "space-between",
-    marginTop: "auto",
-  },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    minWidth: 250,
-    margin: "0 20px",
-  },
-  livesButton: {
-    marginRight: 20,
-  },
-  media: {
-    height: 200,
-    paddingTop: "56.25%",
-  },
-  title: {
-    overflow: "scroll",
-    maxHeight: 100,
-  },
-}));
-
-const MyCard = ({
+const CardContainer = ({
   buttonTitle,
   buttonPath,
   likeButton,
@@ -67,7 +31,6 @@ const MyCard = ({
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
-  const classes = useStyles();
 
   useEffect(() => {
     if (savedItemsList.length > 0 && savedItem) {
@@ -117,7 +80,7 @@ const MyCard = ({
     }
   };
 
-  const toggleArticle = async () => {
+  const toggleGame = async () => {
     dispatch(toggleFavoriteGame(savedItem));
 
     if (!isSaved) {
@@ -129,32 +92,16 @@ const MyCard = ({
   };
 
   return (
-    <Card className={classes.card}>
-      <CardMedia className={classes.media} image={urlImg} title={title} />
-      <CardContent>
-        <Typography
-          className={classes.title}
-          variant="h5"
-          color="textSecondary"
-          component="p"
-        >
-          {title}
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.cardActionsContainer}>
-        <div>
-          {likeButton && (
-            <IconButton onClick={toggleArticle} aria-label="add to favorites">
-              {isSaved ? <Favorite /> : <FavoriteBorder />}
-            </IconButton>
-          )}
-        </div>
-        <Link to={buttonPath}>
-          <MyButton className={classes.livesButton} name={buttonTitle} />
-        </Link>
-      </CardActions>
-    </Card>
+    <MyCard
+      buttonTitle={buttonTitle}
+      buttonPath={buttonPath}
+      toggleLike={toggleGame}
+      isSaved={isSaved}
+      title={title}
+      urlImg={urlImg}
+      likeButton={likeButton}
+    />
   );
 };
 
-export default MyCard;
+export default CardContainer;

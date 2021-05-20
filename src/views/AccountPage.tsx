@@ -6,13 +6,11 @@ import {
   IconButton,
   makeStyles,
   Typography,
-  useMediaQuery,
   useTheme,
 } from "@material-ui/core";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 //mycomponents
-import HorizontalList from "../components/containers/HorizontalList";
 import placeholder from "../assets/images/account.png";
 
 //store
@@ -76,7 +74,6 @@ const AccountPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const theme = useTheme();
-  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   const dispatch = useAppDispatch();
 

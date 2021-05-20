@@ -13,6 +13,7 @@ const SearchPage = () => {
   if (searchedGames.length === 0 && isLoading === false && !searchGameErrorMsg)
     return <Redirect to="/" />;
 
+  //TODO aggiungere come titolo la stringa cercata
   return (
     <div>
       {isLoading ? (
@@ -31,7 +32,6 @@ const SearchPage = () => {
               items={searchedGames}
             />
           )}
-          //TODO aggiungere come titolo la stringa cercata
         </>
       )}
     </div>

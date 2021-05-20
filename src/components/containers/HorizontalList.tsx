@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import Card from "../Card";
 import { Games, ListProps, Streams } from "../../types/interfaces";
 import { Typography } from "@material-ui/core";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import HorizontalListHeader from "../HorizontalListHeader";
 import { loadTopStreams } from "../../store/games";
+import CardContainer from "./CardContainer";
 
 const useStyles = makeStyles((theme: Theme) => ({
   gamesListContainer: {
@@ -45,7 +45,7 @@ const HorizontalList = ({
         <div className={classes.gamesListContainer}>
           {items &&
             items.map((item: any) => (
-              <Card
+              <CardContainer
                 buttonPath={`/game/${item.id}`}
                 savedItem={item}
                 likeButton={true}
@@ -63,8 +63,8 @@ const HorizontalList = ({
         <div className={classes.gamesListContainer}>
           {items &&
             items.map((item: any) => (
-              <Card
-                buttonPath={""}
+              <CardContainer
+                buttonPath="/explore"
                 likeButton={false}
                 buttonTitle="View Channel"
                 key={item.id}

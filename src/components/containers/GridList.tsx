@@ -2,11 +2,11 @@ import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import { useAppSelector } from "../../store/hooks";
 import { Games, ListProps, Streams } from "../../types/interfaces";
-import Card from "../Card";
+import CardContainer from "./CardContainer";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
-    margin: "10px 20px 20px 10px",
+    margin: "10px 0px",
     maxWidth: 300,
     "& .MuiCard-root": {
       miHeight: 350,
@@ -39,7 +39,7 @@ const GridList = ({
           {items &&
             items.map((item: any) => (
               <Grid key={item.id} className={classes.grid} item xs>
-                <Card
+                <CardContainer
                   savedItem={item}
                   likeButton={true}
                   buttonTitle="View Lives"
@@ -59,13 +59,13 @@ const GridList = ({
           {items &&
             items.map((item: any) => (
               <Grid key={item.id} item xs>
-                <Card
+                <CardContainer
                   likeButton={false}
                   buttonTitle="View Channel"
                   key={item.id}
                   urlImg={item.thumbnail_url || placeholder}
                   title={item.title || notAvailable}
-                  buttonPath={""}
+                  buttonPath="/explore"
                 />
               </Grid>
             ))}
