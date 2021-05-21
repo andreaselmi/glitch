@@ -1,77 +1,24 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  makeStyles,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import { useHistory, useParams } from "react-router";
 
-//mycomponents
-import placeholder from "../assets/images/account.png";
+import { Container } from "@material-ui/core";
+import { toast, ToastContainer } from "react-toastify";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setUserImg } from "../store/auth";
 
-//config
-import { firestore, storage } from "../config/firebase";
+//my components
 import Loader from "../components/Loader";
 import ContainerList from "../components/containers/ContainerList";
-import { useParams } from "react-router";
-import { helix } from "../config/api";
-import { Games, Streams } from "../types/interfaces";
-import { gamesEndRequest, gamesRequested } from "../store/games";
-import { toast, ToastContainer } from "react-toastify";
-import CardContainer from "../components/containers/CardContainer";
+import ErrorTitle from "../components/DisplayError";
 
-const useStyles = makeStyles((theme) => ({
-  divider: {
-    margin: "30px 0",
-  },
-  headerContainer: {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "flex-start",
-    marginTop: 20,
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "center",
-    },
-  },
-  imageContainer: {
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    maxWidth: 200,
-    maxHeight: 200,
-    borderRadius: "50%",
-    overflow: "hidden",
-    margin: "20px 30px",
-    "& img": {
-      width: 200,
-      height: 200,
-    },
-  },
-  input: {
-    display: "none",
-  },
-  sectionTitleContainer: {
-    padding: "20px",
-  },
-  userImgButton: {
-    color: theme.palette.background.paper,
-    backgroundColor: theme.palette.text.disabled,
-    height: 50,
-    width: 50,
-    position: "absolute",
-    borderRadius: 50,
-    bottom: 20,
-    right: 35,
-  },
-}));
+//store
+import { gamesEndRequest, gamesRequested } from "../store/games";
+
+//api
+import { helix } from "../config/api";
+//types
+import { Games, Streams } from "../types/interfaces";
 
 interface ParamTypes {
   game_id: string;
@@ -79,11 +26,11 @@ interface ParamTypes {
 
 const GameStreamsPage = () => {
   const [game, setGame] = useState<Games>();
-  const [streams, setStreams] = useState<Streams[]>();
+  const [streams, setStreams] = useState<Streams[]>([]);
+  const history = useHistory();
 
-  const { favoriteGames, isLoading } = useAppSelector((state) => state.games);
+  const { isLoading } = useAppSelector((state) => state.games);
 
-  const classes = useStyles();
   const params = useParams<ParamTypes>();
   const dispatch = useAppDispatch();
 
@@ -122,9 +69,17 @@ const GameStreamsPage = () => {
         <Loader width={400} height={400} />
       ) : (
         <>
+          {streams?.length === 0 && !isLoading && (
+            <ErrorTitle
+              onClick={() => history.goBack()}
+              retryButtonText="Back"
+              error={true}
+              text="There are no streams to view"
+            />
+          )}
+
           {streams && game && streams.length > 0 && (
             <ContainerList
-              //TODO da sistemare
               title={`${game.name} live streams`}
               itemTypeError={null}
               type="grid"

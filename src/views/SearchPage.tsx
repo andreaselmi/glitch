@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useAppSelector } from "../store/hooks";
 import ContainerList from "../components/containers/ContainerList";
 import Loader from "../components/Loader";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import SearchGameHandler from "../components/SearchGameHandler";
+import ErrorTitle from "../components/DisplayError";
 
 const useStyles = makeStyles((theme) => ({
   containerSearch: {
@@ -13,10 +14,7 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  errorTitle: {
-    textAlign: "center",
-    marginTop: 30,
-  },
+
   searchTitle: {
     padding: "20px 0 0 20px",
   },
@@ -45,15 +43,14 @@ const SearchPage = () => {
       ) : (
         <>
           {searchGameErrorMsg ? (
-            <Typography
-              className={classes.errorTitle}
-              variant="h5"
-              color="textSecondary"
-            >
-              {searchGameErrorMsg === "No Results"
-                ? `No results for "${searchValue}"`
-                : "Error Try Again Later"}
-            </Typography>
+            <ErrorTitle
+              error={false}
+              text={
+                searchGameErrorMsg === "No Results"
+                  ? `No results for "${searchValue}"`
+                  : "Error Try Again"
+              }
+            />
           ) : (
             <>
               <Typography

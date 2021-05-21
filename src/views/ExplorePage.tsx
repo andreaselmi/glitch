@@ -8,6 +8,7 @@ import { loadTopGames, loadTopStreams } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import ContainerList from "../components/containers/ContainerList";
 import SearchGameHandler from "../components/SearchGameHandler";
+import ErrorTitle from "../components/DisplayError";
 
 const useStyles = makeStyles((theme) => ({
   containerSearch: {
@@ -51,12 +52,28 @@ const ExplorePage = () => {
         <Loader height={400} width={400} />
       ) : (
         <>
+          {!isLoading && topGames.length === 0 && (
+            <ErrorTitle
+              onClick={() => dispatch(loadTopGames())}
+              error={Boolean(topGamesErrorMsg)}
+              text="No Top Games to display"
+            />
+          )}
+
           {topGames && topGames.length > 0 && (
             <ContainerList
               title="Top Games"
               itemTypeError={topGamesErrorMsg}
               type="horizontal"
               items={topGames}
+            />
+          )}
+
+          {!isLoading && topStreams.length === 0 && (
+            <ErrorTitle
+              onClick={() => dispatch(loadTopStreams())}
+              error={Boolean(topStreamsErrorMsg)}
+              text="No topStreams to display"
             />
           )}
 

@@ -100,9 +100,9 @@ const HorizontalList = ({
         numberOfItems={items.length}
         retryAction={() => dispatch(loadTopStreams())}
       />
-      {!items && (
+      {items.length === 0 && (
         <Typography variant="h5" color="textPrimary">
-          Non ci sono elementi da mostrare
+          There are no elements to show.
         </Typography>
       )}
       {items && items.length > 0 && renderItems(items)}
