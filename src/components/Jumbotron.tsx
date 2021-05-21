@@ -23,9 +23,12 @@ const useStyles = makeStyles((theme) => ({
     background: `url(${bgImage})no-repeat center`,
     backgroundSize: "cover",
     display: "flex",
-    height: "77vh",
+    height: "75vh",
     position: "relative",
     zIndex: 1,
+    [theme.breakpoints.down("sm")]: {
+      height: "70vh",
+    },
   },
   headerTextContainer: {
     justifyContent: "space-around",
@@ -41,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: -1,
   },
 }));
+
+//TODO valutare un sottotitolo
 
 const Jumbotron = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -75,17 +80,22 @@ const Jumbotron = () => {
         direction="column"
       >
         <Grid item xs={6} lg={5}>
-          <Typography variant={mobile ? "h5" : "h3"} color="textPrimary">
+          <Typography
+            style={{ fontWeight: "bolder" }}
+            variant={mobile ? "h5" : "h3"}
+            color="textPrimary"
+          >
             Discover around your favorite videogames.
           </Typography>
-          <Typography
+
+          {/* <Typography
             variant={mobile ? "subtitle2" : "subtitle1"}
             color="textPrimary"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
             sed maxime cum nesciunt aperiam, rerum exercitationem eius fuga
             inventore!
-          </Typography>
+          </Typography> */}
           {user.uid ? (
             <Link style={{ textDecoration: "none" }} to="/explore">
               <Button

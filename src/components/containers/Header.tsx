@@ -32,7 +32,7 @@ const Header = () => {
     //animated bottom icon
     bounce: {
       alignItems: "center",
-      animation: `$myEffect 2000ms `,
+      animation: `$bounceEffect 2000ms `,
       animationIterationCount: "infinite",
       color: "#fff",
       cursor: "pointer",
@@ -41,7 +41,7 @@ const Header = () => {
       justifyContent: "center",
       width: 50,
     },
-    "@keyframes myEffect": {
+    "@keyframes bounceEffect": {
       "0%": { transform: "translateY(0)" },
       "50%": { transform: "translateY(-10px)" },
       "100% ": { transform: "translateY(0)" },

@@ -61,6 +61,8 @@ const GameStreamsPage = () => {
     fetchStreams();
   }, []);
 
+  //TODO evitare che si intraveda il retry prima del caricamento
+
   return (
     <Container maxWidth="xl">
       <ToastContainer />
