@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-
-import { Container } from "@material-ui/core";
 import { toast, ToastContainer } from "react-toastify";
+import { Container } from "@material-ui/core";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -17,9 +16,9 @@ import { gamesEndRequest, gamesRequested } from "../store/games";
 
 //api
 import { helix } from "../config/api";
+
 //types
 import { Games, Streams } from "../types/interfaces";
-
 interface ParamTypes {
   game_id: string;
 }
