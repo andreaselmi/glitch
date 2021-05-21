@@ -8,6 +8,7 @@ interface GamesStoreProps {
   topGames: Games[];
   topStreams: Streams[];
   searchedGames: Games[];
+  singleGameStreams: Streams[];
   searchValue: string;
   isLoading: boolean;
   topGamesErrorMsg: string | null;
@@ -20,6 +21,7 @@ const initialState: GamesStoreProps = {
   topGames: [],
   topStreams: [],
   searchedGames: [],
+  singleGameStreams: [],
   isLoading: false,
   searchValue: "",
   topGamesErrorMsg: null,
