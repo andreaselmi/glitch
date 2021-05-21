@@ -1,3 +1,7 @@
+/*
+Component that uses the react-scroll library and allows you to scroll to a specific point on the page
+*/
+
 import React from "react";
 import { Link } from "react-scroll";
 

@@ -106,5 +106,3 @@ const GridList = ({
 };
 
 export default GridList;
-
-//TODO da implementare title

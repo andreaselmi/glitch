@@ -1,3 +1,7 @@
+/*
+Simple material ui button
+*/
+
 import React from "react";
 
 import { Button, ButtonProps } from "@material-ui/core";

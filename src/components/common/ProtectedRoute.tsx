@@ -1,3 +1,7 @@
+/*
+Protected route
+*/
+
 import { Redirect, Route, RouteProps } from "react-router";
 
 export type ProtectedRouteProps = {

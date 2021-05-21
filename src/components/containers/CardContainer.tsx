@@ -10,6 +10,7 @@ import MyCard from "../common/Card";
 
 //types
 import { CardContainerProps } from "../../types/interfaces";
+import { toast, ToastContainer } from "react-toastify";
 
 const CardContainer = ({
   buttonTitle,
@@ -51,8 +52,7 @@ const CardContainer = ({
           userId: user.uid,
         })
         .catch((error) => {
-          //TODO toast per l'errore
-          alert("Non è stato possibile salvare l'articolo");
+          toast.error("The item could not be saved, please try again later");
           setIsSaved(false);
         });
     }
@@ -68,7 +68,7 @@ const CardContainer = ({
           .doc(`${savedItem.id} user id: ${user.uid}`)
           .delete();
       } catch (error) {
-        //TODO toast per l'errore
+        toast.error("The item could not be deleted, please try again later");
         setIsSaved(true);
       }
     }
@@ -87,6 +87,7 @@ const CardContainer = ({
 
   return (
     <div {...restProps}>
+      <ToastContainer />
       <MyCard
         redirectTo={redirectTo}
         buttonTitle={buttonTitle}

@@ -1,3 +1,7 @@
+/*
+A card with an image at the top, a title and a section of actions to like or navigate to the detail of the content
+*/
+
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -38,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: "56.25%",
   },
   title: {
-    //TODO da sistemare
     overflowY: "hidden",
     maxHeight: 100,
   },
