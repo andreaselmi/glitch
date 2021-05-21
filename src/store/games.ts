@@ -91,7 +91,7 @@ export const {
 } = userSlice.actions;
 export default userSlice.reducer;
 
-//action for starting api calls
+//actions for starting api calls
 interface ApiCallBeganProps {
   endpoint: string;
   onSuccess: string;
@@ -120,8 +120,43 @@ export const firestoreCallBegan = createAction(
   withPayloadType<FirestoreCallBeganProps>()
 );
 
-//custom api middleware
-export const apiMiddleware =
+export const loadTopGames = () => {
+  return apiCallBegan({
+    endpoint: "/games/top",
+    onSuccess: "games/addTopGames",
+    onError: "games/loadTopGamesFailed",
+  });
+};
+export const loadTopStreams = () => {
+  return apiCallBegan({
+    endpoint: "/streams",
+    onSuccess: "games/addTopStreams",
+    onError: "games/loadTopStreamsFailed",
+  });
+};
+export const loadSearchedGames = (query: string) => {
+  return apiCallBegan({
+    endpoint: "/search/categories",
+    query,
+    onSuccess: "games/addSearchedGames",
+    onError: "games/loadSearchedGamesFailed",
+  });
+};
+
+export const loadGamesFromFirestore = (user: any) => {
+  return firestoreCallBegan({
+    user,
+    collection: "games",
+    parameter: "userId",
+    filter: "==",
+    onSuccess: "games/loadSavedGames",
+  });
+};
+
+//end actions api calls
+
+//customs middleware
+export const helixApiMiddleware =
   ({ dispatch }: any) =>
   (next: any) =>
   async (action: PayloadAction<any>) => {
@@ -170,36 +205,3 @@ export const firestoreMiddleware =
         });
       });
   };
-
-export const loadTopGames = () => {
-  return apiCallBegan({
-    endpoint: "/games/top",
-    onSuccess: "games/addTopGames",
-    onError: "games/loadTopGamesFailed",
-  });
-};
-export const loadTopStreams = () => {
-  return apiCallBegan({
-    endpoint: "/streams",
-    onSuccess: "games/addTopStreams",
-    onError: "games/loadTopStreamsFailed",
-  });
-};
-export const loadSearchedGames = (query: string) => {
-  return apiCallBegan({
-    endpoint: "/search/categories",
-    query,
-    onSuccess: "games/addSearchedGames",
-    onError: "games/loadSearchedGamesFailed",
-  });
-};
-
-export const loadGamesFromFirestore = (user: any) => {
-  return firestoreCallBegan({
-    user,
-    collection: "games",
-    parameter: "userId",
-    filter: "==",
-    onSuccess: "games/loadSavedGames",
-  });
-};

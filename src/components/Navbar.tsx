@@ -10,10 +10,8 @@ import {
   ListItemText,
   makeStyles,
   useTheme,
-  IconButton,
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import SearchIcon from "@material-ui/icons/Search";
 
 //components
 import logo from "../assets/images/logoWhite.png";
@@ -31,7 +29,7 @@ import { setNoUser } from "../store/auth";
 import { clearFavoriteGames } from "../store/games";
 
 import { auth } from "../config/firebase";
-import SearchInputNavbar from "./SearchGameHandler";
+import SearchGameHandler from "./SearchGameHandler";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -123,7 +121,7 @@ const Navbar = ({ links }: NavbarProps) => {
             component="nav"
             aria-labelledby="main navigation"
           >
-            {user.uid && <SearchInputNavbar />}
+            {user.uid && <SearchGameHandler />}
             {links.map((link) => {
               if (link.private && !user.uid) return null;
               return (

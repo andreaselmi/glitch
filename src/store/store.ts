@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth";
-import gamesReducer, { apiMiddleware, firestoreMiddleware } from "./games";
+import gamesReducer, { helixApiMiddleware, firestoreMiddleware } from "./games";
 
 export const store = configureStore({
   reducer: {
@@ -8,7 +8,7 @@ export const store = configureStore({
     games: gamesReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiMiddleware, firestoreMiddleware),
+    getDefaultMiddleware().concat(helixApiMiddleware, firestoreMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

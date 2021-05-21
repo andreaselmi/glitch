@@ -7,7 +7,7 @@ import { Container, makeStyles } from "@material-ui/core";
 import { loadTopGames, loadTopStreams } from "../store/games";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import ContainerList from "../components/containers/ContainerList";
-import SearchInputNavbar from "../components/SearchGameHandler";
+import SearchGameHandler from "../components/SearchGameHandler";
 
 const useStyles = makeStyles((theme) => ({
   containerSearch: {
@@ -40,8 +40,12 @@ const ExplorePage = () => {
 
   return (
     <div>
-      <Container maxWidth="xs" className={classes.containerSearch}>
-        <SearchInputNavbar />
+      <Container
+        style={{ color: "white" }}
+        maxWidth="xs"
+        className={classes.containerSearch}
+      >
+        <SearchGameHandler />
       </Container>
       {isLoading ? (
         <Loader height={400} width={400} />
