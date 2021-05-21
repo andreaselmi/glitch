@@ -32,12 +32,12 @@ const ContainerList = ({
         if (text === -1) {
           games = items.map((game: any) => ({
             ...game,
-            box_art_url: game.box_art_url.replace("52x72", "500x500"),
+            box_art_url: game.box_art_url.replace("52x72", "300x300"),
           }));
         } else {
           games = items.map((game: any) => ({
             ...game,
-            box_art_url: game.box_art_url.replace(/{width}|{height}/g, "500"),
+            box_art_url: game.box_art_url.replace(/{width}|{height}/g, "300"),
           }));
         }
         setData(games);
@@ -47,7 +47,7 @@ const ContainerList = ({
         if (text === -1) {
           streams = items.map((game: any) => ({
             ...game,
-            thumbnail_url: game.thumbnail_url.replace("52x72", "500x500"),
+            thumbnail_url: game.thumbnail_url.replace("52x72", "300x300"),
           }));
         } else {
           streams = items.map((game: any) => ({
