@@ -37,5 +37,28 @@ export interface ListProps {
   items: Games[] | Streams[];
 }
 
+//interfaces for card container and card
+export interface CardContainerProps extends React.HTMLProps<HTMLDivElement> {
+  buttonTitle: string;
+  likeButton: boolean;
+  buttonPath: string;
+  redirectTo: "internal" | "external";
+  title: string;
+  urlImg: string;
+  savedItemsList?: Games[];
+  savedItem?: Games;
+}
+
+export interface MyCardProps {
+  buttonTitle: string;
+  likeButton: boolean;
+  buttonPath: string;
+  redirectTo: "internal" | "external";
+  title: string;
+  urlImg: string;
+  isSaved?: boolean;
+  toggleLike?: () => void;
+}
+
 //types for links in navbar
 export type NavLinksProps = Omit<Route, "component">;

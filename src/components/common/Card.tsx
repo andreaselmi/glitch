@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import {
@@ -14,17 +15,8 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 //my components
 import MyButton from "./MyButton";
-import { Link } from "react-router-dom";
 
-interface MyCardProps {
-  buttonTitle: string;
-  likeButton: boolean;
-  buttonPath: string;
-  title: string;
-  urlImg: string;
-  isSaved?: boolean;
-  toggleLike?: () => void;
-}
+import { MyCardProps } from "../../types/interfaces";
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardActionsContainer: {
@@ -60,6 +52,7 @@ const MyCard = ({
   toggleLike,
   urlImg,
   title,
+  redirectTo,
 }: MyCardProps) => {
   const classes = useStyles();
 
@@ -83,9 +76,16 @@ const MyCard = ({
             </IconButton>
           )}
         </div>
-        <Link className={classes.linkButton} to={buttonPath}>
-          <MyButton name={buttonTitle} />
-        </Link>
+        {redirectTo === "internal" && (
+          <Link className={classes.linkButton} to={buttonPath}>
+            <MyButton name={buttonTitle} />
+          </Link>
+        )}
+        {redirectTo === "external" && (
+          <a className={classes.linkButton} href={buttonPath}>
+            <MyButton name={buttonTitle} />
+          </a>
+        )}
       </CardActions>
     </Card>
   );

@@ -57,6 +57,7 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <CardContainer
+                redirectTo="internal"
                 className={`${classes.cardContainer} ${classes.gameCardContainer}`}
                 buttonPath={`/game/${item.id}`}
                 savedItem={item}
@@ -76,8 +77,9 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <CardContainer
+                redirectTo="external"
                 className={classes.cardContainer}
-                buttonPath="/explore"
+                buttonPath={`https://www.twitch.tv/${item.user_login}`}
                 likeButton={false}
                 buttonTitle="View Channel"
                 key={item.id}

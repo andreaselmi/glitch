@@ -1,33 +1,27 @@
 import React, { useState, useEffect } from "react";
 
-//my components
-import { Games } from "../../types/interfaces";
-
+//store
 import { toggleFavoriteGame } from "../../store/games";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { firestore } from "../../config/firebase";
+
+//mycomponents
 import MyCard from "../common/Card";
 
-interface MyCardProps extends React.HTMLProps<HTMLDivElement> {
-  buttonTitle: string;
-  likeButton: boolean;
-  buttonPath: string;
-  title: string;
-  urlImg: string;
-  savedItemsList?: Games[];
-  savedItem?: Games;
-}
+//types
+import { CardContainerProps } from "../../types/interfaces";
 
 const CardContainer = ({
   buttonTitle,
   buttonPath,
   likeButton,
+  redirectTo,
   urlImg,
   title,
   savedItemsList = [],
   savedItem,
   ...restProps
-}: MyCardProps) => {
+}: CardContainerProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
@@ -94,6 +88,7 @@ const CardContainer = ({
   return (
     <div {...restProps}>
       <MyCard
+        redirectTo={redirectTo}
         buttonTitle={buttonTitle}
         buttonPath={buttonPath}
         toggleLike={toggleGame}

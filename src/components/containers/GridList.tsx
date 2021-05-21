@@ -53,6 +53,7 @@ const GridList = ({
             items.map((item: any) => (
               <Grid key={item.id} className={classes.grid} item xs>
                 <CardContainer
+                  redirectTo="internal"
                   className={`${classes.cardContainer} ${classes.gameCardContainer}`}
                   savedItem={item}
                   likeButton={true}
@@ -74,6 +75,7 @@ const GridList = ({
             items.map((item: any) => (
               <Grid key={item.id} item xs>
                 <CardContainer
+                  redirectTo="external"
                   className={classes.cardContainer}
                   likeButton={false}
                   buttonTitle="View Channel"
