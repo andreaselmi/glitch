@@ -77,7 +77,7 @@ interface ParamTypes {
   game_id: string;
 }
 
-const GamePage = () => {
+const GameStreamsPage = () => {
   const [game, setGame] = useState<Games>();
   const [streams, setStreams] = useState<Streams[]>();
 
@@ -127,7 +127,7 @@ const GamePage = () => {
               //TODO da sistemare
               title={`${game.name} live streams`}
               itemTypeError={null}
-              type="horizontal"
+              type="grid"
               items={streams}
             />
           )}
@@ -137,4 +137,4 @@ const GamePage = () => {
   );
 };
 
-export default GamePage;
+export default GameStreamsPage;

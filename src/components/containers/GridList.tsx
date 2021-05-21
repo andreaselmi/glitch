@@ -7,7 +7,6 @@ import CardContainer from "./CardContainer";
 const useStyles = makeStyles((theme) => ({
   grid: {
     margin: "10px 0px",
-    maxWidth: "75%",
     "& .MuiCard-root": {
       miHeight: 350,
     },
@@ -20,11 +19,26 @@ const useStyles = makeStyles((theme) => ({
   },
   gameCardContainer: {
     maxHeight: 400,
-    minWidth: 300,
     "& div .MuiCardMedia-root": {
       minHeight: 250,
     },
   },
+  gridContainer: {
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      justifyContent: "flex-start",
+    },
+  },
+  streamCardContainer: {
+    maxHeight: 400,
+    [theme.breakpoints.down("xs")]: {
+      minWidth: 200,
+    },
+    "& div .MuiCardMedia-root": {
+      minHeight: 250,
+    },
+  },
+
   title: {
     margin: "20px 0 0 20px",
   },
@@ -51,7 +65,15 @@ const GridList = ({
         <>
           {items &&
             items.map((item: any) => (
-              <Grid key={item.id} className={classes.grid} item xs>
+              <Grid
+                key={item.id}
+                className={classes.grid}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={2}
+              >
                 <CardContainer
                   redirectTo="internal"
                   className={`${classes.cardContainer} ${classes.gameCardContainer}`}
@@ -73,16 +95,24 @@ const GridList = ({
         <>
           {items &&
             items.map((item: any) => (
-              <Grid key={item.id} item xs>
+              <Grid
+                className={classes.grid}
+                key={item.id}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+              >
                 <CardContainer
                   redirectTo="external"
-                  className={classes.cardContainer}
+                  className={`${classes.cardContainer} ${classes.streamCardContainer}`}
                   likeButton={false}
                   buttonTitle="View Channel"
                   key={item.id}
                   urlImg={item.thumbnail_url || placeholder}
                   title={item.title || notAvailable}
-                  buttonPath="/explore"
+                  buttonPath={`https://www.twitch.tv/${item.user_login}`}
                 />
               </Grid>
             ))}
@@ -94,11 +124,15 @@ const GridList = ({
   return (
     <>
       {title && (
-        <Typography className={classes.title} variant="h3" color="textPrimary">
+        <Typography
+          className={classes.title}
+          variant="h5"
+          color="textSecondary"
+        >
           {title}
         </Typography>
       )}
-      <Grid justify="center" container>
+      <Grid className={classes.gridContainer} container>
         {items && items.length > 0 ? renderItems(items) : null}
       </Grid>
     </>

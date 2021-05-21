@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: "0 20px",
   },
   linkButton: {
-    marginRight: 20,
     textDecoration: "none",
   },
   media: {
@@ -43,7 +42,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     overflowY: "hidden",
-    maxHeight: 100,
+    maxHeight: "2.4em",
+    lineHeight: "1.2em",
   },
 }));
 
