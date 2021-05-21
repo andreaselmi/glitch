@@ -7,7 +7,7 @@ import { makeStyles, InputBase, fade, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory, useLocation } from "react-router";
 import { useAppDispatch } from "../store/hooks";
-import { loadSearchedGames } from "../store/games";
+import { loadSearchedGames, setSearchValue } from "../store/games";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -77,8 +77,9 @@ const SearchGameHandler = ({ ...restProps }) => {
       search: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      dispatch(loadSearchedGames(values.search));
+    onSubmit: ({ search }) => {
+      dispatch(setSearchValue(search));
+      dispatch(loadSearchedGames(search));
 
       if (location.pathname !== "/search") history.push("/search");
     },

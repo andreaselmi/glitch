@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 import { useAppSelector } from "../../store/hooks";
 import { Games, ListProps, Streams } from "../../types/interfaces";
 import CardContainer from "./CardContainer";
@@ -25,12 +25,15 @@ const useStyles = makeStyles((theme) => ({
       minHeight: 250,
     },
   },
+  title: {
+    margin: "20px 0 0 20px",
+  },
 }));
 
 interface GridListProps extends ListProps {
   placeholder: string;
   notAvailable: string;
-  title: string;
+  title?: string;
 }
 
 const GridList = ({
@@ -87,9 +90,16 @@ const GridList = ({
   };
 
   return (
-    <Grid justify="center" container style={{ margin: "30px 0" }}>
-      {items && items.length > 0 ? renderItems(items) : null}
-    </Grid>
+    <>
+      {title && (
+        <Typography className={classes.title} variant="h3" color="textPrimary">
+          {title}
+        </Typography>
+      )}
+      <Grid justify="center" container>
+        {items && items.length > 0 ? renderItems(items) : null}
+      </Grid>
+    </>
   );
 };
 

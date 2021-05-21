@@ -23,7 +23,7 @@ const ContainerList = ({
   const notAvailable = "Data not available";
 
   //function that replaces width and height with dimensions
-  //Currently the categories endpoint of TWITCH API returns a bug in the image string, instead of passing width and height like the other endpoints it returns 52x72 images
+  //Currently the categories endpoint of TWITCH API returns a bug in the image string, instead of passing width and height like the other endpoints it returns 52x72 pixels images
   const replaceImgDimensions = () => {
     if (items && items.length > 0) {
       if ("box_art_url" in items[0]) {

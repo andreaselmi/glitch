@@ -17,12 +17,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginTop: 30,
   },
+  searchTitle: {
+    padding: "20px 0 0 20px",
+  },
 }));
 
 const SearchPage = () => {
-  const { searchedGames, isLoading, searchGameErrorMsg } = useAppSelector(
-    (state) => state.games
-  );
+  const { searchedGames, isLoading, searchGameErrorMsg, searchValue } =
+    useAppSelector((state) => state.games);
   const classes = useStyles();
 
   if (searchedGames.length === 0 && isLoading === false && !searchGameErrorMsg)
@@ -48,15 +50,26 @@ const SearchPage = () => {
               variant="h5"
               color="textSecondary"
             >
-              {searchGameErrorMsg}...
+              {searchGameErrorMsg === "No Results"
+                ? `No results for "${searchValue}"`
+                : "Error Try Again Later"}
             </Typography>
           ) : (
-            <ContainerList
-              title="Results"
-              itemTypeError={null}
-              type="grid"
-              items={searchedGames}
-            />
+            <>
+              <Typography
+                className={classes.searchTitle}
+                variant="h6"
+                color="textSecondary"
+              >
+                Results for "{searchValue}" ({searchedGames.length})
+              </Typography>
+              <ContainerList
+                title=""
+                itemTypeError={null}
+                type="grid"
+                items={searchedGames}
+              />
+            </>
           )}
         </>
       )}

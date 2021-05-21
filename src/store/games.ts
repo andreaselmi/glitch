@@ -8,6 +8,7 @@ interface GamesStoreProps {
   topGames: Games[];
   topStreams: Streams[];
   searchedGames: Games[];
+  searchValue: string;
   isLoading: boolean;
   topGamesErrorMsg: string | null;
   topStreamsErrorMsg: string | null;
@@ -20,6 +21,7 @@ const initialState: GamesStoreProps = {
   topStreams: [],
   searchedGames: [],
   isLoading: false,
+  searchValue: "",
   topGamesErrorMsg: null,
   topStreamsErrorMsg: null,
   searchGameErrorMsg: null,
@@ -50,7 +52,7 @@ const userSlice = createSlice({
     gamesEndRequest: (state) => {
       state.isLoading = false;
     },
-    loadSavedGames: (state, action) => {
+    loadSavedGames: (state, action: PayloadAction<any>) => {
       const alreadySaved = state.favoriteGames.findIndex(
         (game) => game["id"] === action.payload.id
       );
@@ -58,17 +60,23 @@ const userSlice = createSlice({
         state.favoriteGames.push(action.payload);
       } else return state;
     },
-    loadSearchedGamesFailed: (state, action) => {
+    loadSearchedGamesFailed: (state, action: PayloadAction<any>) => {
       state.searchGameErrorMsg = action.payload;
       state.isLoading = false;
     },
-    loadTopGamesFailed: (state, action) => {
+    loadTopGamesFailed: (state, action: PayloadAction<any>) => {
       state.topGamesErrorMsg = action.payload;
       state.isLoading = false;
     },
-    loadTopStreamsFailed: (state, action) => {
+    loadTopStreamsFailed: (state, action: PayloadAction<any>) => {
       state.topStreamsErrorMsg = action.payload;
       state.isLoading = false;
+    },
+    setSearchValue: (state, action: PayloadAction<any>) => {
+      state.searchValue = action.payload;
+    },
+    clearSearchValue: (state) => {
+      state.searchValue = "";
     },
     toggleFavoriteGame: (state, action) => {
       const alreadySaved = state.favoriteGames.findIndex(
@@ -88,6 +96,8 @@ export const {
   gamesRequested,
   gamesEndRequest,
   toggleFavoriteGame,
+  setSearchValue,
+  clearSearchValue,
 } = userSlice.actions;
 export default userSlice.reducer;
 
