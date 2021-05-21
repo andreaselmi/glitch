@@ -18,6 +18,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: "none",
     },
   },
+  cardContainer: {
+    minHeight: 300,
+    minWidth: 350,
+  },
+  gameCardContainer: {
+    minHeight: 400,
+    minWidth: 300,
+    "& div .MuiCardMedia-root": {
+      height: 300,
+    },
+  },
 }));
 
 interface HorizontalListProps extends ListProps {
@@ -46,6 +57,7 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <CardContainer
+                className={`${classes.cardContainer} ${classes.gameCardContainer}`}
                 buttonPath={`/game/${item.id}`}
                 savedItem={item}
                 likeButton={true}
@@ -64,6 +76,7 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <CardContainer
+                className={classes.cardContainer}
                 buttonPath="/explore"
                 likeButton={false}
                 buttonTitle="View Channel"

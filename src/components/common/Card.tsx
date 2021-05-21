@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: "auto",
   },
   card: {
+    height: "100%",
     display: "flex",
     flexDirection: "column",
-    minWidth: 250,
     margin: "0 20px",
   },
   linkButton: {
@@ -42,11 +42,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     textDecoration: "none",
   },
   media: {
-    height: 200,
+    maxHeight: "100%",
     paddingTop: "56.25%",
   },
   title: {
-    overflow: "scroll",
+    //TODO da sistemare
+    overflowY: "hidden",
     maxHeight: 100,
   },
 }));

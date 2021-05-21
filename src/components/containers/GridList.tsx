@@ -7,12 +7,22 @@ import CardContainer from "./CardContainer";
 const useStyles = makeStyles((theme) => ({
   grid: {
     margin: "10px 0px",
-    maxWidth: 300,
+    maxWidth: "75%",
     "& .MuiCard-root": {
       miHeight: 350,
     },
     "& p": {
       fontSize: "1rem",
+    },
+  },
+  cardContainer: {
+    height: "100%",
+  },
+  gameCardContainer: {
+    maxHeight: 400,
+    minWidth: 300,
+    "& div .MuiCardMedia-root": {
+      minHeight: 250,
     },
   },
 }));
@@ -40,6 +50,7 @@ const GridList = ({
             items.map((item: any) => (
               <Grid key={item.id} className={classes.grid} item xs>
                 <CardContainer
+                  className={`${classes.cardContainer} ${classes.gameCardContainer}`}
                   savedItem={item}
                   likeButton={true}
                   buttonTitle="View Lives"
@@ -60,6 +71,7 @@ const GridList = ({
             items.map((item: any) => (
               <Grid key={item.id} item xs>
                 <CardContainer
+                  className={classes.cardContainer}
                   likeButton={false}
                   buttonTitle="View Channel"
                   key={item.id}

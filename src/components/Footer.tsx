@@ -15,6 +15,7 @@ import { Grid, Icon, Typography } from "@material-ui/core";
 import Scroller from "./common/Scroller";
 
 const useStyles = makeStyles((theme) => ({
+  //TODO valutare posizione back to top
   backToTopIcon: {
     alignItems: "center",
     backgroundColor: theme.palette.background.paper,
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
     position: "absolute",
     right: 20,
-    top: -60,
+    bottom: 30,
   },
   container: {
     alignItems: "center",
