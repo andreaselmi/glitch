@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 //material-ui imports
 import {
@@ -11,9 +11,11 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
+import Search from "@material-ui/icons/Search";
 
 //interfaces
 import { NavbarProps } from "../types/interfaces";
+//components
 import MyButton from "./common/MyButton";
 
 const useStyles = makeStyles({
@@ -37,16 +39,27 @@ interface MyModalProps extends NavbarProps {
 const MyDrawer = ({ links, openModal, onClickLogout }: MyModalProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const classes = useStyles();
+  const history = useHistory();
   return (
     <>
-      <IconButton
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        onClick={() => setOpen(!open)}
-      >
-        <MenuIcon />
-      </IconButton>
+      <div>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="search-icon"
+          onClick={() => history.push("/explore")}
+        >
+          <Search />
+        </IconButton>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          onClick={() => setOpen(!open)}
+        >
+          <MenuIcon />
+        </IconButton>
+      </div>
       <SwipeableDrawer
         anchor="right"
         open={open}
