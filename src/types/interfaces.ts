@@ -13,6 +13,12 @@ export interface Streams {
   title: string;
   thumbnail_url: string;
 }
+export interface StreamsWithPagination {
+  streams: Streams[];
+  pagination: {
+    cursor: string;
+  };
+}
 //types route react-router-dom
 export interface Route {
   name: string;

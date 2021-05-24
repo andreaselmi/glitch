@@ -8,7 +8,6 @@ interface GamesStoreProps {
   topGames: Games[];
   topStreams: Streams[];
   searchedGames: Games[];
-  singleGameStreams: Streams[];
   searchValue: string;
   isLoading: boolean;
   topGamesErrorMsg: string | null;
@@ -21,7 +20,6 @@ const initialState: GamesStoreProps = {
   topGames: [],
   topStreams: [],
   searchedGames: [],
-  singleGameStreams: [],
   isLoading: false,
   searchValue: "",
   topGamesErrorMsg: null,
@@ -112,6 +110,7 @@ export default userSlice.reducer;
 //actions for starting api calls
 interface ApiCallBeganProps {
   endpoint: string;
+  options?: string;
   onSuccess: string;
   onError: string;
   query?: string;
@@ -138,24 +137,27 @@ export const firestoreCallBegan = createAction(
   withPayloadType<FirestoreCallBeganProps>()
 );
 
-export const loadTopGames = () => {
+export const loadTopGames = (options = "") => {
   return apiCallBegan({
     endpoint: "/games/top",
+    options,
     onSuccess: "games/addTopGames",
     onError: "games/loadTopGamesFailed",
   });
 };
-export const loadTopStreams = () => {
+export const loadTopStreams = (options = "") => {
   return apiCallBegan({
     endpoint: "/streams",
+    options,
     onSuccess: "games/addTopStreams",
     onError: "games/loadTopStreamsFailed",
   });
 };
-export const loadSearchedGames = (query: string) => {
+export const loadSearchedGames = (query: string, options = "") => {
   return apiCallBegan({
     endpoint: "/search/categories",
     query,
+    options,
     onSuccess: "games/addSearchedGames",
     onError: "games/loadSearchedGamesFailed",
   });
@@ -182,14 +184,14 @@ export const helixApiMiddleware =
     dispatch(gamesRequested());
     dispatch(clearErrors());
 
-    const { endpoint, onSuccess, onError, query } = action.payload;
+    const { endpoint, onSuccess, onError, query, options } = action.payload;
 
     try {
       let response;
       if (query) {
-        response = await helix.get(endpoint + "?query=" + query);
+        response = await helix.get(endpoint + "?query=" + query + options);
       } else {
-        response = await helix.get(endpoint);
+        response = await helix.get(endpoint + options);
       }
 
       if (response.status === 200 && response.data.data) {
@@ -199,8 +201,6 @@ export const helixApiMiddleware =
         throw new Error("No Results");
       }
     } catch (error) {
-      //TODO da verificare
-      console.log(error);
       dispatch({ type: onError, payload: error.message });
     }
   };

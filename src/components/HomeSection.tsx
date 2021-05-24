@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "0 50px",
+
     "& > div": {
       textAlign: "center",
     },

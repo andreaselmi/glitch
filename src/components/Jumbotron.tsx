@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   headerTextContainer: {
-    justifyContent: "space-around",
+    justifyContent: "flex-end",
     paddingLeft: "5vw",
     height: "30vh",
   },
@@ -53,7 +53,7 @@ const Jumbotron = () => {
   const theme = useTheme();
 
   const classes = useStyles();
-  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     if (user.uid) setOpen(false);
