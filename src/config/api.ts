@@ -63,3 +63,17 @@ helix.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+helix.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem("accessToken");
+      setAccessToken();
+      window.location.reload();
+    }
+    return Promise.reject(error.response.data);
+  }
+);
