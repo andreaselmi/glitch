@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAppSelector } from "../store/hooks";
 import ContainerList from "../components/containers/ContainerList";
 import Loader from "../components/Loader";
-import { Redirect, useHistory } from "react-router";
+import { Redirect } from "react-router";
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import SearchGameHandler from "../components/SearchGameHandler";
 import ErrorTitle from "../components/DisplayError";
@@ -28,7 +28,6 @@ const SearchPage = () => {
   if (searchedGames.length === 0 && isLoading === false && !searchGameErrorMsg)
     return <Redirect to="/" />;
 
-  //TODO aggiungere come titolo la stringa cercata
   return (
     <div>
       <Container

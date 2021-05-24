@@ -21,6 +21,7 @@ import { setUserImg } from "../store/auth";
 import { firestore, storage } from "../config/firebase";
 import Loader from "../components/Loader";
 import ContainerList from "../components/containers/ContainerList";
+import { toast, ToastContainer } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -35,9 +36,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   imageContainer: {
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
     maxWidth: 200,
     maxHeight: 200,
     borderRadius: "50%",
@@ -73,7 +71,6 @@ const AccountPage = () => {
   const [file, setFile] = useState<File | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const theme = useTheme();
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
@@ -101,21 +98,24 @@ const AccountPage = () => {
       const url = await storageRef.getDownloadURL();
       return url;
     } catch (e) {
-      console.log(e);
       return null;
     }
   };
 
   const storedImg = async () => {
     let url = await uploadImage();
-    dispatch(
-      setUserImg({
+    if (url) {
+      dispatch(
+        setUserImg({
+          userImg: url,
+        })
+      );
+      await firestore.collection("users").doc(user.uid).update({
         userImg: url,
-      })
-    );
-    await firestore.collection("users").doc(user.uid).update({
-      userImg: url,
-    });
+      });
+    } else {
+      toast.error("error loading image. Try again");
+    }
     setIsLoading(false);
   };
 
@@ -125,10 +125,15 @@ const AccountPage = () => {
 
   return (
     <Container maxWidth="xl">
+      <ToastContainer />
       <Grid container className={classes.headerContainer}>
         <div style={{ position: "relative" }}>
           <Grid md={6} item className={classes.imageContainer}>
-            <img alt="User" src={user.userImg || image || placeholder} />
+            <img
+              style={{ objectFit: "cover" }}
+              alt="User"
+              src={user.userImg || image || placeholder}
+            />
           </Grid>
 
           {user.provider === "google.com" ? null : (

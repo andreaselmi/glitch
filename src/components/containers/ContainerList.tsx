@@ -27,7 +27,7 @@ const ContainerList = ({
   const replaceImgDimensions = () => {
     if (items && items.length > 0) {
       if ("box_art_url" in items[0]) {
-        const text = items[0].box_art_url.indexOf("width");
+        const text = items[0].box_art_url.indexOf("{width}x{height}");
         let games;
         if (text === -1) {
           games = items.map((game: any) => ({
@@ -42,7 +42,7 @@ const ContainerList = ({
         }
         setData(games);
       } else if ("thumbnail_url" in items[0]) {
-        const text = items[0].thumbnail_url.indexOf("width");
+        const text = items[0].thumbnail_url.indexOf("{width}x{height}");
         let streams;
         if (text === -1) {
           streams = items.map((game: any) => ({
