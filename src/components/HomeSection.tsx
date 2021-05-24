@@ -16,12 +16,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "0 50px",
-    minHeight: "60vh",
     "& > div": {
       textAlign: "center",
     },
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "55vh",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
       minHeight: "70vh",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      minHeight: "75vh",
     },
   },
   textContainer: {
@@ -41,7 +47,6 @@ const HomeSection: React.FC<HomeSectionProps> = ({
   children,
 }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
     <Container className={classes.container} maxWidth="md">

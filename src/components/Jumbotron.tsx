@@ -79,7 +79,7 @@ const Jumbotron = () => {
         container
         direction="column"
       >
-        <Grid item xs={6} lg={5}>
+        <Grid item xs={8} sm={6} lg={5}>
           <Typography
             style={{ fontWeight: "bolder" }}
             variant={mobile ? "h5" : "h3"}
@@ -88,14 +88,6 @@ const Jumbotron = () => {
             Discover around your favorite videogames.
           </Typography>
 
-          {/* <Typography
-            variant={mobile ? "subtitle2" : "subtitle1"}
-            color="textPrimary"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            sed maxime cum nesciunt aperiam, rerum exercitationem eius fuga
-            inventore!
-          </Typography> */}
           {user.uid ? (
             <Link style={{ textDecoration: "none" }} to="/explore">
               <Button
