@@ -43,11 +43,7 @@ const userSlice = createSlice({
       state.topStreamsErrorMsg = null;
       state.topStreams = action.payload.data;
     },
-    clearErrors: (state) => {
-      state.topGamesErrorMsg = null;
-      state.topStreamsErrorMsg = null;
-      state.searchGameErrorMsg = null;
-    },
+
     clearFavoriteGames: (state) => {
       state.favoriteGames = [];
     },
@@ -97,7 +93,6 @@ const userSlice = createSlice({
 });
 
 export const {
-  clearErrors,
   clearFavoriteGames,
   gamesRequested,
   gamesEndRequest,
@@ -182,7 +177,6 @@ export const helixApiMiddleware =
   async (action: PayloadAction<any>) => {
     if (action.type !== "apiCallBegan") return next(action);
     dispatch(gamesRequested());
-    dispatch(clearErrors());
 
     const { endpoint, onSuccess, onError, query, options } = action.payload;
 

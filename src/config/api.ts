@@ -79,8 +79,6 @@ helix.interceptors.response.use(
     ) {
       localStorage.removeItem("accessToken");
       setAccessToken();
-      window.location.reload();
-      console.log(error.response);
     }
     return Promise.reject(error.response.data);
   }
