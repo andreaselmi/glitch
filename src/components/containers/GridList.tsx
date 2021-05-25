@@ -105,6 +105,7 @@ const GridList = ({
                 lg={3}
               >
                 <StreamCard
+                  isLive={item.type === "live"}
                   viewerCount={item.viewer_count}
                   userName={item.user_name}
                   redirectTo="external"

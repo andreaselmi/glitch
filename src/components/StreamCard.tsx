@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "space-between",
     marginTop: "auto",
   },
-  //TODO sistemare
   card: {
-    minWidth: 300,
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -50,7 +48,7 @@ const StreamCard = ({
   title,
   redirectTo,
   viewerCount,
-  type,
+  isLive,
   userName,
 }: StreamCardProps) => {
   const classes = useStyles();

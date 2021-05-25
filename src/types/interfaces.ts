@@ -12,6 +12,8 @@ export interface Streams {
   game_name: string;
   title: string;
   thumbnail_url: string;
+  viewer_count: number;
+  type: "live" | "";
 }
 export interface StreamsWithPagination {
   streams: Streams[];
@@ -62,7 +64,7 @@ export interface StreamCardProps {
   title: string;
   redirectTo: "internal" | "external";
   viewerCount: number;
-  type?: "live";
+  isLive: boolean;
   userName: string;
 }
 

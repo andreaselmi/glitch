@@ -80,17 +80,19 @@ const HorizontalList = ({
         <div className={classes.gamesListContainer}>
           {items &&
             items.map((item: any) => (
-              <StreamCard
-                viewerCount={item.viewer_count}
-                userName={item.user_name}
-                redirectTo="external"
-                // className={classes.cardContainer}
-                buttonPath={`https://www.twitch.tv/${item.user_login}`}
-                buttonTitle="View Channel"
-                key={item.id}
-                urlImg={item.thumbnail_url || placeholder}
-                title={item.title || notAvailable}
-              />
+              <div className={`${classes.cardContainer}`}>
+                <StreamCard
+                  isLive={item.type === "live"}
+                  viewerCount={item.viewer_count}
+                  userName={item.user_name}
+                  redirectTo="external"
+                  buttonPath={`https://www.twitch.tv/${item.user_login}`}
+                  buttonTitle="View Channel"
+                  key={item.id}
+                  urlImg={item.thumbnail_url || placeholder}
+                  title={item.title || notAvailable}
+                />
+              </div>
             ))}
         </div>
       );
