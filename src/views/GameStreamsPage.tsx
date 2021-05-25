@@ -105,25 +105,27 @@ const GameStreamsPage = () => {
           )}
         </>
       )}
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "20px 0",
-        }}
-      >
-        <MyButton
-          name="before"
-          disabled={countPagination === 0}
-          onClick={() => fetchStreams("before", pagination)}
-        />
-        <MyButton
-          name="after"
-          disabled={streams.length < 20}
-          onClick={() => fetchStreams("after", pagination)}
-        />
-      </div>
+      {streams?.length !== 0 && (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "20px 0",
+          }}
+        >
+          <MyButton
+            name="before"
+            disabled={countPagination === 0}
+            onClick={() => fetchStreams("before", pagination)}
+          />
+          <MyButton
+            name="after"
+            disabled={streams.length < 20}
+            onClick={() => fetchStreams("after", pagination)}
+          />
+        </div>
+      )}
     </Container>
   );
 };

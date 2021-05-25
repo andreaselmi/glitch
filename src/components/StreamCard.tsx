@@ -6,6 +6,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  CardHeader,
   CardActions,
   Typography,
 } from "@material-ui/core";
@@ -18,7 +19,7 @@ import { StreamCardProps } from "../types/interfaces";
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardActionsContainer: {
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     marginTop: "auto",
   },
   card: {
@@ -27,8 +28,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     margin: "0 20px",
   },
+  cardHeader: {
+    "& div": {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      "& span:last-child": {
+        alignSelf: "flex-end",
+      },
+    },
+  },
   linkButton: {
     textDecoration: "none",
+  },
+  liveBadge: {
+    position: "absolute",
+    top: -40,
+    left: 10,
+    backgroundColor: theme.palette.error.dark,
+    padding: "5px 10px",
+    borderRadius: 5,
+    fontWeight: "bold",
   },
   media: {
     maxHeight: "100%",
@@ -55,8 +75,14 @@ const StreamCard = ({
 
   return (
     <Card className={classes.card}>
+      <CardHeader
+        className={classes.cardHeader}
+        title={userName}
+        subheader={`${viewerCount} viewers`}
+      />
       <CardMedia className={classes.media} image={urlImg} title={title} />
-      <CardContent>
+      <CardContent style={{ position: "relative" }}>
+        {isLive && <span className={classes.liveBadge}>LIVE</span>}
         <Typography
           className={classes.title}
           variant="h5"
@@ -68,12 +94,12 @@ const StreamCard = ({
       <CardActions className={classes.cardActionsContainer}>
         {redirectTo === "internal" && (
           <Link className={classes.linkButton} to={buttonPath}>
-            <MyButton name={buttonTitle} />
+            <MyButton variant="text" name={buttonTitle} />
           </Link>
         )}
         {redirectTo === "external" && (
           <a className={classes.linkButton} href={buttonPath}>
-            <MyButton name={buttonTitle} />
+            <MyButton variant="text" name={buttonTitle} />
           </a>
         )}
       </CardActions>
