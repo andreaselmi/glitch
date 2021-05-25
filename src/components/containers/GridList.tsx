@@ -2,7 +2,8 @@ import React from "react";
 import { Grid, makeStyles, Typography } from "@material-ui/core";
 import { useAppSelector } from "../../store/hooks";
 import { Games, ListProps, Streams } from "../../types/interfaces";
-import CardContainer from "./CardContainer";
+import GameCard from "./GameCard";
+import StreamCard from "../StreamCard";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -16,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContainer: {
     height: "100%",
-  },
-  gameCardContainer: {
     maxHeight: 400,
     "& div .MuiCardMedia-root": {
       minHeight: 250,
@@ -74,18 +73,19 @@ const GridList = ({
                 md={4}
                 lg={2}
               >
-                <CardContainer
-                  redirectTo="internal"
-                  className={`${classes.cardContainer} ${classes.gameCardContainer}`}
-                  savedItem={item}
-                  likeButton={true}
-                  buttonTitle="View Lives"
-                  key={item.id}
-                  urlImg={item.box_art_url || placeholder}
-                  title={item.name || notAvailable}
-                  buttonPath={`/game/${item.id}`}
-                  savedItemsList={favoriteGames}
-                />
+                <div className={classes.cardContainer}>
+                  <GameCard
+                    redirectTo="internal"
+                    savedItem={item}
+                    likeButton={true}
+                    buttonTitle="View Lives"
+                    key={item.id}
+                    urlImg={item.box_art_url || placeholder}
+                    title={item.name || notAvailable}
+                    buttonPath={`/game/${item.id}`}
+                    savedItemsList={favoriteGames}
+                  />
+                </div>
               </Grid>
             ))}
         </>
@@ -104,10 +104,10 @@ const GridList = ({
                 md={4}
                 lg={3}
               >
-                <CardContainer
+                <StreamCard
+                  viewerCount={item.viewer_count}
+                  userName={item.user_name}
                   redirectTo="external"
-                  className={`${classes.cardContainer} ${classes.streamCardContainer}`}
-                  likeButton={false}
                   buttonTitle="View Channel"
                   key={item.id}
                   urlImg={item.thumbnail_url || placeholder}

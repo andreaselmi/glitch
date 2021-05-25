@@ -5,7 +5,8 @@ import { Typography } from "@material-ui/core";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import HorizontalListHeader from "../HorizontalListHeader";
 import { loadTopStreams } from "../../store/games";
-import CardContainer from "./CardContainer";
+import GameCard from "./GameCard";
+import StreamCard from "../StreamCard";
 
 const useStyles = makeStyles((theme: Theme) => ({
   gamesListContainer: {
@@ -56,18 +57,21 @@ const HorizontalList = ({
         <div className={classes.gamesListContainer}>
           {items &&
             items.map((item: any) => (
-              <CardContainer
-                redirectTo="internal"
+              <div
                 className={`${classes.cardContainer} ${classes.gameCardContainer}`}
-                buttonPath={`/game/${item.id}`}
-                savedItem={item}
-                likeButton={true}
-                buttonTitle="View Lives"
-                key={item.id}
-                urlImg={item.box_art_url || placeholder}
-                title={item.name || notAvailable}
-                savedItemsList={favoriteGames}
-              />
+              >
+                <GameCard
+                  redirectTo="internal"
+                  buttonPath={`/game/${item.id}`}
+                  savedItem={item}
+                  likeButton={true}
+                  buttonTitle="View Lives"
+                  key={item.id}
+                  urlImg={item.box_art_url || placeholder}
+                  title={item.name || notAvailable}
+                  savedItemsList={favoriteGames}
+                />
+              </div>
             ))}
         </div>
       );
@@ -76,11 +80,12 @@ const HorizontalList = ({
         <div className={classes.gamesListContainer}>
           {items &&
             items.map((item: any) => (
-              <CardContainer
+              <StreamCard
+                viewerCount={item.viewer_count}
+                userName={item.user_name}
                 redirectTo="external"
-                className={classes.cardContainer}
+                // className={classes.cardContainer}
                 buttonPath={`https://www.twitch.tv/${item.user_login}`}
-                likeButton={false}
                 buttonTitle="View Channel"
                 key={item.id}
                 urlImg={item.thumbnail_url || placeholder}

@@ -9,10 +9,10 @@ import { firestore } from "../../config/firebase";
 import MyCard from "../common/Card";
 
 //types
-import { CardContainerProps } from "../../types/interfaces";
+import { GameCardProps } from "../../types/interfaces";
 import { toast, ToastContainer } from "react-toastify";
 
-const CardContainer = ({
+const GameCard = ({
   buttonTitle,
   buttonPath,
   likeButton,
@@ -21,8 +21,7 @@ const CardContainer = ({
   title,
   savedItemsList = [],
   savedItem,
-  ...restProps
-}: CardContainerProps) => {
+}: GameCardProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
@@ -86,7 +85,7 @@ const CardContainer = ({
   };
 
   return (
-    <div {...restProps}>
+    <>
       <ToastContainer />
       <MyCard
         redirectTo={redirectTo}
@@ -98,8 +97,8 @@ const CardContainer = ({
         urlImg={urlImg}
         likeButton={likeButton}
       />
-    </div>
+    </>
   );
 };
 
-export default CardContainer;
+export default GameCard;

@@ -44,7 +44,7 @@ export interface ListProps {
 }
 
 //interfaces for card container and card
-export interface CardContainerProps extends React.HTMLProps<HTMLDivElement> {
+export interface GameCardProps {
   buttonTitle: string;
   likeButton: boolean;
   buttonPath: string;
@@ -53,6 +53,17 @@ export interface CardContainerProps extends React.HTMLProps<HTMLDivElement> {
   urlImg: string;
   savedItemsList?: Games[];
   savedItem?: Games;
+}
+
+export interface StreamCardProps {
+  buttonTitle: string;
+  buttonPath: string;
+  urlImg: string;
+  title: string;
+  redirectTo: "internal" | "external";
+  viewerCount: number;
+  type?: "live";
+  userName: string;
 }
 
 export interface MyCardProps {
