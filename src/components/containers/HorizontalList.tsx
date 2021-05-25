@@ -90,8 +90,8 @@ const HorizontalList = ({
               <div key={item.id} className={`${classes.cardContainer}`}>
                 <StreamCard
                   isLive={item.type === "live"}
-                  viewerCount={item.viewer_count}
-                  userName={item.user_name}
+                  viewerCount={item.viewer_count || notAvailable}
+                  userName={item.user_name || notAvailable}
                   redirectTo="external"
                   buttonPath={`https://www.twitch.tv/${item.user_login}`}
                   buttonTitle="View Channel"

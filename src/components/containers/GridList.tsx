@@ -96,11 +96,10 @@ const GridList = ({
               >
                 <StreamCard
                   isLive={item.type === "live"}
-                  viewerCount={item.viewer_count}
-                  userName={item.user_name}
+                  viewerCount={item.viewer_count || notAvailable}
+                  userName={item.user_name || notAvailable}
                   redirectTo="external"
                   buttonTitle="View Channel"
-                  key={item.id}
                   urlImg={item.thumbnail_url || placeholder}
                   title={item.title || notAvailable}
                   buttonPath={`https://www.twitch.tv/${item.user_login}`}

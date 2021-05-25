@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       maxWidth: "60%",
       overflow: "hidden",
     },
+    "& .MuiTypography-root:last-child": {
+      textAlign: "right",
+    },
   },
   linkButton: {
     textDecoration: "none",
