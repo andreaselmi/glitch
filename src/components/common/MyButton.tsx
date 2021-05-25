@@ -1,5 +1,5 @@
 /*
-Simple material ui button
+Simply material ui button
 */
 
 import React from "react";

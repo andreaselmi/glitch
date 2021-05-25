@@ -53,7 +53,7 @@ const Jumbotron = () => {
   const theme = useTheme();
 
   const classes = useStyles();
-  const mobile = useMediaQuery(theme.breakpoints.down("md"));
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (user.uid) setOpen(false);

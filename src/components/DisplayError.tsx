@@ -3,7 +3,7 @@ import React from "react";
 import MyButton from "./common/MyButton";
 
 interface DisplayErrorProps extends React.HTMLProps<HTMLDivElement> {
-  error: boolean;
+  showRetryButton: boolean;
   retryButtonText?: string;
   text: string;
   onClick?: () => void;
@@ -11,7 +11,7 @@ interface DisplayErrorProps extends React.HTMLProps<HTMLDivElement> {
 
 const DisplayError = ({
   retryButtonText = "Retry",
-  error,
+  showRetryButton,
   onClick,
   text,
   ...restProps
@@ -26,7 +26,7 @@ const DisplayError = ({
         {text}
       </Typography>
 
-      {error && <MyButton name={retryButtonText} onClick={onClick} />}
+      {showRetryButton && <MyButton name={retryButtonText} onClick={onClick} />}
     </div>
   );
 };

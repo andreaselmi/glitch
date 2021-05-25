@@ -5,7 +5,7 @@ import Loader from "../components/Loader";
 import { Redirect } from "react-router";
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import SearchGameHandler from "../components/SearchGameHandler";
-import ErrorTitle from "../components/DisplayError";
+import DisplayError from "../components/DisplayError";
 
 const useStyles = makeStyles((theme) => ({
   containerSearch: {
@@ -42,8 +42,8 @@ const SearchPage = () => {
       ) : (
         <>
           {searchGameErrorMsg ? (
-            <ErrorTitle
-              error={false}
+            <DisplayError
+              showRetryButton={false}
               text={
                 searchGameErrorMsg === "No Results"
                   ? `No results for "${searchValue}"`

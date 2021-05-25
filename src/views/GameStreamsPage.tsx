@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 //my components
 import Loader from "../components/Loader";
 import ContainerList from "../components/containers/ContainerList";
-import ErrorTitle from "../components/DisplayError";
+import DisplayError from "../components/DisplayError";
 
 //store
 import { gamesEndRequest, gamesRequested } from "../store/games";
@@ -87,10 +87,10 @@ const GameStreamsPage = () => {
       ) : (
         <>
           {streams?.length === 0 && !isLoading && (
-            <ErrorTitle
+            <DisplayError
               onClick={() => history.goBack()}
               retryButtonText="Back"
-              error={true}
+              showRetryButton={true}
               text="There are no streams to view"
             />
           )}

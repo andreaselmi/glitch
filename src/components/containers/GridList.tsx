@@ -8,9 +8,6 @@ import StreamCard from "../StreamCard";
 const useStyles = makeStyles((theme) => ({
   grid: {
     margin: "10px 0px",
-    "& .MuiCard-root": {
-      miHeight: 350,
-    },
     "& p": {
       fontSize: "1rem",
     },
@@ -28,16 +25,6 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "flex-start",
     },
   },
-  streamCardContainer: {
-    maxHeight: 400,
-    [theme.breakpoints.down("xs")]: {
-      minWidth: 200,
-    },
-    "& div .MuiCardMedia-root": {
-      minHeight: 250,
-    },
-  },
-
   title: {
     margin: "20px 0 0 20px",
   },
