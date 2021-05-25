@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& div": {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center",
-      "& span:last-child": {
-        alignSelf: "flex-end",
-      },
+      alignItems: "flex-end",
+    },
+    "& .MuiTypography-root:first-child": {
+      overflow: "hidden",
     },
   },
   linkButton: {
