@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Loader from "../components/Loader";
 import ContainerList from "../components/containers/ContainerList";
 import DisplayError from "../components/DisplayError";
+import MyButton from "../components/common/MyButton";
 
 //store
 import { gamesEndRequest, gamesRequested } from "../store/games";
@@ -19,7 +20,6 @@ import { helix } from "../config/api";
 
 //types
 import { Games, Streams } from "../types/interfaces";
-import MyButton from "../components/common/MyButton";
 interface ParamTypes {
   game_id: string;
 }
@@ -76,8 +76,6 @@ const GameStreamsPage = () => {
     fetchGameDetails();
     fetchStreams();
   }, []);
-
-  //TODO evitare che si intraveda il retry prima del caricamento
 
   return (
     <Container maxWidth="xl">

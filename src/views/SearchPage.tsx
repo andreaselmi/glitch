@@ -1,11 +1,17 @@
 import React from "react";
-import { useAppSelector } from "../store/hooks";
+import { Redirect } from "react-router";
+
+//material ui
+import { Container, makeStyles, Typography } from "@material-ui/core";
+
+//components
+import SearchGameHandler from "../components/SearchGameHandler";
 import ContainerList from "../components/containers/ContainerList";
 import Loader from "../components/Loader";
-import { Redirect } from "react-router";
-import { Container, makeStyles, Typography } from "@material-ui/core";
-import SearchGameHandler from "../components/SearchGameHandler";
 import DisplayError from "../components/DisplayError";
+
+//store
+import { useAppSelector } from "../store/hooks";
 
 const useStyles = makeStyles((theme) => ({
   containerSearch: {

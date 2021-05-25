@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+
+//material ui
 import {
   Container,
   Divider,
@@ -11,6 +14,8 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 //mycomponents
 import placeholder from "../assets/images/account.png";
+import Loader from "../components/Loader";
+import ContainerList from "../components/containers/ContainerList";
 
 //store
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -18,9 +23,6 @@ import { setUserImg } from "../store/auth";
 
 //config
 import { firestore, storage } from "../config/firebase";
-import Loader from "../components/Loader";
-import ContainerList from "../components/containers/ContainerList";
-import { toast, ToastContainer } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -189,7 +191,6 @@ const AccountPage = () => {
       ) : (
         <>
           <ContainerList
-            //TODO da sistemare
             title="Your favorite Games"
             itemTypeError={null}
             type="horizontal"

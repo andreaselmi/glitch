@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-height:400px)": {
       marginBottom: 75,
     },
-    [theme.breakpoints.up("xl")]: {
-      marginBottom: 300,
+    [theme.breakpoints.up("lg")]: {
+      marginBottom: 350,
     },
   },
   textContainer: {

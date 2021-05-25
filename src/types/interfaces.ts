@@ -79,5 +79,7 @@ export interface MyCardProps {
   toggleLike?: () => void;
 }
 
+//end card types
+
 //types for links in navbar
 export type NavLinksProps = Omit<Route, "component">;

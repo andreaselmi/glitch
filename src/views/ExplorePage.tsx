@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-//mycomponents
-import Loader from "../components/Loader";
+
 //material ui
 import { Container, makeStyles } from "@material-ui/core";
-//types
-import { loadTopGames, loadTopStreams } from "../store/games";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+
+//mycomponents
+import Loader from "../components/Loader";
 import ContainerList from "../components/containers/ContainerList";
 import SearchGameHandler from "../components/SearchGameHandler";
 import DisplayError from "../components/DisplayError";
+
+//store
+import { loadTopGames, loadTopStreams } from "../store/games";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const useStyles = makeStyles((theme) => ({
   containerSearch: {
@@ -16,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
-  },
-  sectionTitleContainer: {
-    padding: "20px",
   },
 }));
 
