@@ -1,6 +1,8 @@
 import React from "react";
-import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
+import * as yup from "yup";
+
+//toast container for displaying errors
 import { ToastContainer } from "react-toastify";
 //material ui
 import { LinearProgress, Typography, makeStyles } from "@material-ui/core";
@@ -15,6 +17,8 @@ import { facebookSignIn, googleSignIn, login } from "../config/auth";
 //my components
 import MyButton from "./common/MyButton";
 import SocialButtons from "./containers/SocialButtons";
+
+//logo glitch
 import logo from "../assets/images/logoWhite.png";
 
 let validationSchema = yup.object().shape({

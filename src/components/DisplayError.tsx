@@ -1,5 +1,7 @@
-import { Typography } from "@material-ui/core";
 import React from "react";
+//material ui
+import { Typography } from "@material-ui/core";
+//components
 import MyButton from "./common/MyButton";
 
 interface DisplayErrorProps extends React.HTMLProps<HTMLDivElement> {

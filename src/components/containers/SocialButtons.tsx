@@ -1,6 +1,8 @@
 import React from "react";
-import MyButton from "../common/MyButton";
+//material ui
 import { makeStyles } from "@material-ui/core";
+//components
+import MyButton from "../common/MyButton";
 
 interface SocialButtonsProps {
   handleGoogle: () => void;

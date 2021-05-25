@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useAppSelector } from "../../store/hooks";
-import { ListProps, Games, Streams } from "../../types/interfaces";
+
+//components
+import placeholder from "../../assets/images/placeholder.png";
 import GridList from "./GridList";
 import HorizontalList from "./HorizontalList";
-
-import placeholder from "../../assets/images/placeholder.png";
-
+//types
+import { ListProps, Games, Streams } from "../../types/interfaces";
+//store
+import { useAppSelector } from "../../store/hooks";
 interface ContainerListProps extends ListProps {
   type: "horizontal" | "grid";
   itemTypeError: string | null;

@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Button, Grid, Typography } from "@material-ui/core";
+
 //background home header image
 import bgImage from "../assets/images/headerBg.jpg";
+
 //my components
 import MyModal from "./MyModal";
 import UserAuthTabs from "./containers/UserAuthTabs";
+
 //store
 import { useAppSelector } from "../store/hooks";
 
@@ -44,8 +47,6 @@ const useStyles = makeStyles((theme) => ({
     zIndex: -1,
   },
 }));
-
-//TODO valutare un sottotitolo
 
 const Jumbotron = () => {
   const [open, setOpen] = useState<boolean>(false);

@@ -1,7 +1,10 @@
 import React from "react";
 import { Grid, makeStyles, Typography } from "@material-ui/core";
+//store
 import { useAppSelector } from "../../store/hooks";
+//types
 import { Games, ListProps, Streams } from "../../types/interfaces";
+//components
 import GameCard from "./GameCard";
 import StreamCard from "../StreamCard";
 

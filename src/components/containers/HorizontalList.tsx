@@ -1,10 +1,17 @@
 import React from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Games, ListProps, Streams } from "../../types/interfaces";
+//material ui
 import { Typography } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+
+//types
+import { Games, ListProps, Streams } from "../../types/interfaces";
+
+//store
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import HorizontalListHeader from "../HorizontalListHeader";
 import { loadTopStreams } from "../../store/games";
+
+//components
+import HorizontalListHeader from "../HorizontalListHeader";
 import GameCard from "./GameCard";
 import StreamCard from "../StreamCard";
 

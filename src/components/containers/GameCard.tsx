@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 //store
 import { toggleFavoriteGame } from "../../store/games";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+
+//import firestore from my config
 import { firestore } from "../../config/firebase";
 
 //mycomponents
@@ -10,7 +13,6 @@ import MyCard from "../common/Card";
 
 //types
 import { GameCardProps } from "../../types/interfaces";
-import { toast, ToastContainer } from "react-toastify";
 
 const GameCard = ({
   buttonTitle,

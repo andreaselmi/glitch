@@ -19,6 +19,7 @@ import MyDrawer from "./MyDrawer";
 import MyModal from "./MyModal";
 import UserAuthTabs from "./containers/UserAuthTabs";
 import MyButton from "./common/MyButton";
+import SearchGameHandler from "./SearchGameHandler";
 
 //interface
 import { NavbarProps } from "../types/interfaces";
@@ -28,8 +29,8 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setNoUser } from "../store/auth";
 import { clearFavoriteGames } from "../store/games";
 
+//auth from my config
 import { auth } from "../config/firebase";
-import SearchGameHandler from "./SearchGameHandler";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

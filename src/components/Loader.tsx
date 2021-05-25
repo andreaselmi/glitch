@@ -1,4 +1,5 @@
 import React from "react";
+//lottie and lottie loader file
 import Lottie from "react-lottie";
 import animationData from "../assets/loaders/robotLoader.json";
 

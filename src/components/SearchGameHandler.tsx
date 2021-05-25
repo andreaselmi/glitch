@@ -1,11 +1,13 @@
 import React from "react";
+import { useHistory, useLocation } from "react-router";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 //material ui imports
 import { makeStyles, InputBase, fade, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { useHistory, useLocation } from "react-router";
+
+//store
 import { useAppDispatch } from "../store/hooks";
 import { loadSearchedGames, setSearchValue } from "../store/games";
 
@@ -71,7 +73,6 @@ const SearchGameHandler = ({ ...restProps }) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  //TODO svuotare il form dopo la ricerca
   const formik = useFormik({
     initialValues: {
       search: "",
