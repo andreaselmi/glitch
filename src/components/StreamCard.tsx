@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       alignItems: "flex-end",
     },
     "& .MuiTypography-root:first-child": {
+      maxWidth: "65%",
       overflow: "hidden",
     },
   },
