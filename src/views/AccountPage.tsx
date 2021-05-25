@@ -78,7 +78,7 @@ const AccountPage = () => {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
 
-    if (!fileList) return;
+    if (!fileList) return null;
 
     setFile(fileList[0]);
     setImage(URL.createObjectURL(fileList[0]));
@@ -145,6 +145,7 @@ const AccountPage = () => {
                 id="icon-button-file"
                 type="file"
                 onChange={(e) => handleImageChange(e)}
+                disabled={isLoading}
               />
               <label htmlFor="icon-button-file">
                 {isLoading ? (
