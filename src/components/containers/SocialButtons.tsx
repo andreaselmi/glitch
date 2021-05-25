@@ -33,7 +33,7 @@ const SocialButtons = ({
     <div className={classes.socialContainer}>
       <MyButton
         startIcon={<i className="fab fa-google"></i>}
-        name="Sign Up With Google"
+        name="Sign In With Google"
         variant="outlined"
         className={classes.googleButton}
         onClick={handleGoogle}
