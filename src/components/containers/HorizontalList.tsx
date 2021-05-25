@@ -58,6 +58,7 @@ const HorizontalList = ({
           {items &&
             items.map((item: any) => (
               <div
+                key={item.id}
                 className={`${classes.cardContainer} ${classes.gameCardContainer}`}
               >
                 <GameCard
@@ -66,7 +67,6 @@ const HorizontalList = ({
                   savedItem={item}
                   likeButton={true}
                   buttonTitle="View Lives"
-                  key={item.id}
                   urlImg={item.box_art_url || placeholder}
                   title={item.name || notAvailable}
                   savedItemsList={favoriteGames}
@@ -80,7 +80,7 @@ const HorizontalList = ({
         <div className={classes.gamesListContainer}>
           {items &&
             items.map((item: any) => (
-              <div className={`${classes.cardContainer}`}>
+              <div key={item.id} className={`${classes.cardContainer}`}>
                 <StreamCard
                   isLive={item.type === "live"}
                   viewerCount={item.viewer_count}
@@ -88,7 +88,6 @@ const HorizontalList = ({
                   redirectTo="external"
                   buttonPath={`https://www.twitch.tv/${item.user_login}`}
                   buttonTitle="View Channel"
-                  key={item.id}
                   urlImg={item.thumbnail_url || placeholder}
                   title={item.title || notAvailable}
                 />

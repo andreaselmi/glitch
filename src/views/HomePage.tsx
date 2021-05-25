@@ -51,7 +51,7 @@ const HomePage = () => {
 
       <HomeSection
         title="Are you looking for inspiration ?"
-        subtitle="Explore the best games and live tops of the moment"
+        subtitle="You will always have the ranking of the 20 most followed games and streams"
       >
         <ExploreIcon className={desktop ? classes.icon : classes.mobileIcon} />
       </HomeSection>

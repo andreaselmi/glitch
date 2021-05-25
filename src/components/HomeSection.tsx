@@ -2,8 +2,7 @@ import React from "react";
 
 //material ui
 import { Typography, Grid, Container } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 interface HomeSectionProps {
   title: string;
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     marginBottom: 200,
-    ["@media (max-height:400px)"]: {
+    "@media (max-height:400px)": {
       marginBottom: 75,
     },
   },

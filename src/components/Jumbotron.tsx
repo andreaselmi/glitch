@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
     position: "relative",
     zIndex: 1,
-    ["@media (max-height:510px)"]: {
+    "@media (max-height:510px)": {
       height: "60vh",
     },
   },
