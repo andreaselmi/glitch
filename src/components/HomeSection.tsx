@@ -20,15 +20,10 @@ const useStyles = makeStyles((theme) => ({
     "& > div": {
       textAlign: "center",
     },
-    [theme.breakpoints.down("sm")]: {
-      minHeight: "55vh",
-    },
-    [theme.breakpoints.between("sm", "md")]: {
-      minHeight: "70vh",
-    },
 
-    [theme.breakpoints.up("md")]: {
-      minHeight: "75vh",
+    marginBottom: 200,
+    ["@media (max-height:400px)"]: {
+      marginBottom: 75,
     },
   },
   textContainer: {

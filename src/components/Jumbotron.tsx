@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
     position: "relative",
     zIndex: 1,
-    [theme.breakpoints.down("sm")]: {
-      height: "70vh",
+    ["@media (max-height:510px)"]: {
+      height: "60vh",
     },
   },
   headerTextContainer: {
