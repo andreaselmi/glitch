@@ -29,13 +29,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: "0 20px",
   },
   cardHeader: {
+    display: "block",
     "& div": {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "flex-end",
     },
     "& .MuiTypography-root:first-child": {
-      maxWidth: "65%",
+      maxWidth: "60%",
       overflow: "hidden",
     },
   },
