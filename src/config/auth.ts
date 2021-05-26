@@ -92,7 +92,7 @@ export const authStateChanged = async (user: firebase.User | null) => {
       } else {
         store.dispatch(
           setCurrentUser({
-            fullName: displayName,
+            fullName: displayName || "Welcome Guest",
             email,
             userImg: "",
             uid,
@@ -102,7 +102,7 @@ export const authStateChanged = async (user: firebase.User | null) => {
         userRef.set({
           provider,
           email,
-          fullName: displayName,
+          fullName: displayName || "Welcome Guest",
           uid,
           userImg: "",
         });
