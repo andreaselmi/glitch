@@ -55,7 +55,6 @@ export const register = async (values: AuthValues) => {
 //sets the user according to the provider used to log in
 export const authStateChanged = async (user: firebase.User | null) => {
   if (user) {
-    console.log(user);
     //data from firebaseUser
     let provider = user.providerData[0]?.providerId;
     const { email, uid, displayName, photoURL } = user;
@@ -71,10 +70,10 @@ export const authStateChanged = async (user: firebase.User | null) => {
     if (provider === "google.com") {
       store.dispatch(
         setCurrentUser({
-          email,
+          email: email || "",
           uid,
-          fullName: displayName,
-          userImg: photoURL,
+          fullName: displayName || "Welcome Guest",
+          userImg: photoURL || "",
           provider,
         })
       );
@@ -93,10 +92,10 @@ export const authStateChanged = async (user: firebase.User | null) => {
         store.dispatch(
           setCurrentUser({
             fullName: displayName || "Welcome Guest",
-            email,
+            email: email || "",
             userImg: "",
             uid,
-            provider,
+            provider: provider || "",
           })
         );
         userRef.set({

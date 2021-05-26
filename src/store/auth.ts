@@ -40,7 +40,7 @@ const authSlice = createSlice({
     userIsAuthenticated: (state) => {
       state.isAuthenticated = true;
     },
-    setCurrentUser: (state, action: PayloadAction<any>) => {
+    setCurrentUser: (state, action: PayloadAction<User>) => {
       const { user } = state;
       user.fullName = action.payload.fullName;
       user.email = action.payload.email;

@@ -65,7 +65,6 @@ const GameStreamsPage = () => {
       setPagination(data.pagination.cursor);
       setStreams(data.data);
       dispatch(gamesEndRequest());
-      console.log(data);
     } catch (error) {
       toast.error("Unable to retrieve data. Try again later.");
       dispatch(gamesEndRequest());

@@ -53,7 +53,7 @@ const userSlice = createSlice({
     gamesEndRequest: (state) => {
       state.isLoading = false;
     },
-    loadSavedGames: (state, action: PayloadAction<any>) => {
+    loadSavedGames: (state, action: PayloadAction<Games>) => {
       const alreadySaved = state.favoriteGames.findIndex(
         (game) => game["id"] === action.payload.id
       );
@@ -61,19 +61,19 @@ const userSlice = createSlice({
         state.favoriteGames.push(action.payload);
       } else return state;
     },
-    loadSearchedGamesFailed: (state, action: PayloadAction<any>) => {
+    loadSearchedGamesFailed: (state, action: PayloadAction<string>) => {
       state.searchGameErrorMsg = action.payload;
       state.isLoading = false;
     },
-    loadTopGamesFailed: (state, action: PayloadAction<any>) => {
+    loadTopGamesFailed: (state, action: PayloadAction<string>) => {
       state.topGamesErrorMsg = action.payload;
       state.isLoading = false;
     },
-    loadTopStreamsFailed: (state, action: PayloadAction<any>) => {
+    loadTopStreamsFailed: (state, action: PayloadAction<string>) => {
       state.topStreamsErrorMsg = action.payload;
       state.isLoading = false;
     },
-    setSearchValue: (state, action: PayloadAction<any>) => {
+    setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
     clearSearchValue: (state) => {
