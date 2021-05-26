@@ -6,6 +6,12 @@ Glitch uses the twitch API to display the games and streams of the moment. Creat
 
 If you want to run Glitch locally create your app on https://dev.twitch.tv/ and enter Client ID and Client secret in the ".env.example" file, then rename it in ".env" and follow the commands below
 
+## If on localhost you get a security error when using the facebook login change to package.json
+the line
+"start": "react-scripts start"
+to
+"start": "HTTPS=true react-scripts start"
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -18,6 +24,7 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
