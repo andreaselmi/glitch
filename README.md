@@ -1,11 +1,14 @@
-# glitch
+# glitch - https://glitchbyselmi.netlify.app
 
-in progress.....
+Glitch is a project created for [start2impact](https://www.start2impact.it/).
 
+Glitch uses the twitch API to display the games and streams of the moment. Create your own custom game collection and view ongoing streams for your favorite games.
 
+If you want to run Glitch locally create your app on https://dev.twitch.tv/ and enter Client ID and Client secret in the ".env.example" file, then rename it .env and follow the commands below
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
