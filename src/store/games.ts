@@ -199,7 +199,6 @@ export const helixApiMiddleware =
     }
   };
 
-//TODO tipizzare dispatch e next
 //middleware for fetching data from firestore
 export const firestoreMiddleware =
   ({ dispatch }: any) =>

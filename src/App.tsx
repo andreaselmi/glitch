@@ -38,8 +38,6 @@ const App = () => {
 
   if (initializing) return <Loader height={400} width={400} />;
 
-  //TODO provare ad implementare sentry.io
-
   return (
     <Router>
       <CssBaseline>
