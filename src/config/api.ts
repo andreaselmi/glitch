@@ -73,10 +73,7 @@ helix.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (
-      error.response.status === 401 &&
-      error.response.data.message === "Invalid OAuth token"
-    ) {
+    if (error.response.status === 401) {
       localStorage.removeItem("accessToken");
       setAccessToken();
     }
