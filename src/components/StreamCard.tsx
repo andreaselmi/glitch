@@ -103,7 +103,12 @@ const StreamCard = ({
           </Link>
         )}
         {redirectTo === "external" && (
-          <a className={classes.linkButton} href={buttonPath}>
+          <a
+            rel="noreferrer"
+            target="_blank"
+            className={classes.linkButton}
+            href={buttonPath}
+          >
             <MyButton variant="text" name={buttonTitle} />
           </a>
         )}
